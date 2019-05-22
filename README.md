@@ -29,11 +29,11 @@ NOTE: this list is not exhaustive as there are many programs that i have
 included shortcuts
 
 # How to use
-1. Clone the repo into .config/i3 (not yet generalisnot yet generalised)
+1. Clone the repo into .config
 2. Copy the file in the "example" folder to .config/i3 (without .example in the
    name)
 3. Edit them to use your desired settings
-    2. run switchconfig.sh (requires "baseconfigs" to be configured)
+4. run switchconfig.sh (requires "baseconfigs" to be configured)
 
 # Things that probably wont work
 
