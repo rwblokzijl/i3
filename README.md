@@ -1,4 +1,4 @@
-i3 config
+My i3 config
 ===
 
 # Introduction
@@ -40,7 +40,7 @@ included shortcuts
  - Backgrounds - i store these outside the repo but set them in the config
  - some scripts that use credentials from outside the repo
 
-# Explaination of the files and directory
+# Explaination of the files and directories
 ```
 ~/.config/i3
 ├── baseconfigs - this file specifies default values for switchconfig.sh
