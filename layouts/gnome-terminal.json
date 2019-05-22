@@ -1,0 +1,25 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 433,
+       "width": 735,
+       "x": 0,
+       "y": 0
+    },
+    "name": "bloodyfool@Desktop: ~/.config/i3",
+    "percent": 1,
+    "swallows": [
+       {
+       "class": "^Gnome\\-terminal$"
+       // "instance": "^gnome\\-terminal\\-server$",
+       // "title": "^bloodyfool\\@Desktop\\:\\ \\~\\/\\.config\\/i3$",
+       // "transient_for": "^$",
+       // "window_role": "^gnome\\-terminal\\-window\\-74d1421a\\-9e86\\-449f\\-91c7\\-30fca0f12bb5$"
+       }
+    ],
+    "type": "con"
+}
+

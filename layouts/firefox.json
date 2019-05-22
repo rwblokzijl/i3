@@ -1,0 +1,25 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1053,
+       "width": 1916,
+       "x": 0,
+       "y": 0
+    },
+    "name": "Subscriptions - YouTube - Mozilla Firefox",
+    "percent": 1,
+    "swallows": [
+       {
+        "class": "^Firefox\\-esr$"
+       // "instance": "^Navigator$",
+       // "title": "^Subscriptions\\ \\-\\ YouTube\\ \\-\\ Mozilla\\ Firefox$",
+       // "transient_for": "^$",
+       // "window_role": "^browser$"
+       }
+    ],
+    "type": "con"
+}
+

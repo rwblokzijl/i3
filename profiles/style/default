@@ -1,0 +1,35 @@
+################################################################################
+#      _____ __        __                                                      #
+#     / ___// /___  __/ /__                                                    #
+#     \__ \/ __/ / / / / _ \                                                   #
+#    ___/ / /_/ /_/ / /  __/                                                   #
+#   /____/\__/\__, /_/\___/                                                    #
+#            /____/                                                            #
+################################################################################
+# Styling choices for i3, like the bar, background and borders
+################################################################################
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
+bar {
+        status_command i3status
+}
+
+#<colorclass>           <border> <background> <text>  <indicator> <child_border>
+client.focused          $active  $active      $dark   $active     $active
+client.focused_inactive $dark    $dark        $bright $dark       $dark
+client.unfocused        $dark    $dark        $bright $dark       $dark
+client.urgent           $bright  $bright      $dark   $bright     $bright
+
+#make i3 windows slightly bigger by hiding edge borders
+#hide_edge_borders both
+hide_edge_borders horizontal
+
+# End Style ####################################################################
+

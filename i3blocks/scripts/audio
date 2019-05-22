@@ -1,0 +1,39 @@
+#!/bin/bash
+
+INSTANCE="${BLOCK_INSTANCE:-instance}"
+
+# scroll up
+if [[ "${BLOCK_BUTTON}" -eq 4 ]]; then
+	pactl set-sink-volume ${INSTANCE} +10%
+	pactl set-sink-mute ${INSTANCE} off
+# right click
+elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
+	pactl set-sink-mute ${INSTANCE} toggle
+# scroll down
+elif [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
+	pactl set-sink-volume ${INSTANCE} -10%
+	pactl set-sink-mute ${INSTANCE} off
+fi
+
+status=$(pactl list sinks | perl -000ne "if(/#$INSTANCE/)"'{/Mute: (no|yes)/; print "$1\n"}')
+volume=$(pactl list sinks | perl -000ne "if(/#$INSTANCE/)"'{/(\d*)%/; print "$1\n"}')
+
+if [[ "${status}" == "no" ]]; then
+	if [[ "${volume}" == "0" ]]; then
+		echo "  ${volume}% "
+		echo "  ${volume}% "
+		echo ""
+	elif [[ "${volume}" -lt 70 ]]; then
+		echo "  ${volume}% "
+		echo "  ${volume}% "
+		echo ""
+	else
+		echo "  ${volume}% "
+		echo "  ${volume}% "
+		echo ""
+	fi
+else
+	echo " MUTE"
+	echo " MUTE"
+	echo "#c55d51"
+fi

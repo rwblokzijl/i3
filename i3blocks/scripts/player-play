@@ -1,0 +1,36 @@
+#!/bin/bash
+
+ARGUMENTS="--player spotify"
+
+ICON_PLAY=""
+ICON_PAUSE=""
+
+if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+	playerctl ${ARGUMENTS} play-pause
+	pkill -RTMIN+10 i3blocks
+elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
+	i3-msg 'workspace 10:    ' > /dev/null
+fi
+
+PLAYER_STATUS=$(playerctl ${ARGUMENTS} status)
+
+if [[ "${PLAYER_STATUS}" = "Paused" ]]; then
+	CUR_ICON="${ICON_PAUSE}"
+elif [[ "${PLAYER_STATUS}" = "Playing" ]]; then
+	CUR_ICON="${ICON_PLAY}"
+else
+	echo ""
+	echo ""
+	echo ""
+	exit
+fi
+
+echo "${CUR_ICON}"
+echo "${CUR_ICON}"
+
+if [[ "${PLAYER_STATUS}" = "Playing" ]]; then
+	echo "#b8bb26"
+elif [[ "${PLAYER_STATUS}" = "Paused" ]]; then
+	echo "#fb5f4d"
+fi
+

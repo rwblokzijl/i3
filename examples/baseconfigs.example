@@ -1,0 +1,10 @@
+# Never set anything to empty
+RES="1080" #1080, 4k # used to scale things like rofi properly
+MACHINE="desktop" # desktop, laptop, work # used for the bar widgets
+
+# see ./profiles for options to these 5
+BASE="bloodyfool" # username
+#COLORS="" #pick the colorscheme the style will be using
+SHORTCUTS="bloodyfool" # person who's shorthuts u want to use
+PERSONAL="desktop" # used for workspace names and screen configs
+#STYLE="" # see ./profiles/style for options
