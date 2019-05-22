@@ -41,6 +41,7 @@ included shortcuts
  - some scripts that use credentials from outside the repo
 
 # Explaination of the files and directory
+```
 ~/.config/i3
 ├── baseconfigs - this file specifies default values for switchconfig.sh
 ├── examples - examples of configs
@@ -62,3 +63,4 @@ included shortcuts
 │   └── rofi.conf - the final generated config
 ├── scripts - contains some useful and obsolete scripts
 └── switchconfig.sh - The entry point for everything, run this to pick from different preconfigurations
+```
