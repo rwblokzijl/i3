@@ -22,7 +22,6 @@ The following are also used but arent that important:
  - Compton
  - PulseAudio
  - i3lock
- - imagemagick (convert)
  - scrot
 
 NOTE: this list is not exhaustive as there are many programs that i have
