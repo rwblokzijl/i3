@@ -8,6 +8,12 @@ This is my i3 configuration, it has grown in size and complexity over the years.
 This repo is just an occational release when i feel like it. The original is
 managed in a private repo.
 
+This repo consists of a number of scripts that eventually generate configs for
+the following programs:
+ - i3 (example in config_generated_example)
+ - rofi
+ - i3blocks
+
 # Dependencies
 
 I dont really keep track of these, but the following ones at least are pretty
