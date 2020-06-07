@@ -10,7 +10,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # get login info from file
-credentials_file = open("/home/bloodyfool/laundrylogin.creds", "r")
+credentials_file = open("/home/bloodyfool/.ssh/laundrylogin.creds", "r")
 user_email = credentials_file.readline().strip()
 password = credentials_file.readline().strip()
 

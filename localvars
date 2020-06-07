@@ -1,0 +1,3 @@
+set $HEIGHT 1080
+set $WIDTH 5760
+set $MACHINE desktop

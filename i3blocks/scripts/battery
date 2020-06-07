@@ -9,25 +9,25 @@ URGENT_VALUE=10
 
 
 if [[ "${BATTERY_POWER}" -le "${URGENT_VALUE}" ]]; then
-	echo "  ${BATTERY_POWER}% "
-	echo "  ${BATTERY_POWER}% "
+	echo " ${BATTERY_POWER}%"
+	echo ""
 	if [[ "${BATTERY_STATE}" = "Discharging" ]]; then
 		echo "#C55D51"
 	fi
 elif [[ "${BATTERY_STATE}" = "Full" ]]; then
-	echo " ${BATTERY_POWER}% "
-	echo " ${BATTERY_POWER}% "
+	echo " ${BATTERY_POWER}%"
+	echo ""
 	echo "#B8BB26"
 	exit
 elif [[ "${BATTERY_POWER}" -le 30 ]]; then
-	echo " ${BATTERY_POWER}% "
-	echo " ${BATTERY_POWER}% "
+	echo " ${BATTERY_POWER}%"
+	echo ""
 elif [[ "${BATTERY_POWER}" -le 70 ]]; then
-	echo " ${BATTERY_POWER}% "
-	echo " ${BATTERY_POWER}% "
+	echo " ${BATTERY_POWER}%"
+	echo ""
 else
-	echo " ${BATTERY_POWER}% "
-	echo " ${BATTERY_POWER}% "
+	echo " ${BATTERY_POWER}%"
+	echo ""
 fi
 
 if [[ "${BATTERY_STATE}" = "Discharging" ]]; then

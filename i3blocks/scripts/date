@@ -17,7 +17,9 @@
 #------------------------------------------------------------------------
 
 #DATE=$(date '+%Y-%m-%d')
-echo "`date '+%Y-%m-%d'`"
+ICON=""
+DATEL="`date '+%Y-%m-%d (%a)'`"
+DATES="`date '+%Y-%m-%d'`"
 
 #------------------------------------------------------------------------
 
@@ -28,9 +30,7 @@ if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
 	gsimplecal &
 fi
 
-
 #------------------------------------------------------------------------
 
-#echo "$DATE" # full text
-#echo "$DATE" # short text
-
+echo "$ICON ${DATEL}" # full text
+echo "$ICON ${DATES}" # short text

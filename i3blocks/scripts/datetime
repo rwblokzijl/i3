@@ -1,8 +1,45 @@
 #!/bin/bash
 
-FORMAT="${BLOCK_INSTANCE:-%H:%M}"
-DATETIME=$(date "+${FORMAT}")
+################################################################################
+#
+#  This script prints the time combined with a fuzzy time emoji that
+#  shows the closest half hour (half past for minutes between 15 and 44, and
+#  o'clock for minutes between 45 and 14)
+#  Example: "🕦 11:16"
+#  In this example the clock emoji shows half past eleven because its the
+#  closest half hour to 11:16
+#
+################################################################################
 
-echo "${DATETIME}"
-echo "${DATETIME}"
-echo ""
+FORMAT="${BLOCK_INSTANCE:-%H:%M}"
+TIME=$(date "+${FORMAT}")
+HOUR=$(date "+%H")
+MIN=$(date "+%M")
+
+# The icons in order 12:00, 12:30 ... to 12:00 again
+# (12:00 twice, this is neccesary for 11:46)
+ICONS=(🕛 🕧 🕐 🕜 🕑 🕝 🕒 🕞 🕓 🕟 🕔 🕠 🕕 🕡 🕖 🕢 🕗 🕣 🕘 🕤 🕙 🕥 🕚 🕦 🕛)
+
+# Pick icon based on the hours and minutes, this line is equivalent to the
+# commented lines below. Read them to understand the mechanism for choosing a
+# clock.
+ICONS_IDX=$(echo "(($HOUR%12)*2)+(($MIN+15)/30)" | bc)
+
+# Pick icon based on the HOUR
+# ICONS_IDX=$(echo "($HOUR%12)*2" | bc)
+
+# Shift icon forward based on the minutes (if :15 or more, proceed to half
+# past(idx+1), if :45 or more proceed a whole hour (idx+2))
+# if [[ "${MIN}" -ge 15  ]]; then
+# 	ICONS_IDX=$(echo "$ICONS_IDX+1" | bc)
+# fi
+
+# if [[ "${MIN}" -ge 45  ]]; then
+# 	ICONS_IDX=$(echo "$ICONS_IDX+1" | bc)
+# fi
+
+# Set the icon
+ICON=${ICONS[${ICONS_IDX}]}
+
+echo "$ICON ${TIME}"
+echo "$ICON ${TIME}"

@@ -1,39 +1,54 @@
 #!/bin/bash
 
 INSTANCE="${BLOCK_INSTANCE:-instance}"
+STEP="${step:-5}" # use "step" set in i3blocks.conf, with 5 as default
 
+# First round the old volume down to the next "$STEP"
+INSTANCE=$(pacmd info | grep Default\ sink | grep -oE '[^ ]+$')
+INSTANCE_NUM=$(pactl list short | grep "${INSTANCE}\s" | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,')
+
+# Round to nearest ${STEP}
+volume=$(pactl list sinks | perl -000ne "if(/#$INSTANCE_NUM/)"'{/(\d*)%/; print "$1\n"}')
+volume=$(echo "$volume/$STEP*$STEP" | bc)
+pactl set-sink-volume ${INSTANCE} $volume%
+
+# Process the "mouse event"
 # scroll up
 if [[ "${BLOCK_BUTTON}" -eq 4 ]]; then
-	pactl set-sink-volume ${INSTANCE} +10%
+	pactl set-sink-volume ${INSTANCE} +$STEP%
 	pactl set-sink-mute ${INSTANCE} off
 # right click
 elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
 	pactl set-sink-mute ${INSTANCE} toggle
 # scroll down
 elif [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
-	pactl set-sink-volume ${INSTANCE} -10%
+	pactl set-sink-volume ${INSTANCE} -$STEP%
 	pactl set-sink-mute ${INSTANCE} off
 fi
 
-status=$(pactl list sinks | perl -000ne "if(/#$INSTANCE/)"'{/Mute: (no|yes)/; print "$1\n"}')
-volume=$(pactl list sinks | perl -000ne "if(/#$INSTANCE/)"'{/(\d*)%/; print "$1\n"}')
+# Recalculate the mute status and volume
+status=$(pactl list sinks | perl -000ne "if(/#$INSTANCE_NUM/)"'{/Mute: (no|yes)/; print "$1\n"}')
+volume=$(pactl list sinks | perl -000ne "if(/#$INSTANCE_NUM/)"'{/(\d*)%/; print "$1\n"}')
 
+# print the status text
 if [[ "${status}" == "no" ]]; then
 	if [[ "${volume}" == "0" ]]; then
-		echo "  ${volume}% "
-		echo "  ${volume}% "
+		echo " ${volume}%"
+		echo " ${volume}%"
 		echo ""
 	elif [[ "${volume}" -lt 70 ]]; then
-		echo "  ${volume}% "
-		echo "  ${volume}% "
+		echo " ${volume}%"
+		echo " ${volume}%"
 		echo ""
 	else
-		echo "  ${volume}% "
-		echo "  ${volume}% "
+		echo " ${volume}%"
+		echo " ${volume}%"
 		echo ""
 	fi
 else
 	echo " MUTE"
 	echo " MUTE"
+	# echo "$STEP"
+	# echo "$STEP"
 	echo "#c55d51"
 fi

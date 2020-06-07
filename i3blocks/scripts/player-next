@@ -15,8 +15,8 @@ if [[ "${PLAYER_STATUS}" != "Paused" ]] && [[ "${PLAYER_STATUS}" != "Playing" ]]
 	echo ""
 	echo ""
 else
-	echo " "
-	echo " "
+	echo ""
+	echo ""
 	echo ""
 fi
 

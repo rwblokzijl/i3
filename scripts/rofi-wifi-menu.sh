@@ -24,6 +24,9 @@ fi
 
 LIST=$(nmcli --fields "$FIELDS" device wifi list | sed '/^--/d')
 # For some reason rofi always approximates character width 2 short... hmmm
+echo ---
+echo $LIST
+echo ---
 RWIDTH=$(($(echo "$LIST" | head -n 1 | awk '{print length($0); }')+2))
 # Dynamically change the height of the rofi menu
 LINENUM=$(echo "$LIST" | wc -l)

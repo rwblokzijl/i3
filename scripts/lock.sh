@@ -1,14 +1,34 @@
 #!/bin/bash
-ICON=$HOME/.config/i3/icon.png
+
+# This script locks the screen showing the screencontents to be blurred
+# This works as follows
+# - Take screenshot
+# - blur the image
+# - add lock icon to the middle
+# - start i3lock with the image as background
+
+# Note that on large screens that the image processing is expensive (time wise)
+# This is why the image is scaled down, then the operations are applied, then
+# the image is scaled up again (as i3lock doesnt allow scaling of images)
+
+ICON=$HOME/.config/i3/scripts/icon.png
 TMPBG=/tmp/screen.png
-
-#take a screenshot
 scrot $TMPBG
+convert $TMPBG -scale 10% $TMPBG # scale down to make image processing cheaper
+# convert -auto-gamma $TMPBG $TMPBG # blur and grey the image
+convert -auto-gamma $TMPBG $TMPBG # grey the image
+convert $TMPBG -scale 1000% $TMPBG # scale the image up again
+# convert -blur 0x2 -auto-gamma $TMPBG $TMPBG # blur the image (SLOW PART)
+SIZES=$(xrandr | grep -oP '\d+x\d+\+\d+\+\d+' | sed 's/x/ /g; s/+/ /g')
+ICON_SIZE=($(identify -format '%w %h' $ICON))
 
-#blur
-convert $TMPBG -scale 10% -sample 1000% $TMPBG
-#convert -modulate 100,0 -modulate 50 -blur 0x10 -auto-gamma $TMPBG $TMPBG
-#convert $TMPBG $ICON -gravity center -composite -matte $TMPBG
+while read -r line
+do
+	W_H_X_Y=($line)
+	let WIDTH=${W_H_X_Y[0]}/2+${W_H_X_Y[2]}-${ICON_SIZE[0]}/2
+	let HEIGHT=${W_H_X_Y[1]}/2+${W_H_X_Y[3]}-${ICON_SIZE[1]}/2
+	echo $WIDTH x $HEIGHT
+	convert $TMPBG $ICON -geometry +$WIDTH+$HEIGHT -composite -matte $TMPBG #add an icon
+done <<< "$SIZES"
 
-#lock using the blurred pic
-i3lock -u -i $TMPBG
+i3lock -i $TMPBG

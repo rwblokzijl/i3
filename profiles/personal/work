@@ -9,47 +9,125 @@
 # Personal i3 configurations like workspace names, rig specific shortcuts and
 # other things.
 ################################################################################
+#
+# Browser
+set $WS1 "1:    "
+# Terminal
+set $WS2 "2:    "
+# 3
+set $WS3 "3:  3  "
+# 4
+set $WS4 "4:  4  "
+# 5
+set $WS5 "5:  5  "
+# 6
+set $WS6 "6:  6  "
+# 7
+set $WS7 "7:  7  "
+# 8
+set $WS8 "8:  8  "
+# 9
+set $WS9 "9:  9  "
+# Music
+set $WS10 "10:    "
+# Settings
+set $WS11 "11:    "
+# Left browser:
+set $WS12 "12:    "
+# Left Chats
+set $WS13 "13:    "
+# Left password manager
+set $WS14 "14:    "
+
+set $SC1 VGA-2
+set $SC2 VGA-1
+
+# Assign workspaces to Monitors
+workspace $WS1 output $SC2
+workspace $WS2 output $SC2
+workspace $WS3 output $SC2
+workspace $WS4 output $SC2
+workspace $WS5 output $SC2
+workspace $WS6 output $SC2
+workspace $WS7 output $SC2
+workspace $WS8 output $SC2
+workspace $WS9 output $SC2
+workspace $WS10 output $SC2
+workspace $WS11 output $SC2
+workspace $WS12 output $SC1
+workspace $WS13 output $SC1
+workspace $WS14 output $SC1
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+grave workspace $WS12
+bindsym $mod+q workspace $WS13
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS10
+bindsym $mod+minus workspace $WS11
+bindsym $mod+plus focus output $SC3
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+grave move container to workspace $WS12
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+bindsym $mod+Shift+0 move container to workspace $WS10
+bindsym $mod+Shift+underscore move container to workspace $WS11
+bindsym $mod+Shift+equal move container to output $SC3
 
 #swap caps and escape for better VIMing and swap alt and winkey for better i3ing
 exec_always --no-startup-id /usr/bin/setxkbmap -option "altwin:swap_lalt_lwin"
 
+#configure monitors
+exec_always --no-startup-id "xrandr --output $SC1 --mode 1280x1024 --pos 0x0 --rotate normal --output $SC2 --primary --mode 1920x1080 --pos 1280x0 --rotate normal"
+
 # Set the window borders to indicate the current focused window
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 4
+for_window [class="^Google-chrome$"] border pixel 0
+for_window [class="^Chromium$"] border pixel 0
+for_window [class="^Firefox$"] border pixel 0
+no_focus [window_role="pop-up"]
 
-exec --no-startup-id i3-msg 'workspace 1; append_layout $LAYOUTS/chromium.json'
-exec --no-startup-id i3-msg 'workspace 2; append_layout $LAYOUTS/gnome-terminal.json'
+exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/chromium.json'
+exec --no-startup-id i3-msg 'workspace $WS2; append_layout $LAYOUTS/gnome-terminal.json'
+# exec --no-startup-id i3-msg 'workspace $WS12; append_layout $LAYOUTS/chromium.json'
+exec --no-startup-id i3-msg 'workspace $WS11; append_layout $LAYOUTS/pavucontrol.json'
 
+bindsym $mod+c exec chromium
+bindsym $mod+Shift+c exec chromium -incognito
 
 exec --no-startup-id "chromium"
 exec --no-startup-id "gnome-terminal"
+exec --no-startup-id "keepassxc"
+exec --no-startup-id "rambox"
+exec --no-startup-id "spotify"
+exec --no-startup-id "pavucontrol"
+exec --no-startup-id "insync start"
+
+for_window [class="^Rambox$"]               move to workspace $WS13
+for_window [class="^keepassxc$"]            move to workspace $WS14
+for_window [class="Spotify"]                move to workspace $WS10
 
 #Automatic back-and-forth when switching to the current workspace
 #https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth
-workspace_auto_back_and_forth yes
+#
+# Finally focus workspace 2
+exec --no-startup-id i3-msg 'workspace "$WS2"'
+# workspace_auto_back_and_forth yes
 
 # End Personal #################################################################
 

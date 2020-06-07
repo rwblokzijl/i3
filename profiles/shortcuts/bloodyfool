@@ -13,11 +13,17 @@
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Return exec dbus-launch gnome-terminal
+bindsym $mod+Return exec urxvt
 
 #Start a browser
-bindsym $mod+c exec chromium
-bindsym $mod+Shift+c exec chromium -incognito
+#
+# This is now done in the personal files (for scaling using a fla using a flag)
+#
+# bindsym $mod+c exec chromium
+# bindsym $mod+Shift+c exec chromium -incognito
+# bindsym $mod+c exec brave-browser
+# bindsym $mod+Shift+c exec brave-browser --incognito
 # bindsym $mod+c exec firefox
 # bindsym $mod+Shift+c exec firefox -private-window
 

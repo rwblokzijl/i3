@@ -30,15 +30,11 @@ fi
 
 
 if [[ ! -d /sys/class/net/${INTERFACE}/wireless ]]; then
-	echo "0% "
-	echo "0% "
-	echo "#C55D51"
+	printf '{ "full_text": " 0%%", "label": "", "color": "#C55D51", }\n'
 	exit
 fi
 if [[ "$(cat /sys/class/net/$INTERFACE/operstate)" == 'down' ]]; then
-	echo "0% "
-	echo "0% "
-	echo "#C55D51"
+	printf '{ "full_text": " 0%%", "label": "", "color": "#C55D51", }\n'
 	exit
 fi
 
@@ -47,18 +43,29 @@ fi
 
 QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
 
-#------------------------------------------------------------------------
+------------------------------------------------------------------------
 
-echo "$QUALITY% " # full text
-echo "$QUALITY " # short text
+# COLORS=("#FF0000" "#FF0000" "#FF1000" "#FF2000" "#FF3000" "#FF4000" "#FF5000" "#FF6000" "#FF7000" "#FF8000" "#FF9000" "#FFA000" "#FFB000" "#FFC000" "#FFD000" "#FFE000" "#FFF000" "#FFFF00" "#F0FF00" "#E0FF00" "#D0FF00" "#C0FF00" "#B0FF00" "#A0FF00" "#90FF00" "#80FF00" "#70FF00" "#60FF00" "#50FF00" "#40FF00" "#30FF00" "#20FF00" "#10FF00" "#00FF00")
+
+
+# QUALITY=100
+
+# COLOR_IDX=$(echo "$QUALITY/3" | bc)
+# COLOR=${COLORS[${COLOR_IDX}]}
 
 # color
 if [[ $QUALITY -ge 80 ]]; then
-    echo "#B8BB26"
-elif [[ $QUALITY -lt 80 ]]; then
-    echo "#FABD2F"
-elif [[ $QUALITY -lt 60 ]]; then
-    echo "#FE8019"
+    COLOR="#B8BB26"
 elif [[ $QUALITY -lt 40 ]]; then
-	echo "#C55D51"
+    COLOR="#C55D51"
+elif [[ $QUALITY -lt 60 ]]; then
+    COLOR="#FE8019"
+elif [[ $QUALITY -lt 80 ]]; then
+    COLOR="#FABD2F"
 fi
+
+printf '{
+	"full_text": " %s%%",
+	"label": "",
+	"color": "%s",
+	}\n' $QUALITY $COLOR

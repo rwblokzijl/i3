@@ -9,14 +9,11 @@
        "x": 1920,
        "y": 0
     },
-    "name": "Google Chrome",
+    "name": "Brave",
     "percent": 1,
     "swallows": [
        {
-       "class": "^brave$"
-       // "instance": "^brave$",
-       // "transient_for": "^$",
-       // "window_role": "^browser$"
+           "class": "^Brave\\-browser$"
        }
     ],
     "type": "con"

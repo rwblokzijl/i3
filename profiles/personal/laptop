@@ -40,6 +40,11 @@ set $WS12 "12:    "
 set $WS13 "13:    "
 # Password manager
 set $WS14 "14:    "
+# Browser
+set $WS15 "15:    "
+
+set $SC1 eDP-1
+set $SC2 DP-1
 
 # switch to workspace
 bindsym $mod+1 workspace $WS1
@@ -55,7 +60,7 @@ bindsym $mod+0 workspace $WS10
 bindsym $mod+minus workspace $WS11
 bindsym $mod+equal workspace $WS12
 bindsym $mod+q workspace $WS13
-bindsym $mod+grave workspace $WS14
+bindsym $mod+grave workspace $WS15
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $WS1;
@@ -70,7 +75,24 @@ bindsym $mod+Shift+9 move container to workspace $WS9;
 bindsym $mod+Shift+0 move container to workspace $WS10;
 bindsym $mod+Shift+underscore move container to workspace $WS11;
 bindsym $mod+Shift+plus move container to workspace $WS12;
-bindsym $mod+Shift+grave move container to workspace $WS14
+bindsym $mod+Shift+grave move container to workspace $WS15
+
+# Assign workspaces to Monitors
+workspace $WS1  output $SC1
+workspace $WS2  output $SC1
+workspace $WS3  output $SC1
+workspace $WS4  output $SC1
+workspace $WS5  output $SC1
+workspace $WS6  output $SC1
+workspace $WS7  output $SC1
+workspace $WS8  output $SC1
+workspace $WS9  output $SC1
+workspace $WS10 output $SC1
+workspace $WS11 output $SC1
+workspace $WS12 output $SC1
+workspace $WS13 output $SC1
+workspace $WS14 output $SC1
+workspace $WS15 output $SC2
 
 # Bar signals:
 bindsym --release Caps_Lock exec pkill -RTMIN+11 i3blocks
@@ -81,9 +103,9 @@ bindsym $mod+i workspace prev
 bindsym $mod+o workspace next
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +10% && pactl set-sink-mute 0 off && pkill -RTMIN+10 i3blocks"
-bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -10% && pactl set-sink-mute 0 off && pkill -RTMIN+10 i3blocks"
-bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 0 toggle && pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume $(pacmd info | grep Default\ sink | grep -oE '[^ ]+$') +5% && pactl set-sink-mute $(pacmd info | grep Default\ sink | grep -oE '[^ ]+$') off && pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume $(pacmd info | grep Default\ sink | grep -oE '[^ ]+$') -5% && pactl set-sink-mute $(pacmd info | grep Default\ sink | grep -oE '[^ ]+$') off && pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute $(pacmd info | grep Default\ sink | grep -oE '[^ ]+$') toggle && pkill -RTMIN+10 i3blocks"
 
 # Touchpad controls
 bindsym XF86Search exec $CONFIG/toggletouchpad.sh # toggle touchpad
@@ -95,17 +117,22 @@ exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option
 #enable networkmanager
 exec --no-startup-id nm-applet
 #exec --no-startup-id wicd-gtk -t
+#
+bindsym $mod+c exec chromium --force-device-scale-factor=1.7
+bindsym $mod+Shift+c exec chromium -incognito --force-device-scale-factor=1.7
 
 #start programs on startup
 exec --no-startup-id i3-msg 'workspace $WS2; append_layout $LAYOUTS/gnome-terminal.json'
 #exec --no-startup-id i3-msg 'workspace $WS10; append_layout $LAYOUTS/pavucontrol.json'
 exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/chromium.json'
+# exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/brave.json'
 
 exec --no-startup-id "gnome-terminal"
-exec --no-startup-id "chromium"
-exec --no-startup-id "spotify --force-device-scale-factor=2"
+exec --no-startup-id "chromium --force-device-scale-factor=1.7"
+# exec --no-startup-id "brave-browser"
+exec --no-startup-id "spotify --force-device-scale-factor=1.7"
 exec --no-startup-id "fusuma"
-exec --no-startup-id "rambox"
+exec --no-startup-id "rambox --force-device-scale-factor=1.7"
 
 #exec --no-startup-id "pavucontrol"
 #exec --no-startup-id "thunar"
@@ -120,7 +147,7 @@ for_window [class="dota2"]          move to workspace $WS8
 for_window [class="hl2_linux"]      move to workspace $WS8
 for_window [class="^Minecraft"]     move to workspace $WS8
 for_window [title="^Minecraft Launcher$"]  move to workspace $WS8
-for_window [class="Thunar"]         move to workspace $WS9
+# for_window [class="Thunar"]         move to workspace $WS9
 for_window [class="Spotify"]        move to workspace $WS10
 for_window [class="Pavucontrol"]    move to workspace $WS11
 for_window [class="Wicd-client"]    move to workspace $WS11
@@ -135,6 +162,7 @@ for_window [class="(?i)gsimplecal"] floating enable, move position mouse, move u
 # exec --no-startup-id "xinput --set-prop 13 'Synaptics Two-Finger Scrolling' 1 1"
 
 exec --no-startup-id "insync start"
+exec --no-startup-id "blueman-applet"
 
 exec xrandr --dpi 192
 
@@ -154,7 +182,7 @@ for_window [class="(?i)gsimplecal"] floating enable, move position mouse, move u
 
 #Automatic back-and-forth when switching to the current workspace
 #https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth
-workspace_auto_back_and_forth yes
+# workspace_auto_back_and_forth yes
 
 # End Personal #################################################################
 
