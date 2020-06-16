@@ -48,7 +48,5 @@ if [[ "${status}" == "no" ]]; then
 else
 	echo " MUTE"
 	echo " MUTE"
-	# echo "$STEP"
-	# echo "$STEP"
 	echo "#c55d51"
 fi
