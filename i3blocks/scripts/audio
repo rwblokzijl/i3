@@ -8,7 +8,7 @@ INSTANCE=$(pacmd info | grep Default\ sink | grep -oE '[^ ]+$')
 INSTANCE_NUM=$(pactl list short | grep "${INSTANCE}\s" | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,')
 
 # Round to nearest ${STEP}
-volume=$(pactl list sinks | perl -000ne "if(/#$INSTANCE_NUM/)"'{/(\d*)%/; print "$1\n"}')
+volume=$(pactl list sinks | perl -000ne "if(/#$INSTANCE_NUM\s/)"'{/(\d*)%/; print "$1\n"}')
 volume=$(echo "$volume/$STEP*$STEP" | bc)
 pactl set-sink-volume ${INSTANCE} $volume%
 
@@ -17,9 +17,11 @@ pactl set-sink-volume ${INSTANCE} $volume%
 if [[ "${BLOCK_BUTTON}" -eq 4 ]]; then
 	pactl set-sink-volume ${INSTANCE} +$STEP%
 	pactl set-sink-mute ${INSTANCE} off
+
 # right click
 elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
 	pactl set-sink-mute ${INSTANCE} toggle
+
 # scroll down
 elif [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
 	pactl set-sink-volume ${INSTANCE} -$STEP%
@@ -27,8 +29,8 @@ elif [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
 fi
 
 # Recalculate the mute status and volume
-status=$(pactl list sinks | perl -000ne "if(/#$INSTANCE_NUM/)"'{/Mute: (no|yes)/; print "$1\n"}')
-volume=$(pactl list sinks | perl -000ne "if(/#$INSTANCE_NUM/)"'{/(\d*)%/; print "$1\n"}')
+status=$(pactl list sinks | perl -000ne "if(/#$INSTANCE_NUM\s/)"'{/Mute: (no|yes)/; print "$1\n"}')
+volume=$(pactl list sinks | perl -000ne "if(/#$INSTANCE_NUM\s/)"'{/(\d*)%/; print "$1\n"}')
 
 # print the status text
 if [[ "${status}" == "no" ]]; then
