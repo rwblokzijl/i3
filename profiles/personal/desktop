@@ -47,10 +47,10 @@ set $WS15 "202:    "
 # Left password manager
 set $WS16 "203:    "
 
-set $SC1 DVI-D-1
-set $SC2 DP-1
-set $SC3 HDMI-1
-set $SCM DVI-D-2
+set $SC1 HDMI-A-0
+set $SC2 DisplayPort-0
+set $SC3 DisplayPort-1
+set $SCM DVI-D-0
 
 # chill/unchill
 # bed/dark
@@ -131,18 +131,15 @@ exec --no-startup-id nm-applet
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 1 +5% && pactl set-sink-mute 1 off && pkill -RTMIN+10 i3blocks"
-bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 1 -5% && pactl set-sink-mute 1 off && pkill -RTMIN+10 i3blocks"
-bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 1 toggle && pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "sound up"
+bindsym XF86AudioLowerVolume exec --no-startup-id "sound down"
+bindsym XF86AudioMute        exec --no-startup-id "sound mute"
 
 #swap caps and escape for better VIMing and swap alt and winkey for better i3ing
 exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin"
 
 #configure monitors
 exec_always --no-startup-id "xrandr --output $SC1 --mode 1920x1080 --pos 0x0 --rotate normal --output $SC2 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output $SC3 --mode 1920x1080 --pos 3840x0 --rotate normal --output $SCM --mode 1920x1080 --same-as $SC3"
-#exec_always --no-startup-id xrandr --output $SC2 --primary
-#exec_always --no-startup-id xrandr --output $SC1 --auto --left-of $SC2
-#exec_always --no-startup-id xrandr --output $SC3 --auto --right-of $SC2
 
 # Start programs and assign to workspaces
 
