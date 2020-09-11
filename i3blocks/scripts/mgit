@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if mgit dirty -l ~; then
-    amount=$(mgit status -dl ~ | wc -l)
+if mgit dirty -ul ~; then
+    amount=$(mgit status -dul ~ | wc -l)
     echo "dirty ($amount)"
     echo "($amount)"
 fi
