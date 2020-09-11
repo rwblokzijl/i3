@@ -13,10 +13,8 @@ PLAYER_STATUS=$(playerctl ${ARGUMENTS} status)
 if [[ "${PLAYER_STATUS}" != "Paused" ]] && [[ "${PLAYER_STATUS}" != "Playing" ]]; then
 	echo ""
 	echo ""
-	echo ""
 else
 	echo ""
 	echo ""
-	echo ""
 fi
 

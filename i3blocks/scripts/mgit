@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if mgit dirty -l ~; then
+    amount=$(mgit status -dl ~ | wc -l)
+    echo "dirty ($amount)"
+    echo "($amount)"
+fi
+
+exit 0
+
+# Process the "mouse event"
+# scroll up
+if [[ "${BLOCK_BUTTON}" -eq 4 ]]; then
+	true
+# right click
+elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
+	true
+# scroll down
+elif [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
+	true
+fi
+
