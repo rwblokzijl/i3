@@ -12,36 +12,23 @@
 
 #bindsym --release XF86WakeUp exec --no-startup-id "$CONFIG/suspend.sh"
 
-# Browser
 set $WS1 "1:    "
-# Terminal
 set $WS2 "2:    "
-# 3
 set $WS3 "3:  3  "
-# 4
 set $WS4 "4:  4  "
-# 5
 set $WS5 "5:  5  "
-# 6
 set $WS6 "6:  6  "
-# Steam
 set $WS7 "7:    "
-# Gaming
 set $WS8 "8:    "
-# Thunar
 set $WS9 "9:    "
-# Music
 set $WS10 "10:    "
-# Settings
 set $WS11 "11:    "
-# Virt Manager
 set $WS12 "12:    "
-# Chats
 set $WS13 "13:    "
-# Password manager
 set $WS14 "14:    "
-# Browser
-set $WS15 "15:    "
+
+set $WS101 "101:    "
+# set $WS102 "102:    "
 
 set $SC1 eDP-1
 set $SC2 DP-1
@@ -60,7 +47,9 @@ bindsym $mod+0 workspace $WS10
 bindsym $mod+minus workspace $WS11
 bindsym $mod+equal workspace $WS12
 bindsym $mod+q workspace $WS13
-bindsym $mod+grave workspace $WS15
+
+bindsym $mod+grave workspace $WS101
+# bindsym $mod+u workspace $WS102
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $WS1;
@@ -75,24 +64,28 @@ bindsym $mod+Shift+9 move container to workspace $WS9;
 bindsym $mod+Shift+0 move container to workspace $WS10;
 bindsym $mod+Shift+underscore move container to workspace $WS11;
 bindsym $mod+Shift+plus move container to workspace $WS12;
-bindsym $mod+Shift+grave move container to workspace $WS15
+
+bindsym $mod+Shift+grave move container to workspace $WS101
+# bindsym $mod+Shift+u move container to workspace $WS102
 
 # Assign workspaces to Monitors
-workspace $WS1  output $SC1
-workspace $WS2  output $SC1
-workspace $WS3  output $SC1
-workspace $WS4  output $SC1
-workspace $WS5  output $SC1
-workspace $WS6  output $SC1
-workspace $WS7  output $SC1
-workspace $WS8  output $SC1
-workspace $WS9  output $SC1
-workspace $WS10 output $SC1
-workspace $WS11 output $SC1
-workspace $WS12 output $SC1
+workspace $WS1  output $SC2
+workspace $WS2  output $SC2
+workspace $WS3  output $SC2
+workspace $WS4  output $SC2
+workspace $WS5  output $SC2
+workspace $WS6  output $SC2
+workspace $WS7  output $SC2
+workspace $WS8  output $SC2
+workspace $WS9  output $SC2
+workspace $WS10 output $SC2
+workspace $WS11 output $SC2
+workspace $WS12 output $SC2
 workspace $WS13 output $SC1
 workspace $WS14 output $SC1
-workspace $WS15 output $SC2
+
+workspace $WS101 output $SC1
+# workspace $WS102 output $SC2
 
 # Bar signals:
 bindsym --release Caps_Lock exec pkill -RTMIN+11 i3blocks
