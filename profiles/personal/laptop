@@ -171,6 +171,13 @@ set $gaps smart_gaps on
 
 set $gaps2 smart_borders on
 
+# for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 4
+for_window [class="^Google-chrome$"] border pixel 0
+for_window [class="^Brave-browser$"] border pixel 0
+for_window [class="^Chromium$"] border pixel 0
+for_window [class="^Firefox$"] border pixel 0
+
 for_window [class="(?i)gsimplecal"] floating enable, move position mouse, move up 20
 
 #Automatic back-and-forth when switching to the current workspace

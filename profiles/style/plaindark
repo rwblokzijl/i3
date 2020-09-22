@@ -51,6 +51,10 @@ client.urgent           $bright  $bright      $dark   $bright     $bright
 #exec_always --no-startup-id feh --bg-scale --no-xinerama '$WALLPAPERS/$WIDTH/nature/SANAalr.jpg'
 exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/$WIDTH/nature/*
 
+#enable when i3 is able to run horizontal:
+# hide_edge_borders horizontal
+# for_window [class="^.*"] border pixel 5
+
 #turn off borders
 # for_window [class="^.*"] border pixel 2
 # for_window [class="^Google-chrome$"] border pixel 0
