@@ -91,8 +91,8 @@ set $inactive           #a89984
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec dbus-launch gnome-terminal
 # bindsym $mod+Return exec urxvt
+# bindsym $mod+Return exec dbus-launch gnome-terminal
 
 #Start a browser
 #
@@ -409,6 +409,9 @@ exec --no-startup-id "set_sensitivity.sh"
 exec --no-startup-id "chrome_text_drag.py"
 exec --no-startup-id "killpy monitor.py; monitor.py"
 # exec --no-startup-id "monitor.py"
+
+# start a terminal
+bindsym $mod+Return exec urxvt
 
 #Automatic back-and-forth when switching to the current workspace
 #https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth
