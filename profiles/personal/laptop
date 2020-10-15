@@ -111,8 +111,8 @@ exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option
 exec --no-startup-id nm-applet
 #exec --no-startup-id wicd-gtk -t
 #
-bindsym $mod+c exec chromium --force-device-scale-factor=1.7
-bindsym $mod+Shift+c exec chromium -incognito --force-device-scale-factor=1.7
+# bindsym $mod+c exec chromium --force-device-scale-factor=1.7
+# bindsym $mod+Shift+c exec chromium -incognito --force-device-scale-factor=1.7
 
 #start programs on startup
 exec --no-startup-id i3-msg 'workspace $WS2; append_layout $LAYOUTS/gnome-terminal.json'

@@ -22,8 +22,8 @@ floating_modifier $mod
 #
 # bindsym $mod+c exec chromium
 # bindsym $mod+Shift+c exec chromium -incognito
-# bindsym $mod+c exec brave-browser
-# bindsym $mod+Shift+c exec brave-browser --incognito
+bindsym $mod+c exec brave || brave-browser
+bindsym $mod+Shift+c exec brave --incognito || brave-browser --incognito
 # bindsym $mod+c exec firefox
 # bindsym $mod+Shift+c exec firefox -private-window
 
