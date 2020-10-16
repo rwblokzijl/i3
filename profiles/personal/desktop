@@ -193,7 +193,8 @@ for_window [title="^https://hangouts.google.com - Google Hangouts - Mozilla Fire
 # left screen
 exec --no-startup-id "keepassxc"
 exec --no-startup-id "rambox"
-exec --no-startup-id "chromium"
+# exec --no-startup-id "chromium"
+exec --no-startup-id "brave"
 # middle screen
 #exec --no-startup-id "steam"
 exec --no-startup-id "spotify"

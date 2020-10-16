@@ -121,8 +121,8 @@ exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/chromium.jso
 # exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/brave.json'
 
 exec --no-startup-id "gnome-terminal"
-exec --no-startup-id "chromium --force-device-scale-factor=1.7"
-# exec --no-startup-id "brave-browser"
+# exec --no-startup-id "chromium --force-device-scale-factor=1.7"
+exec --no-startup-id "brave-browser"
 exec --no-startup-id "spotify --force-device-scale-factor=1.7"
 exec --no-startup-id "fusuma"
 exec --no-startup-id "rambox --force-device-scale-factor=1.7"
