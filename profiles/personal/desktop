@@ -144,7 +144,8 @@ exec_always --no-startup-id "xrandr --output $SC1 --mode 1920x1080 --pos 0x0 --r
 # Start programs and assign to workspaces
 
 # Set layouts for monitors to assign programs to specific positions
-exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/chromium.json'
+# exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/chromium.json'
+exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/brave.json'
 #exec --no-startup-id i3-msg 'workspace $WS2; append_layout $LAYOUTS/gnome-terminal.json'
 exec --no-startup-id i3-msg 'workspace $WS11; append_layout $LAYOUTS/pavucontrol.json'
 #exec --no-startup-id i3-msg 'workspace $WS101; append_layout $LAYOUTS/firefox.json'
