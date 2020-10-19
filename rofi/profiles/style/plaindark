@@ -1,7 +1,7 @@
 rofi.opacity: 85
 
 # Window Style
-rofi.lines: 9
+rofi.lines: 6
 rofi.width: 50
 rofi.bw: 4
 rofi.padding: 0
