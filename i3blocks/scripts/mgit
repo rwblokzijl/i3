@@ -2,8 +2,8 @@
 
 if mgit dirty -ul ~; then
     amount=$(mgit status -dul ~ | wc -l)
-    echo "dirty ($amount)"
-    echo "$amount"
+    echo " $amount"
+    echo " $amount"
 fi
 
 exit 0
