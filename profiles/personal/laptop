@@ -126,6 +126,7 @@ exec --no-startup-id "brave-browser"
 exec --no-startup-id "spotify --force-device-scale-factor=1.7"
 exec --no-startup-id "fusuma"
 exec --no-startup-id "rambox --force-device-scale-factor=1.7"
+exec --no-startup-id "signal-desktop"
 
 #exec --no-startup-id "pavucontrol"
 #exec --no-startup-id "thunar"
@@ -146,6 +147,7 @@ for_window [class="Pavucontrol"]    move to workspace $WS11
 for_window [class="Wicd-client"]    move to workspace $WS11
 for_window [class="Virt-manager"]   move to workspace $WS12
 for_window [class="^Rambox$"]       move to workspace $WS13
+for_window [class="^Signal$"]       move to workspace $WS13
 for_window [class="^discord$"]      move to workspace $WS13
 for_window [class="^keepassxc$"]    move to workspace $WS14
 
