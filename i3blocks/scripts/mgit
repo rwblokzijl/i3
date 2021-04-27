@@ -1,10 +1,11 @@
 #!/bin/bash
 
-if mgit dirty -pul ~; then
-    amount=$(mgit status -dpul ~ | wc -l)
-    echo " $amount"
-    echo " $amount"
+amount=$(mgit status -cdpul ~)
+if [ "$amount" -eq "0" ]; then
+    exit 0
 fi
+echo " $amount"
+echo " $amount"
 
 exit 0
 
