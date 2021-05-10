@@ -12,6 +12,8 @@
 
 #bindsym --release XF86WakeUp exec --no-startup-id "$CONFIG/suspend.sh"
 
+set $BAR_SIZE 24
+
 set $WS1 "1:    "
 set $WS2 "2:    "
 set $WS3 "3:  3  "

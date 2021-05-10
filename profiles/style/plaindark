@@ -27,7 +27,7 @@ bar {
 	tray_output primary
 	#height 40
 	tray_padding 0
-	font pango:Hack Nerd Font
+	font pango:Hack Nerd Font $BAR_SIZE
 	strip_workspace_numbers yes
 	colors {
 		background $transbackground
@@ -62,7 +62,8 @@ exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS
 # for_window [class="^Firefox$"] border pixel 0
 
 # Enable transparent terminal
-exec_always --no-startup-id "compton"
+# TODO: enable with proper config: see home desktop
+# exec_always --no-startup-id "compton --config $CONFIG/compton.conf"
 
 #make i3 windows slightly bigger by hiding edge borders
 #hide_edge_borders both
