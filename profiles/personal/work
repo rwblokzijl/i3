@@ -34,11 +34,8 @@ set $WS14 "201:    "
 set $WS15 "202:    "
 set $WS16 "203:    "
 
-# set $SC1 $(xrandr | grep " connected" | sed -n '1 p' | awk '{print $1;}')
-# set $SC2 $(xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')
-
-set $SC1 eDP-1 # TODO: generate on startup with commands above
-set $SC2 DP-2-3
+set $SC1 eDP-1
+set $SC2 {{$(xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')}}
 
 # switch to workspace
 bindsym $mod+grave workspace $WS14
@@ -101,7 +98,7 @@ exec_always --no-startup-id "xrandr --output $SC1 --auto --output $SC2 --auto --
 
 # Set layouts for monitors to assign programs to specific positions
 # exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/chromium.json'
-exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/brave.json'
+exec --no-startup-id i3-msg "workspace $WS1; append_layout $LAYOUTS/brave.json"
 #exec --no-startup-id i3-msg 'workspace $WS2; append_layout $LAYOUTS/gnome-terminal.json'
 exec --no-startup-id i3-msg 'workspace $WS11; append_layout $LAYOUTS/pavucontrol.json'
 #exec --no-startup-id i3-msg 'workspace $WS14; append_layout $LAYOUTS/firefox.json'
@@ -144,6 +141,7 @@ exec --no-startup-id "keepassxc"
 
 exec --no-startup-id "insync start"
 exec --no-startup-id "blueman-applet"
+exec_always --no-startup-id "dunst"
 
 # Finally focus workspace 1
 exec --no-startup-id i3-msg 'workspace "$WS1"'

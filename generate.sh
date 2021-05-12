@@ -27,5 +27,13 @@ do
 	cat "$I3_PROFILES/$line" >> $I3_CONFIG
 done
 
+# Take everything between {{  }} and apply bash expansion
+ESCAPE="s/'/'\\\''/g;"
+PREPEND="s/^/echo '/;"
+EXPAND='s/{{\s*\(.*\)\s*}}/'\''$(echo '\''echo \1'\'' | bash)'\''/;'
+APPEND="s/$/'/"
+EXECUTE="e"
+sed -i "${ESCAPE} ${PREPEND} ${EXPAND} ${APPEND} ${EXECUTE}" $I3_CONFIG
+
 #reload the newly generated config
 i3 restart &> /dev/null

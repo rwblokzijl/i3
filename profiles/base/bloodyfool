@@ -26,15 +26,15 @@ font pango:DejaVu Sans Mono 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-set $HOME /home/bloodyfool
+set $HOME {{$HOME}}
 
-set $CONFIG /home/bloodyfool/.config/i3
-set $ROFI /home/bloodyfool/.config/i3/rofi
-set $I3BLOCKS /home/bloodyfool/.config/i3/i3blocks
-set $SCRIPTS /home/bloodyfool/.config/i3/scripts
-set $LAYOUTS /home/bloodyfool/.config/i3/layouts
+set $CONFIG $HOME/.config/i3
+set $ROFI $HOME/.config/i3/rofi
+set $I3BLOCKS $HOME/.config/i3/i3blocks
+set $SCRIPTS $HOME/.config/i3/scripts
+set $LAYOUTS $HOME/.config/i3/layouts
 
-set $WALLPAPERS /home/bloodyfool/.config/backgrounds
+set $WALLPAPERS $HOME/.config/backgroundss
 
 focus_wrapping no
 
