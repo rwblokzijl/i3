@@ -2,7 +2,7 @@
 
 ARGUMENTS="--player spotify"
 
-ICON_PLAY=""
+ICON_PLAY=" "
 ICON_PAUSE=""
 
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
@@ -32,5 +32,7 @@ if [[ "${PLAYER_STATUS}" = "Playing" ]]; then
 	echo "#b8bb26"
 elif [[ "${PLAYER_STATUS}" = "Paused" ]]; then
 	echo "#fb5f4d"
+else
+    echo ""
 fi
 
