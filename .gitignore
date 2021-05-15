@@ -1,9 +1,8 @@
 config
 *.swp
-profile
-baseconfigs
-rofi/rofi.conf
-localvars
+i3_gen/profile
+i3_gen/baseconfigs
+rofi.conf
+i3_gen/localvars
 tags
-config_work
 .gitold

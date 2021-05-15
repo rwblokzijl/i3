@@ -31,7 +31,7 @@ The following are also used but arent that important:
  - scrot
 
 NOTE: this list is not exhaustive as there are many programs that i have
-included shortcuts
+included keybinds
 
 # How to use
 1. Clone the repo into .config
@@ -59,8 +59,8 @@ included shortcuts
 ├── profiles - contains the ingredients for the config files
 │   ├── base - contains settings for home directory and such
 │   ├── colors - contains different color schemes
-│   ├── personal - contains rig specific settings
-│   ├── shortcuts - contains the shortcuts that should be available everywhere
+│   ├── machine - contains rig specific settings
+│   ├── keybinds - contains the keybinds that should be available everywhere
 │   ├── style - contains different style configurations
 ├── rofi
 │   ├── generate.sh - generates a new rofi config based on color and style settings

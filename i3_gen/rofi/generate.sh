@@ -1,4 +1,4 @@
-ROFI_CONFIG="./rofi/rofi.conf"
+ROFI_CONFIG="../rofi.conf"
 ROFI_PROFILES="./rofi/profiles"
 
 # check if vars are set
@@ -13,8 +13,8 @@ if [ -z $STYLE ]; then
 fi
 
 if [ -z $HEIGHT ]; then
-	echo "Missing HEIGHT resolution for rofi, set it in i3/baseconfigs"
-	exit 1
+	echo "Missing HEIGHT resolution for rofi, set it in i3/baseconfigs, using default"
+	HEIGHT=$(xrandr | grep " connected" | sed -n '1 p' | tr 'x+' " " | awk '{print $4;}')
 fi
 
 # check if vars ar proper values

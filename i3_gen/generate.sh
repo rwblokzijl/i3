@@ -3,28 +3,22 @@
 # This script generates a new i3 config from the files in the "profiles"
 # directory.
 
-cd $HOME/.config/i3
+cd $HOME/.config/i3/i3_gen
 
 #define local folders
-I3_CONFIG="./config"
-I3_VARS="./localvars"
-I3_PROFILE="./profile"
+I3_CONFIG="../config"
+I3_CONFIG_SPEC="./config"
 
-I3_PROFILES="./profiles"
+I3_CONFIG_COMPONENTS="./components"
 
 #clear the old i3 config file
 rm "$I3_CONFIG"
 touch "$I3_CONFIG"
 
-#Start with the local variables (screen sizes and rig identifier)
-if [[ -f $I3_VARS ]]; then
-	cat "$I3_VARS" >> $I3_CONFIG
-fi
-
-#For all the files listed in I3_PROFILE file, append them to the config
-cat $I3_PROFILE | while read line
+#For all the files listed in I3_CONFIG_SPEC file, append them to the config
+cat $I3_CONFIG_SPEC | while read line
 do
-	cat "$I3_PROFILES/$line" >> $I3_CONFIG
+	cat "$I3_CONFIG_COMPONENTS/$line" >> $I3_CONFIG
 done
 
 # Take everything between {{  }} and apply bash expansion

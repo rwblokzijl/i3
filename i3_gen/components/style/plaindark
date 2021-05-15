@@ -11,7 +11,7 @@
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec rofi -show run -lines 6 -eh 2 -width 100 -padding 485 -opacity "90" -bw 0 -bc "$green" -bg "$background" -fg "$bright" -hlbg "$green" -hlfg "$dark"
-bindsym $mod+d exec rofi -show run -config $ROFI/rofi.conf
+bindsym $mod+d exec rofi -show run -config $CONFIG/rofi.conf
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -22,23 +22,23 @@ bindsym $mod+semicolon exec lock
 
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
-	status_command i3blocks -c $I3BLOCKS/$MACHINE_i3blocks.conf
-	mode dock
-	tray_output primary
-	#height 40
-	tray_padding 0
-	font pango:Hack Nerd Font $BAR_SIZE
-	strip_workspace_numbers yes
-	colors {
-		background $transbackground
-		statusline $paneltext
+    status_command i3blocks -c $CONFIG/i3blocks.conf
+    mode dock
+    tray_output primary
+    #height 40
+    tray_padding 0
+    font pango:Hack Nerd Font $BAR_SIZE
+    strip_workspace_numbers yes
+    colors {
+        background $transbackground
+        statusline $paneltext
 
-	#                       Border               BG                   Icon
-		focused_workspace   $transbackground     $transbackground     $active
-		active_workspace    $transbackground     $transbackground     $active
-		inactive_workspace  $transbackground     $transbackground     $inactive
-		urgent_workspace    $transbackground     $transbackground     $inactive
-	}
+        #                   Border               BG                   Icon
+        focused_workspace   $transbackground     $transbackground     $active
+        active_workspace    $transbackground     $transbackground     $active
+        inactive_workspace  $transbackground     $transbackground     $inactive
+        urgent_workspace    $transbackground     $transbackground     $inactive
+    }
 }
 
 #<colorclass>           <border> <background> <text>  <indicator> <child_border>

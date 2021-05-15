@@ -169,7 +169,7 @@ gaps inner 15
 bindsym $mod+z gaps inner all set 0
 bindsym $mod+x gaps inner all set 15
 
-bindsym $mod+n exec $SCRIPTS/rofi-wifi-menu.sh $ROFI/rofi.conf
+bindsym $mod+n exec $SCRIPTS/wifi.sh
 
 set $gaps smart_gaps on
 

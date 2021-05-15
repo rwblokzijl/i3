@@ -1,0 +1,8 @@
+RES="1080" #1080 or 4k # used to scale things like rofi properly
+
+# see ./profiles for options to these 5
+BASE="default" # sets directories and stuff
+#COLORS="" #pick the colorscheme the style will be using
+KEYBINDS="default" # keybinds profile
+MACHINE="desktop" # used for workspace names and screen configs
+#STYLE="" # see ./profiles/style for options

@@ -6,8 +6,10 @@
 #   /_____/\__,_/____/\___/                                                    #
 #                                                                              #
 ################################################################################
+# https://patorjk.com/software/taag/#p=display&f=Slant&t=Base
 # Base config that is the same for all i3 config
 ################################################################################
+
 #Mod1 = alt, Mod4 = win
 set $mod Mod4
 
@@ -26,15 +28,14 @@ font pango:DejaVu Sans Mono 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-set $HOME {{$HOME}}
+set $CONFIG   ~/.config/i3
+set $GENERATOR ~/.config/i3/i3_gen
+set $ROFI     ~/.config/i3/rofi
+set $I3BLOCKS ~/.config/i3/i3blocks
+set $SCRIPTS  ~/.config/i3/scripts
+set $LAYOUTS  ~/.config/i3/layouts
 
-set $CONFIG $HOME/.config/i3
-set $ROFI $HOME/.config/i3/rofi
-set $I3BLOCKS $HOME/.config/i3/i3blocks
-set $SCRIPTS $HOME/.config/i3/scripts
-set $LAYOUTS $HOME/.config/i3/layouts
-
-set $WALLPAPERS $HOME/.config/backgroundss
+set $WALLPAPERS ~/.config/backgroundss
 
 focus_wrapping no
 

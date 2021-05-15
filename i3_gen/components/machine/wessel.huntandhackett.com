@@ -97,11 +97,10 @@ exec_always --no-startup-id "xrandr --output $SC1 --auto --output $SC2 --auto --
 # Start programs and assign to workspaces
 
 # Set layouts for monitors to assign programs to specific positions
-exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/brave.json'
-exec --no-startup-id i3-msg 'workspace $WS11; append_layout $LAYOUTS/pavucontrol.json'
-
 # exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/chromium.json'
+exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/brave.json'
 #exec --no-startup-id i3-msg 'workspace $WS2; append_layout $LAYOUTS/gnome-terminal.json'
+exec --no-startup-id i3-msg 'workspace $WS11; append_layout $LAYOUTS/pavucontrol.json'
 #exec --no-startup-id i3-msg 'workspace $WS14; append_layout $LAYOUTS/firefox.json'
 
 # Set standard workspaces for programs
@@ -161,7 +160,7 @@ bindsym $mod+Return exec urxvt
 # https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth
 # workspace_auto_back_and_forth yes
 
-bindsym $mod+n exec $CONFIG/wifi.sh
+bindsym $mod+n exec $SCRIPTS/wifi.sh
 
 # End Personal #################################################################
 

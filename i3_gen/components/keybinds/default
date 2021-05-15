@@ -1,12 +1,12 @@
 ################################################################################
-#      _____ __               __             __                                #
-#     / ___// /_  ____  _____/ /________  __/ /______                          #
-#     \__ \/ __ \/ __ \/ ___/ __/ ___/ / / / __/ ___/                          #
-#    ___/ / / / / /_/ / /  / /_/ /__/ /_/ / /_(__  )                           #
-#   /____/_/ /_/\____/_/   \__/\___/\__,_/\__/____/                            #
-#                                                                              #
+#       __ __           __    _           __                                   #
+#      / //_/__  __  __/ /_  (_)___  ____/ /____                               #
+#     / ,< / _ \/ / / / __ \/ / __ \/ __  / ___/                               #
+#    / /| /  __/ /_/ / /_/ / / / / / /_/ (__  )                                #
+#   /_/ |_\___/\__, /_.___/_/_/ /_/\__,_/____/                                 #
+#             /____/                                                           #
 ################################################################################
-# All shortcuts
+# All keybinds
 ################################################################################
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -17,8 +17,6 @@ floating_modifier $mod
 # bindsym $mod+Return exec dbus-launch gnome-terminal
 
 #Start a browser
-#
-# This is now done in the personal files (for scaling using a fla using a flag)
 #
 # bindsym $mod+c exec chromium
 # bindsym $mod+Shift+c exec chromium -incognito
@@ -111,7 +109,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 #change style and regenerate config
-bindsym $mod+m exec --no-startup-id $CONFIG/switchconfig.sh
+bindsym $mod+m exec --no-startup-id $GENERATOR/switchconfig.sh
 
 # End Shortcuts ################################################################
 
