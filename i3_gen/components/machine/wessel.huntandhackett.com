@@ -144,7 +144,7 @@ exec --no-startup-id "blueman-applet"
 exec_always --no-startup-id "dunst"
 
 # Finally focus workspace 1
-exec --no-startup-id i3-msg 'workspace "$WS1"'
+exec --no-startup-id i3-msg 'workspace $WS1'
 
 # ### Hacky scripts to run ### #
 # mouse sensitivity
