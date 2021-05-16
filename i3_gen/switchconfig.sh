@@ -11,14 +11,7 @@ PRESETS="./presets"
 PROFILE=$(ls -p $PRESETS | grep -v / | rofi -show run -dmenu -config ~/.config/i3/rofi.conf)
 
 if [[ -z $PROFILE ]]; then
-	#no user input
-	exit 1
-fi
-
-if [[ $(ls $PRESETS | grep "$PROFILE") ]]; then
-	source "$PRESETS/$PROFILE"
-else
-	echo "Invalid input"
+	echo "No user input"
 	exit 1
 fi
 
@@ -28,14 +21,21 @@ else
 	echo "i3/baseconfigs doesn't exist using defaults"
 fi
 
+if [[ $(ls $PRESETS | grep "$PROFILE") ]]; then
+	source "$PRESETS/$PROFILE"
+	ln -sf "$PRESETS/$PROFILE" ./.preset
+else
+	echo "Invalid input"
+	exit 1
+fi
+
 #check if options set
 if [ -z $BASE ]; then
 	BASE=default
 fi
 
 if [ -z $COLORS ]; then
-	echo Colors not set
-	exit 1
+	COLORS=base
 fi
 
 if [ -z $KEYBINDS ]; then
@@ -79,6 +79,7 @@ fi
 
 # will still exit without changes if anything goes wrong in setting rofi
 source ./rofi/generate.sh
+source ./dunst/generate.sh
 
 rm "$CONFIG_SPEC"
 

@@ -1,2 +1,2 @@
-COLORS=gruvaqua
-STYLE=plaindark
+source presets/gruvbox-white
+ACTIVE=$AQUA

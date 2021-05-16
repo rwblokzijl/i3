@@ -1,2 +1,2 @@
-COLORS=gruvblue
-STYLE=plaindark
+source presets/gruvbox-white
+ACTIVE=$BLUE

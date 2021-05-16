@@ -1,2 +1,2 @@
-COLORS=gruvred
-STYLE=plaindark
+source presets/gruvbox-white
+ACTIVE=$RED

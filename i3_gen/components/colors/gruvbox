@@ -26,7 +26,6 @@ set $paneltext          #a89984
 
 set $background         #282828
 set $transbackground    #282828dd
-set $empty              #28282800
 set $active             #b8bb26
 set $inactive           #a89984
 

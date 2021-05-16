@@ -34,8 +34,10 @@ set $WS14 "201:    "
 set $WS15 "202:    "
 set $WS16 "203:    "
 
-set $SC1 eDP-1
-set $SC2 {{$(xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')}}
+; export SC1=$(xrandr | grep " connected" | sed -n '1 p' | awk '{print $1;}')
+; export SC2=$(xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')
+set $SC1 {{$SC1}}
+set $SC2 {{$SC2}}
 
 # switch to workspace
 bindsym $mod+grave workspace $WS14
@@ -92,7 +94,7 @@ bindsym XF86AudioMute        exec --no-startup-id "sound mute"
 exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin"
 
 #configure monitors
-exec_always --no-startup-id "xrandr --output $SC1 --auto --output $SC2 --auto --primary --right-of $SC1"
+exec_always --no-startup-id "xrandr --output $SC1 --auto --output $SC2 --auto --right-of $SC1 --primary "
 
 # Start programs and assign to workspaces
 
@@ -141,7 +143,7 @@ exec --no-startup-id "keepassxc"
 
 exec --no-startup-id "insync start"
 exec --no-startup-id "blueman-applet"
-exec_always --no-startup-id "dunst"
+exec_always --no-startup-id "killall dunst; dunst -config $CONFIG/dunstrc"
 
 # Finally focus workspace 1
 exec --no-startup-id i3-msg 'workspace $WS1'

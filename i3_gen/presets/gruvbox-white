@@ -1,0 +1,25 @@
+export COLORS="base"
+export STYLE="plaindark"
+
+export HEIGHT=$(xrandr | grep " connected" | sed -n '1 p' | tr 'x+' " " | awk '{print $4;}')
+export SCALE=$(($HEIGHT/1080))
+export DARK="#282828"
+export TRANSDARK="#282828dd"
+export BRIGHT="#ebdbb2"
+
+export RED="#fb4934"
+export GREEN="#b8bb26"
+export YELLOW="#fabd2f"
+export BLUE="#83a598"
+export PURPLE="#d3869b"
+export AQUA="#8ec07c"
+export GREY="#a89984"
+
+export BORDER=$DARK
+export PANELTEXT=$GREY
+export BACKGROUND=$DARK
+export TRANSBACKGROUND=$TRANSDARK
+export INACTIVE=$GREY
+
+export ACTIVE=$BRIGHT
+

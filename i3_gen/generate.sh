@@ -1,15 +1,21 @@
 #!/bin/bash
 
-# This script generates a new i3 config from the files in the "profiles"
+# This script generates a new i3 config from the files in the "components"
 # directory.
 
-cd $HOME/.config/i3/i3_gen
+
+GEN_DIR=$HOME/.config/i3/i3_gen
+
+cd $GEN_DIR
+
+source $GEN_DIR/.preset
+cat $GEN_DIR/.preset
 
 #define local folders
-I3_CONFIG="../config"
-I3_CONFIG_SPEC="./config"
+I3_CONFIG="$HOME/.config/i3/config"
+I3_CONFIG_SPEC="$GEN_DIR/config"
 
-I3_CONFIG_COMPONENTS="./components"
+I3_CONFIG_COMPONENTS="$GEN_DIR/components"
 
 #clear the old i3 config file
 rm "$I3_CONFIG"
@@ -21,13 +27,9 @@ do
 	cat "$I3_CONFIG_COMPONENTS/$line" >> $I3_CONFIG
 done
 
-# Take everything between {{  }} and apply bash expansion
-ESCAPE="s/'/'\\\''/g;"
-PREPEND="s/^/echo '/;"
-EXPAND='s/{{\s*\(.*\)\s*}}/'\''$(echo '\''echo \1'\'' | bash)'\''/;'
-APPEND="s/$/'/"
-EXECUTE="e"
-sed -i "${ESCAPE} ${PREPEND} ${EXPAND} ${APPEND} ${EXECUTE}" $I3_CONFIG
+# Expand the BASH-isms in the file
+$GEN_DIR/bash_expand.sh $I3_CONFIG
 
 #reload the newly generated config
 i3 restart &> /dev/null
+
