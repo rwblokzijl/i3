@@ -94,8 +94,14 @@ bindsym XF86AudioMute        exec --no-startup-id "sound mute"
 exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin"
 
 #configure monitors
-; export TOUCHSCREEN=$(xinput --list | grep "pointer" | grep "Wacom" | sed 's/.*\(Wacom.*\w\)\s*id.*/'\''\1'\''/')
+; if [[-z $SC2]]; then
 exec_always --no-startup-id "xrandr --output $SC1 --auto --output $SC2 --auto --right-of $SC1 --primary "
+; else
+exec_always --no-startup-id "xrandr --output $SC1 --auto --primary"
+; fi
+
+#configure touchscreen
+; export TOUCHSCREEN=$(xinput --list | grep "pointer" | grep "Wacom" | sed 's/.*\(Wacom.*\w\)\s*id.*/'\''\1'\''/')
 exec_always --no-startup-id "xinput --map-to-output {{$TOUCHSCREEN}} $SC1"
 
 # Start programs and assign to workspaces
