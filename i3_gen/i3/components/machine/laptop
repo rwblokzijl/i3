@@ -1,0 +1,195 @@
+################################################################################
+#       ____                                   __                              #
+#      / __ \___  ______________  ____  ____ _/ /                              #
+#     / /_/ / _ \/ ___/ ___/ __ \/ __ \/ __ `/ /                               #
+#    / ____/  __/ /  (__  ) /_/ / / / / /_/ / /                                #
+#   /_/    \___/_/  /____/\____/_/ /_/\__,_/_/                                 #
+#                                                                              #
+################################################################################
+# Personal i3 configurations like workspace names, rig specific shortcuts and
+# other things.
+################################################################################
+
+#bindsym --release XF86WakeUp exec --no-startup-id "$CONFIG/suspend.sh"
+
+set $BAR_SIZE 24
+
+set $WS1 "1:    "
+set $WS2 "2:    "
+set $WS3 "3:  3  "
+set $WS4 "4:  4  "
+set $WS5 "5:  5  "
+set $WS6 "6:  6  "
+set $WS7 "7:    "
+set $WS8 "8:    "
+set $WS9 "9:    "
+set $WS10 "10:    "
+set $WS11 "11:    "
+set $WS12 "12:    "
+set $WS13 "213:    "
+set $WS14 "214:    "
+
+set $WS101 "101:    "
+# set $WS102 "102:    "
+
+set $SC1 eDP-1
+set $SC2 DP-1
+
+# switch to workspace
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS10
+bindsym $mod+minus workspace $WS11
+bindsym $mod+equal workspace $WS12
+bindsym $mod+q workspace $WS13
+
+bindsym $mod+grave workspace $WS101
+# bindsym $mod+u workspace $WS102
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $WS1;
+bindsym $mod+Shift+2 move container to workspace $WS2;
+bindsym $mod+Shift+3 move container to workspace $WS3;
+bindsym $mod+Shift+4 move container to workspace $WS4;
+bindsym $mod+Shift+5 move container to workspace $WS5;
+bindsym $mod+Shift+6 move container to workspace $WS6;
+bindsym $mod+Shift+7 move container to workspace $WS7;
+bindsym $mod+Shift+8 move container to workspace $WS8;
+bindsym $mod+Shift+9 move container to workspace $WS9;
+bindsym $mod+Shift+0 move container to workspace $WS10;
+bindsym $mod+Shift+underscore move container to workspace $WS11;
+bindsym $mod+Shift+plus move container to workspace $WS12;
+
+bindsym $mod+Shift+grave move container to workspace $WS101
+# bindsym $mod+Shift+u move container to workspace $WS102
+
+# Assign workspaces to Monitors
+workspace $WS1  output $SC2
+workspace $WS2  output $SC2
+workspace $WS3  output $SC2
+workspace $WS4  output $SC2
+workspace $WS5  output $SC2
+workspace $WS6  output $SC2
+workspace $WS7  output $SC2
+workspace $WS8  output $SC2
+workspace $WS9  output $SC2
+workspace $WS10 output $SC2
+workspace $WS11 output $SC2
+workspace $WS12 output $SC2
+workspace $WS13 output $SC1
+workspace $WS14 output $SC1
+
+workspace $WS101 output $SC1
+# workspace $WS102 output $SC2
+
+# Bar signals:
+bindsym --release Caps_Lock exec pkill -RTMIN+11 i3blocks
+bindsym --release Num_Lock exec pkill -RTMIN+11 i3blocks
+
+# Next and prev WS for fusuma to use
+bindsym $mod+i workspace prev
+bindsym $mod+o workspace next
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume $(pacmd info | grep Default\ sink | grep -oE '[^ ]+$') +5% && pactl set-sink-mute $(pacmd info | grep Default\ sink | grep -oE '[^ ]+$') off && pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume $(pacmd info | grep Default\ sink | grep -oE '[^ ]+$') -5% && pactl set-sink-mute $(pacmd info | grep Default\ sink | grep -oE '[^ ]+$') off && pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute $(pacmd info | grep Default\ sink | grep -oE '[^ ]+$') toggle && pkill -RTMIN+10 i3blocks"
+
+# Touchpad controls
+bindsym XF86Search exec $CONFIG/toggletouchpad.sh # toggle touchpad
+bindsym $mod+F9 exec $CONFIG/toggletouchpad.sh # toggle touchpad
+
+#swap caps and escape for better VIMing
+exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin"
+
+#enable networkmanager
+exec --no-startup-id nm-applet
+#exec --no-startup-id wicd-gtk -t
+#
+# bindsym $mod+c exec chromium --force-device-scale-factor=1.7
+# bindsym $mod+Shift+c exec chromium -incognito --force-device-scale-factor=1.7
+
+#start programs on startup
+exec --no-startup-id i3-msg 'workspace $WS2; append_layout $LAYOUTS/gnome-terminal.json'
+#exec --no-startup-id i3-msg 'workspace $WS10; append_layout $LAYOUTS/pavucontrol.json'
+# exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/chromium.json'
+exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/brave.json'
+
+exec --no-startup-id "gnome-terminal"
+# exec --no-startup-id "chromium --force-device-scale-factor=1.7"
+exec --no-startup-id "brave-browser"
+exec --no-startup-id "spotify --force-device-scale-factor=1.7"
+exec --no-startup-id "fusuma"
+exec --no-startup-id "rambox --force-device-scale-factor=1.7"
+exec --no-startup-id "signal-desktop"
+
+#exec --no-startup-id "pavucontrol"
+#exec --no-startup-id "thunar"
+#exec --no-startup-id "wicd-client"
+#exec --no-startup-id "virt-manager"
+
+for_window [class="jetbrains"]      move to workspace $WS3
+
+for_window [class="Steam"]          move to workspace $WS7
+for_window [title="^Steam$"]        move to workspace $WS7
+for_window [class="dota2"]          move to workspace $WS8
+for_window [class="hl2_linux"]      move to workspace $WS8
+for_window [class="^Minecraft"]     move to workspace $WS8
+for_window [title="^Minecraft Launcher$"]  move to workspace $WS8
+# for_window [class="Thunar"]         move to workspace $WS9
+for_window [class="Spotify"]        move to workspace $WS10
+for_window [class="Pavucontrol"]    move to workspace $WS11
+for_window [class="Wicd-client"]    move to workspace $WS11
+for_window [class="Virt-manager"]   move to workspace $WS12
+for_window [class="^Rambox$"]       move to workspace $WS13
+for_window [class="^Signal$"]       move to workspace $WS13
+for_window [class="^discord$"]      move to workspace $WS13
+for_window [class="^keepassxc$"]    move to workspace $WS14
+
+# Calendar widget on bar
+for_window [class="(?i)gsimplecal"] floating enable, move position mouse, move up 20
+
+# exec --no-startup-id "xinput --set-prop 13 'Synaptics Two-Finger Scrolling' 1 1"
+
+exec --no-startup-id "insync start"
+exec --no-startup-id "blueman-applet"
+
+exec xrandr --dpi 192
+
+#Enable gaps
+#gaps inner 0
+gaps inner 15
+bindsym $mod+z gaps inner all set 0
+bindsym $mod+x gaps inner all set 15
+
+bindsym $mod+n exec $SCRIPTS/wifi.sh
+
+set $gaps smart_gaps on
+
+set $gaps2 smart_borders on
+
+# for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 4
+for_window [class="^Google-chrome$"] border pixel 0
+for_window [class="^Brave-browser$"] border pixel 0
+for_window [class="^Chromium$"] border pixel 0
+for_window [class="^Firefox$"] border pixel 0
+
+for_window [class="(?i)gsimplecal"] floating enable, move position mouse, move up 20
+
+# start a terminal
+bindsym $mod+Return exec dbus-launch gnome-terminal
+
+#Automatic back-and-forth when switching to the current workspace
+#https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth
+# workspace_auto_back_and_forth yes
+
+# End Personal #################################################################
+

@@ -1,0 +1,73 @@
+################################################################################
+#      _____ __        __                                                      #
+#     / ___// /___  __/ /__                                                    #
+#     \__ \/ __/ / / / / _ \                                                   #
+#    ___/ / /_/ /_/ / /  __/                                                   #
+#   /____/\__/\__, /_/\___/                                                    #
+#            /____/                                                            #
+################################################################################
+# Styling choices for i3, like the bar, background and borders
+################################################################################
+
+# start dmenu (a program launcher)
+#bindsym $mod+d exec rofi -show run -lines 6 -eh 2 -width 100 -padding 485 -opacity "90" -bw 0 -bc "$green" -bg "$background" -fg "$bright" -hlbg "$green" -hlfg "$dark"
+bindsym $mod+d exec rofi -show run -config $CONFIG/rofi.conf
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# lock the screen
+bindsym $mod+semicolon exec lock
+
+# Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
+bar {
+    status_command i3blocks -c $CONFIG/i3blocks.conf
+    mode dock
+    tray_output primary
+    #height 40
+    tray_padding 0
+    font pango:Hack Nerd Font $BAR_SIZE
+    strip_workspace_numbers yes
+    colors {
+        background $transbackground
+        statusline $paneltext
+
+        #                   Border               BG                   Icon
+        focused_workspace   $transbackground     $transbackground     $active
+        active_workspace    $transbackground     $transbackground     $active
+        inactive_workspace  $transbackground     $transbackground     $inactive
+        urgent_workspace    $transbackground     $transbackground     $inactive
+    }
+}
+
+#<colorclass>           <border> <background> <text>  <indicator> <child_border>
+client.focused          $active  $active      $dark   $active     $active
+client.focused_inactive $dark    $dark        $bright $dark       $dark
+client.unfocused        $dark    $dark        $bright $dark       $dark
+client.urgent           $bright  $bright      $dark   $bright     $bright
+
+#configure background
+#exec_always --no-startup-id feh --bg-scale --no-xinerama '$WALLPAPERS/$WIDTH/nature/SANAalr.jpg'
+exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/$WIDTH/nature/*
+
+#enable when i3 is able to run horizontal:
+# hide_edge_borders horizontal
+# for_window [class="^.*"] border pixel 5
+
+#turn off borders
+# for_window [class="^.*"] border pixel 2
+# for_window [class="^Google-chrome$"] border pixel 0
+# for_window [class="^Chromium$"] border pixel 0
+# for_window [class="^Firefox$"] border pixel 0
+
+# Enable transparent terminal
+# TODO: enable with proper config: see home desktop
+# exec_always --no-startup-id "compton --config $CONFIG/compton.conf"
+
+#make i3 windows slightly bigger by hiding edge borders
+#hide_edge_borders both
+#hide_edge_borders horizontal
+
+# End Style ####################################################################
+
