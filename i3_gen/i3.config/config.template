@@ -1,0 +1,272 @@
+################################################################################
+#       ____                                                                   #
+#      / __ )____ _________                                                    #
+#     / __  / __ `/ ___/ _ \                                                   #
+#    / /_/ / /_/ (__  )  __/                                                   #
+#   /_____/\__,_/____/\___/                                                    #
+#                                                                              #
+################################################################################
+# https://patorjk.com/software/taag/#p=display&f=Slant&t=Base
+# Base config that is the same for all i3 config
+################################################################################
+
+#Mod1 = alt, Mod4 = win
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+#font pango:monospace 8
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+
+set $CONFIG   ~/.config/i3
+set $GENERATOR ~/.config/i3/i3_gen
+set $ROFI     ~/.config/i3/rofi
+set $I3BLOCKS ~/.config/i3/i3blocks
+set $SCRIPTS  ~/.config/i3/scripts
+set $LAYOUTS  ~/.config/i3/layouts
+
+set $WALLPAPERS ~/.config/backgroundss
+
+focus_wrapping no
+
+# End Base ####################################################################
+
+################################################################################
+#      ______      __                                                          #
+#     / ____/___  / /___  __________                                           #
+#    / /   / __ \/ / __ \/ ___/ ___/                                           #
+#   / /___/ /_/ / / /_/ / /  (__  )                                            #
+#   \____/\____/_/\____/_/  /____/                                             #
+#                                                                              #
+################################################################################
+# The colors to be used by the rest of the scripts
+################################################################################
+
+set $dark               {{$DARK}}
+set $bright             {{$BRIGHT}}
+
+set $red                {{$RED}}
+set $green              {{$GREEN}}
+set $yellow             {{$YELLOW}}
+set $blue               {{$BLUE}}
+set $purple             {{$PURPLE}}
+set $aqua               {{$AQUA}}
+
+set $grey               {{$GREY}}
+
+set $border             {{$BORDER}}
+set $paneltext          {{$PANELTEXT}}
+
+set $background         {{$BACKGROUND}}
+set $transbackground    {{$TRANSBACKGROUND}}
+set $active             {{$ACTIVE}}
+set $inactive           {{$INACTIVE}}
+
+# End Colors ###################################################################
+
+################################################################################
+#       __ __           __    _           __                                   #
+#      / //_/__  __  __/ /_  (_)___  ____/ /____                               #
+#     / ,< / _ \/ / / / __ \/ / __ \/ __  / ___/                               #
+#    / /| /  __/ /_/ / /_/ / / / / / /_/ (__  )                                #
+#   /_/ |_\___/\__, /_.___/_/_/ /_/\__,_/____/                                 #
+#             /____/                                                           #
+################################################################################
+# All keybinds
+################################################################################
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+# bindsym $mod+Return exec urxvt
+# bindsym $mod+Return exec dbus-launch gnome-terminal
+
+#Start a browser
+#
+# bindsym $mod+c exec chromium
+# bindsym $mod+Shift+c exec chromium -incognito
+bindsym $mod+c exec brave || brave-browser
+bindsym $mod+Shift+c exec brave --incognito || brave-browser --incognito
+# bindsym $mod+c exec firefox
+# bindsym $mod+Shift+c exec firefox -private-window
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# split in horizontal orientation
+bindsym $mod+g split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child #program launcher will be sad if you use this
+
+# change workspace
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+#bindsym $mod+i focus output left
+#bindsym $mod+o focus output right
+
+# reload the configuration file
+#bindsym $mod+r reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+    # These bindings trigger as soon as you enter the resize mode
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Media player controls
+bindsym XF86AudioPlay exec "playerctl play-pause && pkill -RTMIN+10 i3blocks"
+# bindsym XF86AudioPlay exec "playerctl play && pkill -RTMIN+10 i3blocks"
+# bindsym XF86AudioPause exec playerctl pause && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioNext exec "playerctl next && pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioPrev exec "playerctl previous && pkill -RTMIN+10 i3blocks"
+bindsym XF86AudioStop exec "playerctl stop && pkill -RTMIN+10 i3blocks"
+
+#toggling floating windows by using mod+t
+bindsym $mod+t floating toggle
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+
+#change style and regenerate config
+bindsym $mod+m exec --no-startup-id $GENERATOR/switchconfig.sh
+
+bindsym $mod+b exec --no-startup-id $SCRIPTS/wg.sh
+
+# End Keybinds ################################################################
+
+################################################################################
+#      _____ __        __                                                      #
+#     / ___// /___  __/ /__                                                    #
+#     \__ \/ __/ / / / / _ \                                                   #
+#    ___/ / /_/ /_/ / /  __/                                                   #
+#   /____/\__/\__, /_/\___/                                                    #
+#            /____/                                                            #
+################################################################################
+# Styling choices for i3, like the bar, background and borders
+################################################################################
+
+# start dmenu (a program launcher)
+#bindsym $mod+d exec rofi -show run -lines 6 -eh 2 -width 100 -padding 485 -opacity "90" -bw 0 -bc "$green" -bg "$background" -fg "$bright" -hlbg "$green" -hlfg "$dark"
+bindsym $mod+d exec rofi -show run -config $CONFIG/rofi.conf
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# lock the screen
+bindsym $mod+semicolon exec lock
+
+# Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
+bar {
+    status_command i3blocks -c $CONFIG/i3blocks.conf
+    mode dock
+    tray_output primary
+    #height 40
+    tray_padding 0
+    font pango:Hack Nerd Font $BAR_SIZE
+    strip_workspace_numbers yes
+    colors {
+        background $transbackground
+        statusline $paneltext
+
+        #                   Border               BG                   Icon
+        focused_workspace   $transbackground     $transbackground     $active
+        active_workspace    $transbackground     $transbackground     $active
+        inactive_workspace  $transbackground     $transbackground     $inactive
+        urgent_workspace    $transbackground     $transbackground     $inactive
+    }
+}
+
+#<colorclass>           <border> <background> <text>  <indicator> <child_border>
+client.focused          $active  $active      $dark   $active     $active
+client.focused_inactive $dark    $dark        $bright $dark       $dark
+client.unfocused        $dark    $dark        $bright $dark       $dark
+client.urgent           $bright  $bright      $dark   $bright     $bright
+
+#configure background
+#exec_always --no-startup-id feh --bg-scale --no-xinerama '$WALLPAPERS/$WIDTH/nature/SANAalr.jpg'
+exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/$WIDTH/nature/*
+
+#enable when i3 is able to run horizontal:
+# hide_edge_borders horizontal
+# for_window [class="^.*"] border pixel 5
+
+#turn off borders
+# for_window [class="^.*"] border pixel 2
+# for_window [class="^Google-chrome$"] border pixel 0
+# for_window [class="^Chromium$"] border pixel 0
+# for_window [class="^Firefox$"] border pixel 0
+
+# Enable transparent terminal
+# TODO: enable with proper config: see home desktop
+# exec_always --no-startup-id "compton --config $CONFIG/compton.conf"
+
+#make i3 windows slightly bigger by hiding edge borders
+#hide_edge_borders both
+#hide_edge_borders horizontal
+
+# End Style ####################################################################
+
+; export HOSTNAME=$(hostname)
+; if [[ -f i3.config/machine_specific/$HOSTNAME ]]; then
+; import i3.config/machine_specific/$HOSTNAME
+; else
+; import i3.config/machine_specific/laptop
+; fi

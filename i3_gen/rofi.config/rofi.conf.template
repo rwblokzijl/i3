@@ -1,0 +1,21 @@
+rofi.color-enabled: true
+
+rofi.color-window: {{$DARK}}, {{$ACTIVE}}, {{$DARK}}
+
+#                  'bg',      'fg',        'bgalt',   'hlbg',      'hlfg'
+rofi.color-normal: {{$DARK}}, {{$BRIGHT}}, {{$DARK}}, {{$ACTIVE}}, {{$DARK}}
+rofi.color-active: {{$RED}},  {{$DARK}},   {{$RED}},  {{$RED}},    {{$DARK}}
+rofi.color-urgent: {{$RED}},  {{$DARK}},   {{$RED}},  {{$RED}},    {{$DARK}}
+
+rofi.opacity: 85
+
+# Window Style
+rofi.lines: 6
+rofi.width: 50
+rofi.bw: 4
+rofi.padding: 0
+
+rofi.eh: 2
+
+rofi.font: Hack Regular {{$((24*$SCALE))}}
+

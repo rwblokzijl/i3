@@ -3,32 +3,31 @@
 # This script generates a new i3 config from the files in the "components"
 # directory.
 
-
 GEN_DIR=$HOME/.config/i3/i3_gen
-
 cd $GEN_DIR
 
-source $GEN_DIR/.preset
-cat $GEN_DIR/.preset
+# load defaults
+SWITCHER_DEFAULTS="./switcher_defaults"
+if [ -f $SWITCHER_DEFAULTS ]; then
+    source $SWITCHER_DEFAULTS
+    cat $SWITCHER_DEFAULTS
+fi
 
-#define local folders
-I3_CONFIG="$HOME/.config/i3/config"
-I3_CONFIG_SPEC="$GEN_DIR/config"
+# load preset
+PROFILE=$GEN_DIR/.preset
+if [ -f $PROFILE ]; then
+    source $PROFILE
+    cat $PROFILE
+fi
 
-I3_CONFIG_COMPONENTS="$GEN_DIR/components"
-
-#clear the old i3 config file
-rm "$I3_CONFIG"
-touch "$I3_CONFIG"
-
-#For all the files listed in I3_CONFIG_SPEC file, append them to the config
-cat $I3_CONFIG_SPEC | while read line
+# generate all the configs
+for DIR in *.config
 do
-	cat "$I3_CONFIG_COMPONENTS/$line" >> $I3_CONFIG
+    echo --- Generating $DIR ---
+    CONFIG_SOURCE=$DIR/*.template
+    CONFIG_TARGET=../$(basename $CONFIG_SOURCE .template)
+    ./bash_expand.sh $CONFIG_SOURCE $CONFIG_TARGET
 done
-
-# Expand the BASH-isms in the file
-$GEN_DIR/bash_expand.sh $I3_CONFIG
 
 #reload the newly generated config
 i3 restart &> /dev/null
