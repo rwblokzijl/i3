@@ -94,10 +94,10 @@ bindsym XF86AudioMute        exec --no-startup-id "sound mute"
 exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin"
 
 #configure monitors
-; if [[-z $SC2]]; then
-exec_always --no-startup-id "xrandr --output $SC1 --auto --output $SC2 --auto --right-of $SC1 --primary "
-; else
+; if [ -z "$SC2" ]; then
 exec_always --no-startup-id "xrandr --output $SC1 --auto --primary"
+; else
+exec_always --no-startup-id "xrandr --output $SC1 --auto --output $SC2 --auto --right-of $SC1 --primary "
 ; fi
 
 #configure touchscreen
