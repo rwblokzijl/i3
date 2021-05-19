@@ -2,12 +2,19 @@
 
 INTERFACE="${BLOCK_INSTANCE:-wlan0}"
 
+IF=$(iw dev)
+
+if [[ -z $IF ]]; then #no wifi exists
+    exit
+fi
+
 if [[ ! -d /sys/class/net/${INTERFACE}/wireless ]]; then
     echo " " "0%"
     echo " " "0%"
     echo "#C55D51"
 	exit
 fi
+
 if [[ "$(cat /sys/class/net/$INTERFACE/operstate)" == 'down' ]]; then
     echo " " "0%"
     echo " " "0%"
@@ -28,7 +35,12 @@ else
     COLOR="#B8BB26"
 fi
 
-echo " " "$QUALITY% ($SSID)"
+if [[ -z $SSID ]]; then
+    echo " "
+else
+    echo " " "$QUALITY% ($SSID)"
+fi
+
 echo " "
 echo $COLOR
 
