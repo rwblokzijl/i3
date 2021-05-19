@@ -1,10 +1,8 @@
 #!/bin/bash
 
-INTERFACE="${BLOCK_INSTANCE:-wlan0}"
+INTERFACE=$(iw dev | grep Interface | cut -f2 -d " ")
 
-IF=$(iw dev)
-
-if [[ -z $IF ]]; then #no wifi exists
+if [[ -z $INTERFACE ]]; then #no wifi exists
     exit
 fi
 
