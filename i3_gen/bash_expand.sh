@@ -28,6 +28,11 @@ INPUT=$1
 OUTPUT="${2:-$INPUT}"
 WRITE_TO_FILE="${3:-true}"
 
+if [[ ! -z $4 ]]; then
+    >&2 echo "Too many arguments!"
+    exit 1
+fi
+
 #                             How its done:
 #
 # We effectively turn the whole config into a script that echos the desired
