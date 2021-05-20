@@ -1,2 +1,2 @@
 source presets/gruvbox-white
-ACTIVE=$GREEN
+export ACTIVE=$GREEN

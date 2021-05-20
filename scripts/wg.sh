@@ -4,19 +4,19 @@ OPTION1="connect"
 OPTION2="break"
 OPTIONS="$OPTION1\n$OPTION2"
 
-SELECTED="$(echo -e "$OPTIONS" | rofi -config ~/.config/i3/rofi.conf -lines 2 -dmenu -p "Wireguard VPN")"
+SELECTED="$(echo -e "$OPTIONS" | rofi -lines 2 -dmenu -p "Wireguard VPN")"
 
 case $SELECTED in
     $OPTION1)
         PROFILE=$(basename -s .conf $(ls /etc/wireguard) | \
-            rofi -config ~/.config/i3/rofi.conf -dmenu -p "Select to connect"
+            rofi -dmenu -p "Select to connect"
         )
         COMMAND="wg-quick up $PROFILE"
         SUCCESS="CONNECTED to $PROFILE"
         ;;
     $OPTION2)
         PROFILE=$( wg 2>&1 | grep interface | cut -f5 -d " " | sed 's/://g' | \
-            rofi -config ~/.config/i3/rofi.conf -no-custom -dmenu -p "Select to disconnect"
+            rofi -no-custom -dmenu -p "Select to disconnect"
         )
         COMMAND="wg-quick down $PROFILE"
         SUCCESS="$PROFILE DISCONNECTED"
@@ -32,10 +32,7 @@ if [[ -z $PROFILE ]]; then
 fi
 
 attempt_connect () {
-    PASS=$(rofi -config ~/.config/i3/rofi.conf \
-        -dmenu -mesg "$COMMAND" -password -no-fixed-num-lines \
-        -p "Enter password"
-    )
+    PASS=$(rofi -dmenu -mesg "$COMMAND" -password -no-fixed-num-lines -p "Enter password")
     if [[ -z $PASS ]]; then
         exit
     fi

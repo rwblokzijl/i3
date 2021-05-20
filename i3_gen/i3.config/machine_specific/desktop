@@ -1,13 +1,13 @@
 ################################################################################
-#       ____                                   __                              #
-#      / __ \___  ______________  ____  ____ _/ /                              #
-#     / /_/ / _ \/ ___/ ___/ __ \/ __ \/ __ `/ /                               #
-#    / ____/  __/ /  (__  ) /_/ / / / / /_/ / /                                #
-#   /_/    \___/_/  /____/\____/_/ /_/\__,_/_/                                 #
-#                                                                              #
+#                      ____  ___________ __ ____________  ____
+#                     / __ \/ ____/ ___// //_/_  __/ __ \/ __ \
+#                    / / / / __/  \__ \/ ,<   / / / / / / /_/ /
+#                   / /_/ / /___ ___/ / /| | / / / /_/ / ____/
+#                  /_____/_____//____/_/ |_|/_/  \____/_/
+#
 ################################################################################
-# Personal i3 configurations like workspace names, rig specific shortcuts and
-# other things.
+# Machine specific i3 configurations like workspace names, rig specific
+# shortcuts and other things.
 ################################################################################
 
 set $BAR_SIZE 14
@@ -221,6 +221,8 @@ exec --no-startup-id "killpy monitor.py; monitor.py"
 
 # start a terminal
 bindsym $mod+Return exec urxvt
+
+exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
 
 #Automatic back-and-forth when switching to the current workspace
 #https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth

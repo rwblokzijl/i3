@@ -1,3 +1,4 @@
+;export CONFIG_TARGET_LOCATION=~/.config/dunst/dunstrc
 [global]
     ### Display ###
 

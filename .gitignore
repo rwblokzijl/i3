@@ -1,8 +1,7 @@
 config
-*.swp
-i3_gen/profile
-i3_gen/baseconfigs
 rofi.conf
-i3_gen/localvars
+dunstrc
+i3blocks.conf
+*.swp
 tags
 .gitold

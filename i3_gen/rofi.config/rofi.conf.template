@@ -1,21 +1,20 @@
-rofi.color-enabled: true
+;export CONFIG_TARGET_LOCATION=~/.config/rofi/config.rasi
 
-rofi.color-window: {{$DARK}}, {{$ACTIVE}}, {{$DARK}}
+configuration{
+    color-window: "{{$DARK}}, {{$ACTIVE}}, {{$DARK}}";
 
-#                  'bg',      'fg',        'bgalt',   'hlbg',      'hlfg'
-rofi.color-normal: {{$DARK}}, {{$BRIGHT}}, {{$DARK}}, {{$ACTIVE}}, {{$DARK}}
-rofi.color-active: {{$RED}},  {{$DARK}},   {{$RED}},  {{$RED}},    {{$DARK}}
-rofi.color-urgent: {{$RED}},  {{$DARK}},   {{$RED}},  {{$RED}},    {{$DARK}}
+;#                'bg_odd',   'text',      'bg_even', 'bg_select','text_select'
+    color-normal: "{{$DARK}}, {{$BRIGHT}}, {{$DARK}}, {{$ACTIVE}}, {{$DARK}}";
+    color-active: "{{$GREY}}, {{$DARK}},   {{$GREY}}, {{$ACTIVE}}, {{$DARK}}";
+    color-urgent: "{{$RED}},  {{$DARK}},   {{$RED}},  {{$RED}},    {{$DARK}}";
 
-rofi.opacity: 85
+    lines: 6;
+    width: 50;
+    bw: 4;
+    padding: 0;
+    matching: "fuzzy";
 
-# Window Style
-rofi.lines: 6
-rofi.width: 50
-rofi.bw: 4
-rofi.padding: 0
+    eh: 2;
 
-rofi.eh: 2
-
-rofi.font: Hack Regular {{$((24*$SCALE))}}
-
+    font: "Hack Regular {{$((24*$SCALE))}}";
+}

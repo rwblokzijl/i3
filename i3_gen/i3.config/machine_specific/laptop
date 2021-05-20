@@ -1,13 +1,13 @@
 ################################################################################
-#       ____                                   __                              #
-#      / __ \___  ______________  ____  ____ _/ /                              #
-#     / /_/ / _ \/ ___/ ___/ __ \/ __ \/ __ `/ /                               #
-#    / ____/  __/ /  (__  ) /_/ / / / / /_/ / /                                #
-#   /_/    \___/_/  /____/\____/_/ /_/\__,_/_/                                 #
-#                                                                              #
+#                        __    ___    ____  __________  ____
+#                       / /   /   |  / __ \/_  __/ __ \/ __ \
+#                      / /   / /| | / /_/ / / / / / / / /_/ /
+#                     / /___/ ___ |/ ____/ / / / /_/ / ____/
+#                    /_____/_/  |_/_/     /_/  \____/_/
+#
 ################################################################################
-# Personal i3 configurations like workspace names, rig specific shortcuts and
-# other things.
+# Machine specific i3 configurations like workspace names, rig specific
+# shortcuts and other things.
 ################################################################################
 
 #bindsym --release XF86WakeUp exec --no-startup-id "$CONFIG/suspend.sh"
@@ -162,6 +162,7 @@ exec --no-startup-id "insync start"
 exec --no-startup-id "blueman-applet"
 
 exec xrandr --dpi 192
+exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/4k/nature/*
 
 #Enable gaps
 #gaps inner 0

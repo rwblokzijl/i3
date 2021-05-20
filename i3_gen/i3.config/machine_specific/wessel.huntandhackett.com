@@ -1,13 +1,13 @@
 ################################################################################
-#       ____                                   __                              #
-#      / __ \___  ______________  ____  ____ _/ /                              #
-#     / /_/ / _ \/ ___/ ___/ __ \/ __ \/ __ `/ /                               #
-#    / ____/  __/ /  (__  ) /_/ / / / / /_/ / /                                #
-#   /_/    \___/_/  /____/\____/_/ /_/\__,_/_/                                 #
-#                                                                              #
+#    _       ______  ____  __ __    __  ______   ________  _______   ________
+#   | |     / / __ \/ __ \/ //_/   /  |/  /   | / ____/ / / /  _/ | / / ____/
+#   | | /| / / / / / /_/ / ,<     / /|_/ / /| |/ /   / /_/ // //  |/ / __/
+#   | |/ |/ / /_/ / _, _/ /| |   / /  / / ___ / /___/ __  // // /|  / /___
+#   |__/|__/\____/_/ |_/_/ |_|  /_/  /_/_/  |_\____/_/ /_/___/_/ |_/_____/
+#
 ################################################################################
-# Personal i3 configurations like workspace names, rig specific shortcuts and
-# other things.
+# Machine specific i3 configurations like workspace names, rig specific
+# shortcuts and other things.
 ################################################################################
 
 set $BAR_SIZE 16
@@ -151,7 +151,6 @@ exec --no-startup-id "keepassxc"
 
 exec --no-startup-id "insync start"
 exec --no-startup-id "blueman-applet"
-exec_always --no-startup-id "killall dunst; dunst -config $CONFIG/dunstrc"
 
 # Finally focus workspace 1
 exec --no-startup-id i3-msg 'workspace $WS1'

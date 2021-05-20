@@ -2,9 +2,10 @@
 
 cd $HOME/.config/i3/i3_gen
 
-PROFILES="./presets"
+PRESETS="./presets"
+ENVIRONMENT=./.dotfiles_env
 
-USER_PICK=$(ls -p $PROFILES | grep -v / | rofi -show run -dmenu -config ~/.config/i3/rofi.conf)
+USER_PICK=$(ls -p $PRESETS | grep -v / | rofi -show run -dmenu)
 
 if [[ -z $USER_PICK ]]; then
 	echo "No user input"
@@ -12,8 +13,8 @@ if [[ -z $USER_PICK ]]; then
 fi
 
 # update the new profile
-if [[ $(ls $PROFILES | grep "$USER_PICK") ]]; then
-	ln -sf "$PROFILES/$USER_PICK" ./.preset
+if [[ $(ls $PRESETS | grep "$USER_PICK") ]]; then
+	ln -sf "$PRESETS/$USER_PICK" $ENVIRONMENT
 else
 	echo "Invalid input"
 	exit 1
