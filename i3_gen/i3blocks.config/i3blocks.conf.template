@@ -119,14 +119,14 @@ signal=10
 color=#B8BB26
 interval=10
 
-[laundry]
-command=laundry
-interval=60
-
 [wifi]
 # instance=wlan0
 interval=5
 # format=json
+
+[laundry]
+command=laundry
+interval=60
 
 [battery]
 interval=1
