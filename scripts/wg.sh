@@ -15,7 +15,12 @@ case $SELECTED in
         SUCCESS="CONNECTED to $PROFILE"
         ;;
     $OPTION2)
-        PROFILE=$( wg 2>&1 | grep interface | cut -f5 -d " " | sed 's/://g' | \
+        PROFILE=$( \
+            # `wg` without sudo will stderr for each active connection
+            wg 2>&1 | \
+            grep interface | \
+            cut -f5 -d " " | \
+            sed 's/://g' | \
             rofi -no-custom -dmenu -p "Select to disconnect"
         )
         COMMAND="wg-quick down $PROFILE"

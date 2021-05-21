@@ -14,12 +14,12 @@ if [[ $RESULT != Error* ]]; then
     notify-send "WIFI: " "Connected to $SSID"
     exit 0 # success
 fi
-PASSWORD=$(rofi -show run -dmenu -p "Specify password")
+PASSWORD=$(rofi -show run -password -no-fixed-num-lines -dmenu -p "Specify password")
 notify-send "WIFI: " "Connecting..."
 RESULT=$( nmcli device wifi connect $SSID password $PASSWORD 2>&1)
 echo $RESULT
 while [[ $RESULT == *802-11-wireless-security.psk:* ]]; do
-    PASSWORD=$(rofi -show run -dmenu -p "Incorrect. Specify password")
+    PASSWORD=$(rofi -show run -password -no-fixed-num-lines -dmenu -p "Incorrect. Specify password")
     RESULT=$( nmcli device wifi connect $SSID password $PASSWORD 2>&1)
     echo $RESULT
 done
