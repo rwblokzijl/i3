@@ -171,5 +171,3 @@ bindsym $mod+Return exec urxvt
 
 bindsym $mod+n exec $SCRIPTS/wifi.sh
 
-# End Personal #################################################################
-

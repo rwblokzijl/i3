@@ -1,14 +1,13 @@
 ; export CONFIG_TARGET_LOCATION=$HOME/.config/i3/config
 ################################################################################
-#       ____                                                                   #
-#      / __ )____ _________                                                    #
-#     / __  / __ `/ ___/ _ \                                                   #
-#    / /_/ / /_/ (__  )  __/                                                   #
-#   /_____/\__,_/____/\___/                                                    #
-#                                                                              #
+#                      _ _____                     _____
+#                     (_)__  /   _________  ____  / __(_)___ _
+#                    / / /_ <   / ___/ __ \/ __ \/ /_/ / __ `/
+#                   / /___/ /  / /__/ /_/ / / / / __/ / /_/ /
+#                  /_//____/   \___/\____/_/ /_/_/ /_/\__, /
+#                                                    /____/
 ################################################################################
-# https://patorjk.com/software/taag/#p=display&f=Slant&t=Base
-# Base config that is the same for all i3 config
+# This is my i3 config
 ################################################################################
 
 #Mod1 = alt, Mod4 = win
@@ -22,13 +21,6 @@ set $mod Mod4
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono 8
 
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
-
 set $CONFIG   ~/.config/i3
 set $GENERATOR ~/.config/i3/i3_gen
 set $ROFI     ~/.config/i3/rofi
@@ -38,17 +30,6 @@ set $LAYOUTS  ~/.config/i3/layouts
 
 set $WALLPAPERS ~/.config/backgrounds
 
-focus_wrapping no
-
-# End Base ####################################################################
-
-################################################################################
-#      ______      __                                                          #
-#     / ____/___  / /___  __________                                           #
-#    / /   / __ \/ / __ \/ ___/ ___/                                           #
-#   / /___/ /_/ / / /_/ / /  (__  )                                            #
-#   \____/\____/_/\____/_/  /____/                                             #
-#                                                                              #
 ################################################################################
 # The colors to be used by the rest of the scripts
 ################################################################################
@@ -72,8 +53,6 @@ set $background         {{$BACKGROUND}}
 set $transbackground    {{$TRANSBACKGROUND}}
 set $active             {{$ACTIVE}}
 set $inactive           {{$INACTIVE}}
-
-# End Colors ###################################################################
 
 ################################################################################
 #       __ __           __    _           __                                   #
@@ -190,7 +169,6 @@ bindsym $mod+m exec --no-startup-id $GENERATOR/switchconfig.sh
 
 bindsym $mod+b exec --no-startup-id $SCRIPTS/wg.sh
 
-# End Keybinds ################################################################
 
 ################################################################################
 #      _____ __        __                                                      #
@@ -262,14 +240,19 @@ exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS
 #make i3 windows slightly bigger by hiding edge borders
 #hide_edge_borders both
 #hide_edge_borders horizontal
+focus_wrapping no
 
-# End Style ####################################################################
+################################################################################
+# Machine specific configs
+################################################################################
 
-; export HOSTNAME=$(hostname)
+; export HOSTNAME=$(hostname) # import based on hostname
 ; if [[ -f i3.config/machine_specific/$HOSTNAME ]]; then
 ; import i3.config/machine_specific/$HOSTNAME
 ; else
 ; import i3.config/machine_specific/laptop
 ; fi
+
+# End Machine specific #########################################################
 
 exec_always --no-startup-id "killall dunst; dunst"
