@@ -248,9 +248,9 @@ focus_wrapping no
 
 ; export HOSTNAME=$(hostname) # import based on hostname
 ; if [[ -f i3.config/machine_specific/$HOSTNAME ]]; then
-; import i3.config/machine_specific/$HOSTNAME
+;   import i3.config/machine_specific/$HOSTNAME
 ; else
-; import i3.config/machine_specific/laptop
+;   import i3.config/machine_specific/laptop
 ; fi
 
 # End Machine specific #########################################################
