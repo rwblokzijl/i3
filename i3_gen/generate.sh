@@ -1,26 +1,24 @@
 #!/bin/bash
 
-# This script generates a new i3 config from the files in the "components"
-# directory.
+GEN_DIR=$HOME/.config/dotfiles_gen
+mkdir -p $GEN_DIR
 
-GEN_DIR=$HOME/.config/i3/i3_gen
-# GEN_DIR=$HOME/.config/dotfiles_gen # future
-cd $GEN_DIR
+# allows calls from anywhere
+cd $(dirname $0)
 
 # load defaults
-SWITCHER_DEFAULTS="./.default_env"
+SWITCHER_DEFAULTS="./.default_env" # TODO: move to gen dir, when that is in git
 if [ -f $SWITCHER_DEFAULTS ]; then
     source $SWITCHER_DEFAULTS
     echo Using env vars from $SWITCHER_DEFAULTS
 fi
 
 # load preset
-ENVIRONMENT=./.dotfiles_env
+ENVIRONMENT=$GEN_DIR/.dotfiles_env
 if [ -f $ENVIRONMENT ]; then
     source $ENVIRONMENT
     echo Overriding with env vars from $ENVIRONMENT
 fi
-echo ""
 
 # generate all the configs into generated and link to correct location
 for DIR in *.config

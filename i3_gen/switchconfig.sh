@@ -1,9 +1,11 @@
 #!/bin/bash
 
-cd $HOME/.config/i3/i3_gen
+GEN_DIR=$HOME/.config/dotfiles_gen
 
-PRESETS="./presets"
-ENVIRONMENT=./.dotfiles_env
+cd $(dirname $0)
+
+PRESETS="$(pwd)/presets"
+ENVIRONMENT=$GEN_DIR/.dotfiles_env
 
 USER_PICK=$(ls -p $PRESETS | grep -v / | rofi -show run -dmenu)
 
@@ -19,7 +21,5 @@ else
 	echo "Invalid input"
 	exit 1
 fi
-
-# will still exit without changes if anything goes wrong in setting rofi
 
 source ./generate.sh
