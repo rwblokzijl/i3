@@ -2,7 +2,7 @@
 
 ARGUMENTS="--player spotify"
 
-ICON_PLAY=" "
+ICON_PLAY=""
 ICON_PAUSE=""
 
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then

@@ -50,7 +50,7 @@ signal=10
 interval=5
 separator=false
 #This block prints either a play or pause icon, which are different widths, this line makes sure the block doesnt change size every time the icon changes
-min_width=26
+min_width=16
 
 [player-next]
 instance=spotify
