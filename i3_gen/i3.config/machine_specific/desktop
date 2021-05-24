@@ -13,7 +13,7 @@
 set $BAR_SIZE 14
 
 # Browser
-set $WS1 "1:    "
+set $WS1 "1:    "
 # Terminal
 set $WS2 "2:    "
 # 3
@@ -223,6 +223,8 @@ exec --no-startup-id "killpy monitor.py; monitor.py"
 bindsym $mod+Return exec urxvt
 
 exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
+
+exec_always --no-startup-id "compton --config $CONFIG/compton.conf"
 
 #Automatic back-and-forth when switching to the current workspace
 #https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth

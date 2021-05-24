@@ -13,7 +13,7 @@
 set $BAR_SIZE 16
 
 # Browser
-set $WS1 "1:    "
+set $WS1 "1:    "
 # Terminal
 set $WS2 "2:    "
 # Free

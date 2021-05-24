@@ -235,7 +235,7 @@ exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS
 
 # Enable transparent terminal
 # TODO: enable with proper config: see home desktop
-# exec_always --no-startup-id "compton --config $CONFIG/compton.conf"
+# exec_always --no-startup-id "picom --config $CONFIG/compton.conf"
 
 #make i3 windows slightly bigger by hiding edge borders
 #hide_edge_borders both
