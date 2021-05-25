@@ -10,7 +10,7 @@
 # shortcuts and other things.
 ################################################################################
 
-set $BAR_SIZE 16
+set $BAR_SIZE 14
 
 # Browser
 set $WS1 "1:    "
