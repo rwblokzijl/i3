@@ -29,33 +29,31 @@ command=/home/bloodyfool/.config/i3/i3blocks/scripts/$BLOCK_NAME
 separator_block_width=50
 markup=none
 
-#[playerctl]
-##command=/home/bloodyfool/.config/i3/scripts/scroll $BLOCK_NAME
-#instance=spotify
-#interval=5
-#signal=10
-#markup=pango
-
 [player-prev]
-separator_block_width=15
+separator_block_width=0
 instance=spotify
 interval=5
 signal=10
 separator=false
+min_width=16
+align=right
 
 [player-play]
-separator_block_width=15
+separator_block_width=0
 instance=spotify
 signal=10
 interval=5
 separator=false
 #This block prints either a play or pause icon, which are different widths, this line makes sure the block doesnt change size every time the icon changes
-min_width=16
+#On work machine it also fixes the wide glyph problem
+min_width=38
 
 [player-next]
 instance=spotify
 interval=5
 signal=10
+# min_width=16
+# align=left
 
 #separator=false
 

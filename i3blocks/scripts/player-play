@@ -7,10 +7,12 @@ ICON_PAUSE=""
 
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
 	playerctl ${ARGUMENTS} play-pause
-	pkill -RTMIN+10 i3blocks
+	# pkill -RTMIN+10 i3blocks
 elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
 	i3-msg 'workspace 10:    ' > /dev/null
 fi
+
+sleep 0.1 #give time for play/pause to go through before getting status
 
 PLAYER_STATUS=$(playerctl ${ARGUMENTS} status)
 
@@ -25,8 +27,8 @@ else
 	exit
 fi
 
-echo "${CUR_ICON}"
-echo "${CUR_ICON}"
+echo " ${CUR_ICON} "
+echo " ${CUR_ICON} "
 
 if [[ "${PLAYER_STATUS}" = "Playing" ]]; then
 	echo "#b8bb26"
