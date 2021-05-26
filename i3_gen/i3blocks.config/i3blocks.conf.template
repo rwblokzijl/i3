@@ -29,12 +29,12 @@ command=/home/bloodyfool/.config/i3/i3blocks/scripts/$BLOCK_NAME
 separator_block_width=50
 markup=none
 
-[playerctl]
-#command=/home/bloodyfool/.config/i3/scripts/scroll $BLOCK_NAME
-instance=spotify
-interval=5
-signal=10
-markup=pango
+#[playerctl]
+##command=/home/bloodyfool/.config/i3/scripts/scroll $BLOCK_NAME
+#instance=spotify
+#interval=5
+#signal=10
+#markup=pango
 
 [player-prev]
 separator_block_width=15
