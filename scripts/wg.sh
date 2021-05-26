@@ -46,6 +46,7 @@ attempt_connect () {
         return
     elif [[ $OUTPUT != *"no password was provided"* ]]; then
         notify-send "VPN: " "$SUCCESS"
+	    pkill -RTMIN+10 i3blocks
         exit 0
     fi
 }

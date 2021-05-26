@@ -116,6 +116,7 @@ signal=10
 [externalip]
 color=#B8BB26
 interval=10
+signal=10
 
 [wifi]
 # instance=wlan0

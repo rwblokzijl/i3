@@ -3,6 +3,15 @@
 IP_ADDRESS=$(wget http://ipinfo.io/ip -qO -)
 IP_LOC=$(geoiplookup $IP_ADDRESS | grep -oP -m 1 "(?<= )([A-Z]*)(?=,)")
 
+while read line; do
+    IFS=' ' read -r -a LINE <<< "$line"
+    KNOWN=$(getent hosts ${LINE[0]} | awk '{ print $1 }')
+    if [[ $IP_ADDRESS == $KNOWN ]]; then
+        IP_LOC=${LINE[1]}
+        break
+    fi
+done < ~/.config/vars/known_ips
+
 if [[ "${IP_LOC}" != "" ]]; then
 	echo "${IP_LOC}: ${IP_ADDRESS}"
 	echo "${IP_LOC}"
