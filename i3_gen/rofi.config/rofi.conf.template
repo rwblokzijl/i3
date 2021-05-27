@@ -16,5 +16,5 @@ configuration{
 
     eh: 2;
 
-    font: "Hack Regular {{$((24*$SCALE))}}";
+    font: "Hack Nerd Font {{$((24*$SCALE))}}";
 }

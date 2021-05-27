@@ -168,7 +168,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightne
 bindsym $mod+m exec --no-startup-id $GENERATOR/switchconfig.sh
 
 bindsym $mod+b exec --no-startup-id $SCRIPTS/wg.sh
-
+bindsym $mod+u exec --no-startup-id $SCRIPTS/unicode.sh
 
 ################################################################################
 #      _____ __        __                                                      #

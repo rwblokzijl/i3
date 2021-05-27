@@ -157,7 +157,7 @@ exec --no-startup-id i3-msg 'workspace $WS1'
 
 # ### Hacky scripts to run ### #
 # mouse sensitivity
-mouse_warping none
+# mouse_warping none
 exec --no-startup-id "set_sensitivity.sh"
 # chrome textdrag
 exec --no-startup-id "chrome_text_drag.py"
