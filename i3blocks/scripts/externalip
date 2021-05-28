@@ -8,7 +8,9 @@ while read line; do
     KNOWN=$(getent hosts ${LINE[0]} | awk '{ print $1 }')
     if [[ $IP_ADDRESS == $KNOWN ]]; then
         IP_LOC=${LINE[1]}
-        break
+        echo IP: $IP_LOC
+        echo IP: $IP_LOC
+        exit
     fi
 done < ~/.config/vars/known_ips
 
