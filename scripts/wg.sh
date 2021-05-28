@@ -45,7 +45,7 @@ attempt_connect () {
     if [[ $OUTPUT == *"incorrect"* ]]; then
         return
     elif [[ $OUTPUT != *"no password was provided"* ]]; then
-        notify-send "VPN: " "$SUCCESS"
+        notify-send "VPN: " "$SUCCESS" &
 	    pkill -RTMIN+10 i3blocks
         exit 0
     fi
@@ -54,11 +54,11 @@ attempt_connect () {
 for i in {1..3}; do attempt_connect; done
 
 if [[ $OUTPUT == *"incorrect"* ]]; then
-    notify-send "VPN: " "TOO MANY ATTEMPTS"
+    notify-send "VPN: " "TOO MANY ATTEMPTS" &
     exit
 fi
 
 if [ $? -ne 0 ]; then
-    notify-send "$OUTPUT"
+    notify-send "$OUTPUT" &
 fi
 

@@ -1,4 +1,4 @@
-notify-send "WIFI: " "Scanning..."
+notify-send "WIFI: " "Scanning..." &
 SSID=$(nmcli -f in-use,bars,ssid device wifi list | \
     tail -n +2 | sed -r 's/^\s+/   /; s/^\*\s*/ * /' | \
     rofi -show run -dmenu -p "Select SSID" | \
@@ -8,14 +8,14 @@ if [[ -z $SSID ]]; then
     exit 0
 fi
 
-notify-send "WIFI: " "Connecting..."
+notify-send "WIFI: " "Connecting..." &
 RESULT=$(nmcli device wifi connect $SSID 2>&1)
 if [[ $RESULT != Error* ]]; then
-    notify-send "WIFI: " "Connected to $SSID"
+    notify-send "WIFI: " "Connected to $SSID" &
     exit 0 # success
 fi
 PASSWORD=$(rofi -show run -password -no-fixed-num-lines -dmenu -p "Specify password")
-notify-send "WIFI: " "Connecting..."
+notify-send "WIFI: " "Connecting..." &
 RESULT=$( nmcli device wifi connect $SSID password $PASSWORD 2>&1)
 echo $RESULT
 while [[ $RESULT == *802-11-wireless-security.psk:* ]]; do
@@ -24,9 +24,9 @@ while [[ $RESULT == *802-11-wireless-security.psk:* ]]; do
     echo $RESULT
 done
 if [[ $RESULT == Error* ]]; then
-    notify-send "WIFI: " "Connection failed"
+    notify-send "WIFI: " "Connection failed" &
     exit 1
 fi
 
-notify-send "WIFI: " "Connected to $SSID"
+notify-send "WIFI: " "Connected to $SSID" &
 exit 0
