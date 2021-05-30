@@ -1,26 +1,29 @@
 #!/bin/bash
 
+# Takes all config files in *.config, applies bash expansion, and move to
+# desired config location
+
 GEN_DIR=$HOME/.config/dotfiles_gen
 mkdir -p $GEN_DIR
 
 # allows calls from anywhere
 cd $(dirname $0)
 
-# load defaults
-SWITCHER_DEFAULTS="./.default_env" # TODO: move to gen dir, when that is in git
+# load default environment variables
+SWITCHER_DEFAULTS="./.default_env" # TODO: move to $GEN_DIR when i3_gen is isolated from i3 config
 if [ -f $SWITCHER_DEFAULTS ]; then
     source $SWITCHER_DEFAULTS
     echo Using env vars from $SWITCHER_DEFAULTS
 fi
 
-# load preset
+# load extra environment variables set by ./switchconfig.sh
 ENVIRONMENT=$GEN_DIR/.dotfiles_env
 if [ -f $ENVIRONMENT ]; then
     source $ENVIRONMENT
     echo Overriding with env vars from $ENVIRONMENT
 fi
 
-# generate all the configs into generated and link to correct location
+# generate all the configs into `.generated` and link to correct location
 for DIR in *.config
 do
     CONFIG_TEMPLATE=$(echo $DIR/*.template)
