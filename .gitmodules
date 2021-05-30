@@ -1,0 +1,3 @@
+[submodule "i3_gen/bash_expand"]
+	path = i3_gen/bash_expand
+	url = git@github.com:rwblokzijl/bash_expand.git
