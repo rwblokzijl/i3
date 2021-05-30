@@ -146,10 +146,20 @@ interval=1
 #bindsym --release Num_Lock  exec pkill -RTMIN+11 i3blocks
 [keyindicator]
 instance=CAPS
-interval=once
+interval=1
 signal=11
 
 [keyindicator]
 instance=NUM
-interval=once
+interval=1
 signal=11
+
+; export HOSTNAME=$(hostname) # import based on hostname
+# {{$HOSTNAME}}
+; if [[ $HOSTNAME == "desktop" ]]; then
+[keyboard]
+label=!
+command=/usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin"
+interval=1
+; fi
+

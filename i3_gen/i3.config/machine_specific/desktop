@@ -141,7 +141,7 @@ bindsym XF86AudioMute        exec --no-startup-id "sound mute"
 #this one fires every second because my shitty usb hub keeps reconnecting my
 #keyboard
 # exec_always --no-startup-id "killall bash $CONFIG/scripts/keyboard.sh; bash $CONFIG/scripts/keyboard.sh"
-exec_always --no-startup-id "$CONFIG/scripts/keyboard.sh"
+# exec_always --no-startup-id "$CONFIG/scripts/keyboard.sh"
 
 #configure monitors
 exec_always --no-startup-id "xrandr --output $SC1 --mode 1920x1080 --pos 0x0 --rotate normal --output $SC2 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output $SC3 --mode 1920x1080 --pos 3840x0 --rotate normal --output $SCM --mode 1920x1080 --same-as $SC3"
