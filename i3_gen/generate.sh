@@ -39,7 +39,7 @@ do
     fi
 
     # Generate the config file into the build dir
-    ./bash_expand.sh $CONFIG_TEMPLATE $GENERATED_CONFIG_LOCATION
+    ./bash_expand.sh $CONFIG_TEMPLATE > $CONFIG_TEMPLATE.bak && mv $CONFIG_TEMPLATE.bak $GENERATED_CONFIG_LOCATION
 
     # generate a symlink to the built file in the desired location
     echo "    Linking to $CONFIG_TARGET_LOCATION"
