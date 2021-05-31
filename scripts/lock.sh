@@ -15,11 +15,10 @@ ICON=$HOME/.config/i3/scripts/icon.png
 TMPBG=/tmp/screen.png
 rm $TMPBG
 scrot $TMPBG
-convert $TMPBG -scale 10% $TMPBG # scale down to make image processing cheaper
-# convert -auto-gamma $TMPBG $TMPBG # blur and grey the image
-convert -auto-gamma $TMPBG $TMPBG # grey the image
+# convert -scale 10% -blur 0x2.5 -resize 1000% $TMPBG $TMPBG
+convert $TMPBG -scale 10%   $TMPBG # scale down to make image processing cheaper
+convert $TMPBG -auto-gamma  $TMPBG # grey the image
 convert $TMPBG -scale 1000% $TMPBG # scale the image up again
-# convert -blur 0x2 -auto-gamma $TMPBG $TMPBG # blur the image (SLOW PART)
 SIZES=$(xrandr | grep -oP '\d+x\d+\+\d+\+\d+' | sed 's/x/ /g; s/+/ /g')
 ICON_SIZE=($(identify -format '%w %h' $ICON))
 
