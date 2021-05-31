@@ -13,6 +13,7 @@
 
 ICON=$HOME/.config/i3/scripts/icon.png
 TMPBG=/tmp/screen.png
+rm $TMPBG
 scrot $TMPBG
 convert $TMPBG -scale 10% $TMPBG # scale down to make image processing cheaper
 # convert -auto-gamma $TMPBG $TMPBG # blur and grey the image
