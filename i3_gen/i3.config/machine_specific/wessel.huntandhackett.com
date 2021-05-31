@@ -176,10 +176,12 @@ exec --no-startup-id "set_sensitivity.sh"
 # chrome textdrag
 exec --no-startup-id "chrome_text_drag.py"
 
-exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
-
 # start a terminal
 bindsym $mod+Return exec urxvt
+
+exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
+
+exec_always --no-startup-id "picom --config $CONFIG/compton.conf"
 
 #Automatic back-and-forth when switching to the current workspace
 # https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth
