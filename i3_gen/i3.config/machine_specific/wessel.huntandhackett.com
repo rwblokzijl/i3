@@ -12,6 +12,14 @@
 
 set $BAR_SIZE 14
 
+# Get all screens
+; export SC1=$(xrandr | grep " connected" | sed -n '1 p' | awk '{print $1;}')
+; export SC2=$(xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')
+; export SC3=$(xrandr | grep " connected" | sed -n '3 p' | awk '{print $1;}')
+set $SC1 {{$SC1}}
+set $SC2 {{$SC2}}
+set $SC3 {{$SC3}}
+
 # Browser
 set $WS1 "1:    "
 # Terminal
@@ -29,18 +37,23 @@ set $WS10 "10:    "
 # Settings
 set $WS11 "11:    "
 
-# Small screen
-set $WS14 "201:    "
+# Right screen
+; if [ ! -z "$SC3" ]; then # if at least 3 screens
+set $WS101 "101:    "
+bindsym $mod+equal workspace $WS101
+bindsym $mod+Shift+plus move container to workspace $WS101
+;fi
+
+# Left screen
+; if [ ! -z "$SC2" ]; then # if at least 2 screens
+set $WS14 "201:    "
+bindsym $mod+grave workspace $WS14
+bindsym $mod+Shift+grave move container to workspace $WS14
+;fi
 set $WS15 "202:    "
 set $WS16 "203:    "
 
-; export SC1=$(xrandr | grep " connected" | sed -n '1 p' | awk '{print $1;}')
-; export SC2=$(xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')
-set $SC1 {{$SC1}}
-set $SC2 {{$SC2}}
-
 # switch to workspace
-bindsym $mod+grave workspace $WS14
 bindsym $mod+1 workspace $WS1
 bindsym $mod+2 workspace $WS2
 bindsym $mod+3 workspace $WS3
@@ -55,7 +68,6 @@ bindsym $mod+minus workspace $WS11
 bindsym $mod+q workspace $WS15
 
 # move focused container to workspace
-bindsym $mod+Shift+grave move container to workspace $WS14
 bindsym $mod+Shift+1 move container to workspace $WS1
 bindsym $mod+Shift+2 move container to workspace $WS2
 bindsym $mod+Shift+3 move container to workspace $WS3
@@ -95,9 +107,11 @@ exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option
 
 #configure monitors
 ; if [ -z "$SC2" ]; then
-exec_always --no-startup-id "xrandr --output $SC1 --auto --primary"
+exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary"
+; elif [ -z "$SC3" ]; then
+exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary "
 ; else
-exec_always --no-startup-id "xrandr --output $SC1 --auto --output $SC2 --auto --right-of $SC1 --primary "
+exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary --output {{$SC3}} --auto --right-of {{$SC2}}"
 ; fi
 
 #configure touchscreen
@@ -161,6 +175,8 @@ exec --no-startup-id i3-msg 'workspace $WS1'
 exec --no-startup-id "set_sensitivity.sh"
 # chrome textdrag
 exec --no-startup-id "chrome_text_drag.py"
+
+exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
 
 # start a terminal
 bindsym $mod+Return exec urxvt

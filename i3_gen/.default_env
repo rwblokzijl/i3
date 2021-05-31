@@ -1,4 +1,7 @@
 export HEIGHT=$(xrandr | grep " connected" | sed -n '1 p' | tr 'x+' " " | awk '{print $4;}')
+if [[ $HEIGHT < 1080 ]]; then
+    export HEIGHT=1080
+fi
 export SCALE=$(($HEIGHT/1080))
 export DARK="#282828"
 export TRANSDARK="#282828dd"
