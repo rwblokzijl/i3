@@ -160,6 +160,6 @@ signal=11
 [keyboard]
 label=!
 command=/usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin"
-interval=1
+interval=5
 ; fi
 
