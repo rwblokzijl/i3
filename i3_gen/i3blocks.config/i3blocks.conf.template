@@ -155,7 +155,7 @@ interval=1
 signal=11
 
 ; export HOSTNAME=$(hostname) # import based on hostname
-; if [[ $HOSTNAME == "desktop" ]]; then
+; if [[ $HOSTNAME == "desktop" || $HOSTNAME == "wessel.huntandhackett.com"]]; then
 # {{$HOSTNAME}} only
 [keyboard]
 label=!
