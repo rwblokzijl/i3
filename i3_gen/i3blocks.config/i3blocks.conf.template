@@ -155,11 +155,10 @@ interval=1
 signal=11
 
 ; export HOSTNAME=$(hostname) # import based on hostname
-; if [[ $HOSTNAME == "desktop" || $HOSTNAME == "wessel.huntandhackett.com"]]; then
+; if [[ $HOSTNAME == "desktop" || $HOSTNAME == "wessel.huntandhackett.com" ]]; then
 # {{$HOSTNAME}} only
 [keyboard]
-label=!
-command=/usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin"
+command=/usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin" #&& echo !
 interval=5
 ; fi
 

@@ -109,8 +109,10 @@ exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option
 ; if [ -z "$SC2" ]; then
 exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary"
 ; elif [ -z "$SC3" ]; then
+# exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --off"
 exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary "
 ; else
+# exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --off --output {{$SC3}} --off"
 exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary --output {{$SC3}} --auto --right-of {{$SC2}}"
 ; fi
 
