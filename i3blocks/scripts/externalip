@@ -5,20 +5,30 @@ if [[ -z $IP_ADDRESS ]]; then
     exit
 fi
 IP_LOC=$(geoiplookup $IP_ADDRESS | grep -oP -m 1 "(?<= )([A-Z]*)(?=,)")
-VPN_ICON=""
+
+RED=$(   xrdb -query | grep ^\*color1:  | cut -f 2)
+GREEN=$( xrdb -query | grep ^\*color2:  | cut -f 2)
+YELLOW=$(xrdb -query | grep ^\*color11: | cut -f 2)
+GREY=$(  xrdb -query | grep ^\*grey:    | cut -f 2)
+
 VPN_ICON=""
+VPN_ICON=""
 VPN_ICON=""
 
 ICON=""
+COLOR=$GREY
 
+# VPN
 command -v wg > /dev/null # wg exists
 if [ $? -eq 0 ]; then
     wg # WG fails if a VPN is enaled, but succeeds if there is nothing to show
     if [ ! $? -eq 0 ]; then
         ICON=$VPN_ICON
+        COLOR=$GREEN
     fi
 fi
 
+# KNOWN IP
 while read line; do
     IFS=' ' read -r -a LINE <<< "$line"
     KNOWN=$(getent hosts ${LINE[0]} | awk '{ print $1 }')
@@ -26,11 +36,14 @@ while read line; do
         IP_LOC=${LINE[1]}
         echo "$ICON  $IP_LOC"
         echo "$IP_LOC"
+        echo "$COLOR"
         exit
     fi
 done < ~/.config/vars/known_ips
 
+# UNKNOWN IP
 if [[ "${IP_LOC}" != "" ]]; then
 	echo "$ICON  ${IP_LOC}: ${IP_ADDRESS}"
 	echo "${IP_LOC}"
+	echo "${YELLOW}"
 fi

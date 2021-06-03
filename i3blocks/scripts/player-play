@@ -5,6 +5,10 @@ ARGUMENTS="--player spotify"
 ICON_PLAY=""
 ICON_PAUSE=""
 
+RED=$(   xrdb -query | grep ^\*color1:  | cut -f 2)
+GREEN=$( xrdb -query | grep ^\*color2:  | cut -f 2)
+GREY=$(  xrdb -query | grep ^\*grey:    | cut -f 2)
+
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
 	playerctl ${ARGUMENTS} play-pause
 	# pkill -RTMIN+10 i3blocks
@@ -31,10 +35,6 @@ echo " ${CUR_ICON} "
 echo " ${CUR_ICON} "
 
 if [[ "${PLAYER_STATUS}" = "Playing" ]]; then
-	echo "#b8bb26"
-elif [[ "${PLAYER_STATUS}" = "Paused" ]]; then
-	echo "#fb5f4d"
-else
-    echo ""
+	echo $GREEN
 fi
 

@@ -1,11 +1,13 @@
 #!/bin/bash
 
+YELLOW=$( xrdb -query | grep ^\*color11:  | cut -f 2)
 amount=$(mgit status -cdpul ~)
 if [ "$amount" -eq "0" ]; then
     exit 0
 fi
 echo " $amount"
 echo " $amount"
+echo $YELLOW
 
 exit 0
 

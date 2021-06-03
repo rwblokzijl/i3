@@ -2,6 +2,11 @@
 
 INTERFACE=$(iw dev | grep Interface | cut -f2 -d " ")
 
+RED=$(   xrdb -query | grep ^\*color1:  | cut -f 2)
+GREEN=$( xrdb -query | grep ^\*color10:  | cut -f 2)
+YELLOW=$(xrdb -query | grep ^\*color11: | cut -f 2)
+GREY=$(  xrdb -query | grep ^\*grey:    | cut -f 2)
+
 if [[ -z $INTERFACE ]]; then #no wifi exists
     exit
 fi
@@ -9,28 +14,24 @@ fi
 if [[ ! -d /sys/class/net/${INTERFACE}/wireless ]]; then
     echo " " "0%"
     echo " " "0%"
-    echo "#C55D51"
+    echo "$RED"
 	exit
 fi
 
 if [[ "$(cat /sys/class/net/$INTERFACE/operstate)" == 'down' ]]; then
     echo " " "0%"
     echo " " "0%"
-    echo "#C55D51"
+    echo "$RED"
 fi
 
 SSID=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d\: -f2)
 QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
 
 # color
-if [[ $QUALITY -lt 40 ]]; then
-    COLOR="#C55D51"
-elif [[ $QUALITY -lt 60 ]]; then
-    COLOR="#FE8019"
-elif [[ $QUALITY -lt 80 ]]; then
-    COLOR="#FABD2F"
+if [[ $QUALITY -lt 50 ]]; then
+    COLOR=$YELLOW
 else
-    COLOR="#B8BB26"
+    COLOR=$GREY
 fi
 
 if [[ -z $SSID ]]; then

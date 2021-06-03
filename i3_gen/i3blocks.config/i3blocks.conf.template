@@ -101,27 +101,19 @@ signal=10
 #
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
+
 #[iface]
 ##instance=wlan0
 #color=#4E9A06
 #interval=10
 #
 
-# [externalloc]
-# color=#B8BB26
-# interval=10
-# separator=false
-# separator_block_width=15
-
 [externalip]
-color=#B8BB26
 interval=10
 signal=10
 
 [wifi]
-# instance=wlan0
 interval=5
-# format=json
 
 [laundry]
 command=laundry
