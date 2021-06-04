@@ -32,6 +32,9 @@ fi
 status=$(pactl list sinks | perl -000ne "if(/#$INSTANCE_NUM\s/)"'{/Mute: (no|yes)/; print "$1\n"}')
 volume=$(pactl list sinks | perl -000ne "if(/#$INSTANCE_NUM\s/)"'{/(\d*)%/; print "$1\n"}')
 
+RED=$(   xrdb -query | grep ^\*color1:  | cut -f 2)
+WHITE=$(   xrdb -query | grep ^\*color15:  | cut -f 2)
+
 # print the status text
 if [[ "${status}" == "no" ]]; then
 	if [[ "${volume}" == "0" ]]; then
@@ -44,8 +47,9 @@ if [[ "${status}" == "no" ]]; then
 		echo " ${volume}%"
 		echo " ${volume}%"
 	fi
+	echo $WHITE
 else
 	echo " MUTE"
 	echo " MUTE"
-	echo "#c55d51"
+	echo $RED
 fi

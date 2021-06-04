@@ -8,13 +8,17 @@ elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
 	i3-msg 'workspace 10:    ' > /dev/null
 fi
 
+ICON=""
+WHITE=$(   xrdb -query | grep ^\*color15:  | cut -f 2)
+
 PLAYER_STATUS=$(playerctl ${ARGUMENTS} status)
 
 if [[ "${PLAYER_STATUS}" != "Paused" ]] && [[ "${PLAYER_STATUS}" != "Playing" ]]; then
 	echo ""
 	echo ""
 else
-	echo ""
-	echo ""
+	echo "$ICON"
+	echo "$ICON"
+	echo $WHITE
 fi
 
