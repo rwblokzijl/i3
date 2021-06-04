@@ -6,7 +6,7 @@ ICON_PLAY=""
 ICON_PAUSE=""
 
 RED=$(   xrdb -query | grep ^\*color1:  | cut -f 2)
-GREEN=$( xrdb -query | grep ^\*color2:  | cut -f 2)
+GREEN=$( xrdb -query | grep ^\*color10:  | cut -f 2)
 WHITE=$(   xrdb -query | grep ^\*color15:  | cut -f 2)
 
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
