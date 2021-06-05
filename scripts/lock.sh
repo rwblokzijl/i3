@@ -13,13 +13,19 @@
 
 ICON=$HOME/.config/i3/scripts/icon.png
 TMPBG=/tmp/screen.png
+
+# Take screenshot
 rm $TMPBG
 scrot $TMPBG
-# convert -scale 10% -blur 0x2.5 -resize 1000% $TMPBG $TMPBG
-convert $TMPBG -scale 10%   $TMPBG # scale down to make image processing cheaper
-convert $TMPBG -auto-gamma  $TMPBG # grey the image
-convert $TMPBG -scale 1000% $TMPBG # scale the image up again
-SIZES=$(xrandr | grep -oP '\d+x\d+\+\d+\+\d+' | sed 's/x/ /g; s/+/ /g')
+
+# scale down and up to blur
+# convert $TMPBG -scale 10% $TMPBG
+# convert $TMPBG -scale 1000% $TMPBG
+
+# add icons
+
+# SIZES=$(xrandr |              grep -oP '\d+x\d+\+\d+\+\d+' | sed 's/x/ /g; s/+/ /g')
+SIZES=$(xrandr | grep primary | grep -oP '\d+x\d+\+\d+\+\d+' | sed 's/x/ /g; s/+/ /g')
 ICON_SIZE=($(identify -format '%w %h' $ICON))
 
 while read -r line
@@ -27,7 +33,6 @@ do
 	W_H_X_Y=($line)
 	let WIDTH=${W_H_X_Y[0]}/2+${W_H_X_Y[2]}-${ICON_SIZE[0]}/2
 	let HEIGHT=${W_H_X_Y[1]}/2+${W_H_X_Y[3]}-${ICON_SIZE[1]}/2
-	echo $WIDTH x $HEIGHT
 	convert $TMPBG $ICON -geometry +$WIDTH+$HEIGHT -composite -matte $TMPBG #add an icon
 done <<< "$SIZES"
 
