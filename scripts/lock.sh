@@ -19,8 +19,8 @@ rm $TMPBG
 scrot $TMPBG
 
 # scale down and up to blur
-# convert $TMPBG -scale 10% $TMPBG
-# convert $TMPBG -scale 1000% $TMPBG
+convert $TMPBG -scale 10% $TMPBG
+convert $TMPBG -scale 1000% $TMPBG
 
 # add icons
 
