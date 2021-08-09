@@ -181,7 +181,12 @@ exec --no-startup-id "chrome_text_drag.py"
 # start a terminal
 bindsym $mod+Return exec urxvt
 
+; if [ -z "$SC2" ]; then
+exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/1080/nature/*
+; else
 exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
+; fi
+
 
 exec_always --no-startup-id "picom --config $CONFIG/compton.conf"
 
