@@ -13,9 +13,23 @@
 set $BAR_SIZE 14
 
 # Get all screens
-; export SC1=$(xrandr | grep " connected" | sed -n '1 p' | awk '{print $1;}')
-; export SC2=$(xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')
-; export SC3=$(xrandr | grep " connected" | sed -n '3 p' | awk '{print $1;}')
+; export SC_LAP=$(xrandr | grep " connected" | sed -n '1 p' | awk '{print $1;}')
+; export SC_M1=$(xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')
+; export SC_M2=$(xrandr | grep " connected" | sed -n '3 p' | awk '{print $1;}')
+; export SC_M3=$(xrandr | grep " connected" | sed -n '4 p' | awk '{print $1;}')
+
+; if [ ! -z "$SC_M3" ]; then # if at least 4 screens
+# replace laptop with leftmost
+; export SC0=$SC_LAP
+; export SC1=$SC_M1
+; export SC2=$SC_M2
+; export SC3=$SC_M3
+; else
+; export SC1=$SC_LAP
+; export SC2=$SC_M1
+; export SC2=$SC_M2
+; fi
+
 set $SC1 {{$SC1}}
 set $SC2 {{$SC2}}
 set $SC3 {{$SC3}}
@@ -38,7 +52,7 @@ set $WS010 "10:    "
 set $WS011 "11:    "
 
 # Right screen
-; if [ ! -z "$SC3" ]; then # if at least 3 screens
+; if [ ! -z "$SC3" ]; then # if 3 screens
 set $WS101 "101:    "
 bindsym $mod+equal workspace $WS101
 bindsym $mod+Shift+plus move container to workspace $WS101
@@ -106,6 +120,9 @@ bindsym XF86AudioMute        exec --no-startup-id "sound mute"
 exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin"
 
 #configure monitors
+; if [ -z "$SC0" ]; then # if 4 monitors turn off laptop
+exec_always --no-startup-id "xrandr --output {{$SC0}} --off"
+; fi
 ; if [ -z "$SC2" ]; then
 exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary"
 ; elif [ -z "$SC3" ]; then
