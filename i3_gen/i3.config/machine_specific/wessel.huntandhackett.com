@@ -13,22 +13,54 @@
 set $BAR_SIZE 14
 
 # Get all screens
-; export SC_LAP=$(xrandr | grep " connected" | sed -n '1 p' | awk '{print $1;}')
-; export SC_M1=$(xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')
-; export SC_M2=$(xrandr | grep " connected" | sed -n '3 p' | awk '{print $1;}')
-; export SC_M3=$(xrandr | grep " connected" | sed -n '4 p' | awk '{print $1;}')
+; export SC_LAP=$(  xrandr | grep " connected" | sed -n '1 p' | awk '{print $1;}')
+; export SC_M1=$(   xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')
+; export SC_M2=$(   xrandr | grep " connected" | sed -n '3 p' | awk '{print $1;}')
+; export SC_M3=$(   xrandr | grep " connected" | sed -n '4 p' | awk '{print $1;}')
 
-; if [ ! -z "$SC_M3" ]; then # if at least 4 screens
-# replace laptop with leftmost
-; export SC0=$SC_LAP
-; export SC1=$SC_M1
-; export SC2=$SC_M2
-; export SC3=$SC_M3
+set $SC_LAP {{$SC_LAP}}
+set $SC_M1  {{$SC_M1}}
+set $SC_M2  {{$SC_M2}}
+set $SC_M3  {{$SC_M3}}
+
+; export SC_M1_X=$( xrandr --current | grep '+' | grep -v "connected" | sed -n '2 p' | awk '{print $1}' | cut -d 'x' -f1)
+; export SC_M2_X=$( xrandr --current | grep '+' | grep -v "connected" | sed -n '3 p' | awk '{print $1}' | cut -d 'x' -f1)
+; export SC_M3_X=$( xrandr --current | grep '+' | grep -v "connected" | sed -n '4 p' | awk '{print $1}' | cut -d 'x' -f1)
+
+set $SC_M1_X {{$SC_M1_X}}
+set $SC_M2_X {{$SC_M2_X}}
+set $SC_M3_X {{$SC_M3_X}}
+
+; if [ -n "$SC_M3" ]; then # if at least 4 screens
+; # replace laptop with leftmost screen
+    exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off"
+;   export SC1=$SC_M1
+;   export SC2=$SC_M2
+;   export SC3=$SC_M3
+    exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary --output {{$SC3}} --auto --right-of {{$SC2}}"
+; elif [ -n "$SC_M2" ]; then # 3 screens
+;   if [[ "$SC_M1_X" == "3440" && "$SC_M2_X" == "3440" ]]; then # Both external screens are wide
+; # replace laptop with leftmost screen
+        exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off"
+;       export SC1=$SC_M1
+;       export SC2=$SC_M2
+        exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary --output {{$SC2}} --auto --right-of {{$SC1}} "
+;   else
+;       export SC1=$SC_LAP
+;       export SC2=$SC_M1
+;       export SC3=$SC_M2
+        exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary --output {{$SC3}} --auto --right-of {{$SC2}}"
+;   fi
+; elif [ -n "$SC_M1" ]; then # 2 screens
+;   export SC1=$SC_LAP
+;   export SC2=$SC_M1
+    exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary "
 ; else
-; export SC1=$SC_LAP
-; export SC2=$SC_M1
-; export SC2=$SC_M2
+;   export SC1=$SC_LAP
+    exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary"
 ; fi
+
+# xrandr --output {{$SC1}} --auto --output {{$SC2}} --off
 
 set $SC1 {{$SC1}}
 set $SC2 {{$SC2}}
@@ -118,20 +150,6 @@ bindsym XF86AudioMute        exec --no-startup-id "sound mute"
 
 #swap caps and escape for better VIMing and swap alt and winkey for better i3ing
 exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin"
-
-#configure monitors
-; if [ -z "$SC0" ]; then # if 4 monitors turn off laptop
-exec_always --no-startup-id "xrandr --output {{$SC0}} --off"
-; fi
-; if [ -z "$SC2" ]; then
-exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary"
-; elif [ -z "$SC3" ]; then
-# exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --off"
-exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary "
-; else
-# exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --off --output {{$SC3}} --off"
-exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary --output {{$SC3}} --auto --right-of {{$SC2}}"
-; fi
 
 #configure touchscreen
 ; export TOUCHSCREEN=$(xinput --list | grep "pointer" | grep "Wacom" | sed 's/.*\(Wacom.*\w\)\s*id.*/'\''\1'\''/')
