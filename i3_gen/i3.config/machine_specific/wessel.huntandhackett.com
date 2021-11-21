@@ -132,6 +132,7 @@ exec --no-startup-id i3-msg 'workspace $WS11; append_layout $LAYOUTS/pavucontrol
 # Set standard workspaces for programs
 # small screen
 for_window [class="^Rambox$"]               move to workspace $WS15
+for_window [class="^Signal$"]               move to workspace $WS15
 for_window [class="^discord$"]              move to workspace $WS15
 
 for_window [class="^Microsoft\ Teams.*$"]   move to workspace $WS15
@@ -163,6 +164,7 @@ exec --no-startup-id "spotify"
 exec --no-startup-id "pavucontrol"
 exec --no-startup-id "teams"
 exec --no-startup-id "rambox"
+exec --no-startup-id "signal-desktop"
 exec --no-startup-id "keepassxc"
 
 exec --no-startup-id "insync start"
