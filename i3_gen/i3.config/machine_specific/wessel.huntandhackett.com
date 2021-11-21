@@ -13,32 +13,78 @@
 set $BAR_SIZE 14
 
 # Get all screens
-; export SC1=$(xrandr | grep " connected" | sed -n '1 p' | awk '{print $1;}')
-; export SC2=$(xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')
-; export SC3=$(xrandr | grep " connected" | sed -n '3 p' | awk '{print $1;}')
+; export SC_LAP=$(  xrandr | grep " connected" | sed -n '1 p' | awk '{print $1;}')
+; export SC_M1=$(   xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')
+; export SC_M2=$(   xrandr | grep " connected" | sed -n '3 p' | awk '{print $1;}')
+; export SC_M3=$(   xrandr | grep " connected" | sed -n '4 p' | awk '{print $1;}')
+
+set $SC_LAP {{$SC_LAP}}
+set $SC_M1  {{$SC_M1}}
+set $SC_M2  {{$SC_M2}}
+set $SC_M3  {{$SC_M3}}
+
+; export SC_M1_X=$( xrandr --current | grep '+' | grep -v "connected" | sed -n '2 p' | awk '{print $1}' | cut -d 'x' -f1)
+; export SC_M2_X=$( xrandr --current | grep '+' | grep -v "connected" | sed -n '3 p' | awk '{print $1}' | cut -d 'x' -f1)
+; export SC_M3_X=$( xrandr --current | grep '+' | grep -v "connected" | sed -n '4 p' | awk '{print $1}' | cut -d 'x' -f1)
+
+set $SC_M1_X {{$SC_M1_X}}
+set $SC_M2_X {{$SC_M2_X}}
+set $SC_M3_X {{$SC_M3_X}}
+
+; if [ -n "$SC_M3" ]; then # if at least 4 screens
+; # replace laptop with leftmost screen
+    exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off"
+;   export SC1=$SC_M1
+;   export SC2=$SC_M2
+;   export SC3=$SC_M3
+    exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary --output {{$SC3}} --auto --right-of {{$SC2}}"
+; elif [ -n "$SC_M2" ]; then # 3 screens
+;   if [[ "$SC_M1_X" == "3440" && "$SC_M2_X" == "3440" ]]; then # Both external screens are wide
+; # replace laptop with leftmost screen
+        exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off"
+;       export SC1=$SC_M1
+;       export SC2=$SC_M2
+        exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary --output {{$SC2}} --auto --right-of {{$SC1}} "
+;   else
+;       export SC1=$SC_LAP
+;       export SC2=$SC_M1
+;       export SC3=$SC_M2
+        exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary --output {{$SC3}} --auto --right-of {{$SC2}}"
+;   fi
+; elif [ -n "$SC_M1" ]; then # 2 screens
+;   export SC1=$SC_LAP
+;   export SC2=$SC_M1
+    exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary "
+; else
+;   export SC1=$SC_LAP
+    exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary"
+; fi
+
+# xrandr --output {{$SC1}} --auto --output {{$SC2}} --off
+
 set $SC1 {{$SC1}}
 set $SC2 {{$SC2}}
 set $SC3 {{$SC3}}
 
 # Browser
-set $WS1 "1:    "
+set $WS001 "1:    "
 # Terminal
-set $WS2 "2:    "
+set $WS002 "2:    "
 # Free
-set $WS3 "3:  3  "
-set $WS4 "4:  4  "
-set $WS5 "5:  5  "
-set $WS6 "6:  6  "
-set $WS7 "7:  7  "
-set $WS8 "8:  8  "
-set $WS9 "9:  9  "
+set $WS003 "3:  3  "
+set $WS004 "4:  4  "
+set $WS005 "5:  5  "
+set $WS006 "6:  6  "
+set $WS007 "7:  7  "
+set $WS008 "8:  8  "
+set $WS009 "9:  9  "
 # Music
-set $WS10 "10:    "
+set $WS010 "10:    "
 # Settings
-set $WS11 "11:    "
+set $WS011 "11:    "
 
 # Right screen
-; if [ ! -z "$SC3" ]; then # if at least 3 screens
+; if [ ! -z "$SC3" ]; then # if 3 screens
 set $WS101 "101:    "
 bindsym $mod+equal workspace $WS101
 bindsym $mod+Shift+plus move container to workspace $WS101
@@ -46,56 +92,56 @@ bindsym $mod+Shift+plus move container to workspace $WS101
 
 # Left screen
 ; if [ ! -z "$SC2" ]; then # if at least 2 screens
-set $WS14 "201:    "
-bindsym $mod+grave workspace $WS14
-bindsym $mod+Shift+grave move container to workspace $WS14
+set $WS014 "201:    "
+bindsym $mod+grave workspace $WS014
+bindsym $mod+Shift+grave move container to workspace $WS014
 ;fi
-set $WS15 "202:    "
-set $WS16 "203:    "
+set $WS015 "202:    "
+set $WS016 "203:    "
 
 # switch to workspace
-bindsym $mod+1 workspace $WS1
-bindsym $mod+2 workspace $WS2
-bindsym $mod+3 workspace $WS3
-bindsym $mod+4 workspace $WS4
-bindsym $mod+5 workspace $WS5
-bindsym $mod+6 workspace $WS6
-bindsym $mod+7 workspace $WS7
-bindsym $mod+8 workspace $WS8
-bindsym $mod+9 workspace $WS9
-bindsym $mod+0 workspace $WS10
-bindsym $mod+minus workspace $WS11
-bindsym $mod+q workspace $WS15
+bindsym $mod+1 workspace $WS001
+bindsym $mod+2 workspace $WS002
+bindsym $mod+3 workspace $WS003
+bindsym $mod+4 workspace $WS004
+bindsym $mod+5 workspace $WS005
+bindsym $mod+6 workspace $WS006
+bindsym $mod+7 workspace $WS007
+bindsym $mod+8 workspace $WS008
+bindsym $mod+9 workspace $WS009
+bindsym $mod+0 workspace $WS010
+bindsym $mod+minus workspace $WS011
+bindsym $mod+q workspace $WS015
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $WS1
-bindsym $mod+Shift+2 move container to workspace $WS2
-bindsym $mod+Shift+3 move container to workspace $WS3
-bindsym $mod+Shift+4 move container to workspace $WS4
-bindsym $mod+Shift+5 move container to workspace $WS5
-bindsym $mod+Shift+6 move container to workspace $WS6
-bindsym $mod+Shift+7 move container to workspace $WS7
-bindsym $mod+Shift+8 move container to workspace $WS8
-bindsym $mod+Shift+9 move container to workspace $WS9
-bindsym $mod+Shift+0 move container to workspace $WS10
-bindsym $mod+Shift+underscore move container to workspace $WS11
+bindsym $mod+Shift+1 move container to workspace $WS001
+bindsym $mod+Shift+2 move container to workspace $WS002
+bindsym $mod+Shift+3 move container to workspace $WS003
+bindsym $mod+Shift+4 move container to workspace $WS004
+bindsym $mod+Shift+5 move container to workspace $WS005
+bindsym $mod+Shift+6 move container to workspace $WS006
+bindsym $mod+Shift+7 move container to workspace $WS007
+bindsym $mod+Shift+8 move container to workspace $WS008
+bindsym $mod+Shift+9 move container to workspace $WS009
+bindsym $mod+Shift+0 move container to workspace $WS010
+bindsym $mod+Shift+underscore move container to workspace $WS011
 
 # Assign workspaces to Monitors
-workspace $WS1 output $SC2
-workspace $WS2 output $SC2
-workspace $WS3 output $SC2
-workspace $WS4 output $SC2
-workspace $WS5 output $SC2
-workspace $WS6 output $SC2
-workspace $WS7 output $SC2
-workspace $WS8 output $SC2
-workspace $WS9 output $SC2
-workspace $WS10 output $SC2
-workspace $WS11 output $SC2
+workspace $WS001 output $SC2
+workspace $WS002 output $SC2
+workspace $WS003 output $SC2
+workspace $WS004 output $SC2
+workspace $WS005 output $SC2
+workspace $WS006 output $SC2
+workspace $WS007 output $SC2
+workspace $WS008 output $SC2
+workspace $WS009 output $SC2
+workspace $WS010 output $SC2
+workspace $WS011 output $SC2
 
-workspace $WS14 output $SC1
-workspace $WS15 output $SC1
-workspace $WS16 output $SC1
+workspace $WS014 output $SC1
+workspace $WS015 output $SC1
+workspace $WS016 output $SC1
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id "sound up"
@@ -105,17 +151,6 @@ bindsym XF86AudioMute        exec --no-startup-id "sound mute"
 #swap caps and escape for better VIMing and swap alt and winkey for better i3ing
 exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin"
 
-#configure monitors
-; if [ -z "$SC2" ]; then
-exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary"
-; elif [ -z "$SC3" ]; then
-# exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --off"
-exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary "
-; else
-# exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --off --output {{$SC3}} --off"
-exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary --output {{$SC3}} --auto --right-of {{$SC2}}"
-; fi
-
 #configure touchscreen
 ; export TOUCHSCREEN=$(xinput --list | grep "pointer" | grep "Wacom" | sed 's/.*\(Wacom.*\w\)\s*id.*/'\''\1'\''/')
 exec_always --no-startup-id "xinput --map-to-output {{$TOUCHSCREEN}} $SC1"
@@ -123,25 +158,26 @@ exec_always --no-startup-id "xinput --map-to-output {{$TOUCHSCREEN}} $SC1"
 # Start programs and assign to workspaces
 
 # Set layouts for monitors to assign programs to specific positions
-# exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/chromium.json'
-exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/brave.json'
-#exec --no-startup-id i3-msg 'workspace $WS2; append_layout $LAYOUTS/gnome-terminal.json'
-exec --no-startup-id i3-msg 'workspace $WS11; append_layout $LAYOUTS/pavucontrol.json'
-#exec --no-startup-id i3-msg 'workspace $WS14; append_layout $LAYOUTS/firefox.json'
+# exec --no-startup-id i3-msg 'workspace $WS001; append_layout $LAYOUTS/chromium.json'
+exec --no-startup-id i3-msg 'workspace $WS001; append_layout $LAYOUTS/brave.json'
+#exec --no-startup-id i3-msg 'workspace $WS002; append_layout $LAYOUTS/gnome-terminal.json'
+exec --no-startup-id i3-msg 'workspace $WS011; append_layout $LAYOUTS/pavucontrol.json'
+#exec --no-startup-id i3-msg 'workspace $WS014; append_layout $LAYOUTS/firefox.json'
 
 # Set standard workspaces for programs
 # small screen
-for_window [class="^Rambox$"]               move to workspace $WS15
-for_window [class="^Signal$"]               move to workspace $WS15
-for_window [class="^discord$"]              move to workspace $WS15
+<<<<<<< HEAD
+for_window [class="^Rambox$"]               move to workspace $WS015
+for_window [class="^Signal$"]               move to workspace $WS015
+for_window [class="^discord$"]              move to workspace $WS015
 
-for_window [class="^Microsoft\ Teams.*$"]   move to workspace $WS15
-for_window [class="^KeePassXC$"]            move to workspace $WS16
+for_window [class="^Microsoft\ Teams.*$"]   move to workspace $WS015
+for_window [class="^KeePassXC$"]            move to workspace $WS016
 
 # main screen
-for_window [class="^jetbrains-studio$"]     move to workspace $WS3
-# for_window [class="^Thunar$"]               move to workspace $WS9
-for_window [class="Spotify"]                move to workspace $WS10
+for_window [class="^jetbrains-studio$"]     move to workspace $WS003
+# for_window [class="^Thunar$"]               move to workspace $WS009
+for_window [class="Spotify"]                move to workspace $WS010
 
 hide_edge_borders horizontal
 
@@ -171,7 +207,7 @@ exec --no-startup-id "insync start"
 exec --no-startup-id "blueman-applet"
 
 # Finally focus workspace 1
-exec --no-startup-id i3-msg 'workspace $WS1'
+exec --no-startup-id i3-msg 'workspace $WS001'
 
 # ### Hacky scripts to run ### #
 # mouse sensitivity
@@ -183,7 +219,12 @@ exec --no-startup-id "chrome_text_drag.py"
 # start a terminal
 bindsym $mod+Return exec urxvt
 
+; if [ -z "$SC2" ]; then
+exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/1080/nature/*
+; else
 exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
+; fi
+
 
 exec_always --no-startup-id "picom --config $CONFIG/compton.conf"
 

@@ -220,10 +220,6 @@ client.focused_inactive $dark    $dark        $bright $dark       $dark
 client.unfocused        $dark    $dark        $bright $dark       $dark
 client.urgent           $bright  $bright      $dark   $bright     $bright
 
-#configure background
-#exec_always --no-startup-id feh --bg-scale --no-xinerama '$WALLPAPERS/$WIDTH/nature/SANAalr.jpg'
-exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/$WIDTH/nature/*
-
 #enable when i3 is able to run horizontal:
 # hide_edge_borders horizontal
 # for_window [class="^.*"] border pixel 5

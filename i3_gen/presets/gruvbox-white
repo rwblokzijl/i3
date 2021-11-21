@@ -1,4 +1,4 @@
-export HEIGHT=$(xrandr | grep " connected" | sed -n '1 p' | tr 'x+' " " | awk '{print $4;}')
+export HEIGHT=$( xrandr | grep " connected" | sed -n '2 p' | tr 'x+' " " | awk '{print $4;}' || xrandr | grep " connected" | sed -n '1 p' | tr 'x+' " " | awk '{print $4;}')
 export SCALE=$(($HEIGHT/1080))
 export DARK="#282828"
 export TRANSDARK="#282828dd"
