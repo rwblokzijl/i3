@@ -161,6 +161,7 @@ exec --no-startup-id i3-msg 'workspace $WS11; append_layout $LAYOUTS/pavucontrol
 for_window [class="Mumble"]                 move to workspace $WS14
 # for_window [title="^Google Hangouts "]      move to workspace $WS14
 for_window [class="^Rambox$"]               move to workspace $WS15
+for_window [class="^Signal$"]               move to workspace $WS15
 for_window [class="^discord$"]              move to workspace $WS15
 for_window [class="^KeePassXC$"]            move to workspace $WS16
 # middle screen
@@ -199,6 +200,7 @@ for_window [title="^https://hangouts.google.com - Google Hangouts - Mozilla Fire
 # left screen
 exec --no-startup-id "keepassxc"
 exec --no-startup-id "rambox"
+exec --no-startup-id "signal-desktop"
 # exec --no-startup-id "chromium"
 exec --no-startup-id "brave"
 # middle screen
