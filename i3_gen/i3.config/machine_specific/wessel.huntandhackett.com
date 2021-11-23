@@ -225,6 +225,10 @@ exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS
 
 exec_always --no-startup-id "picom --config $CONFIG/compton.conf"
 
+exec_always --no-startup-id "xset mouse 2 0"
+exec_always --no-startup-id "xset r rate 280 40"
+
+
 #Automatic back-and-forth when switching to the current workspace
 # https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth
 # workspace_auto_back_and_forth yes
