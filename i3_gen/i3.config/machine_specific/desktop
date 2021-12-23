@@ -225,7 +225,8 @@ exec --no-startup-id "killpy monitor.py; monitor.py"
 # exec --no-startup-id "monitor.py"
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+# bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec alacritty
 
 exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
 

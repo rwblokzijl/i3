@@ -217,6 +217,7 @@ exec --no-startup-id "chrome_text_drag.py"
 
 # start a terminal
 bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec alacritty
 
 ; if [ -z "$SC2" ]; then
 exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/1080/nature/*
