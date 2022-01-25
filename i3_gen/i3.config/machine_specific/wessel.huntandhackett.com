@@ -166,7 +166,6 @@ exec --no-startup-id i3-msg 'workspace $WS011; append_layout $LAYOUTS/pavucontro
 
 # Set standard workspaces for programs
 # small screen
-<<<<<<< HEAD
 for_window [class="^Rambox$"]               move to workspace $WS015
 for_window [class="^Signal$"]               move to workspace $WS015
 for_window [class="^discord$"]              move to workspace $WS015
@@ -198,7 +197,7 @@ bindsym $mod+Shift+x exec brave --incognito --profile-directory="Profile 1"
 exec --no-startup-id "brave"
 exec --no-startup-id "spotify"
 exec --no-startup-id "pavucontrol"
-exec --no-startup-id "teams"
+# exec --no-startup-id "teams"
 exec --no-startup-id "rambox"
 exec --no-startup-id "signal-desktop"
 exec --no-startup-id "keepassxc"
@@ -227,6 +226,10 @@ exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS
 
 
 exec_always --no-startup-id "picom --config $CONFIG/compton.conf"
+
+exec_always --no-startup-id "xset mouse 2 0"
+exec_always --no-startup-id "xset r rate 280 40"
+
 
 #Automatic back-and-forth when switching to the current workspace
 # https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth
