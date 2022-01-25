@@ -190,6 +190,9 @@ for_window [class="^.*"] border pixel 5
 # for_window [class="^Chromium$"] border pixel 0
 # for_window [class="^Firefox$"] border pixel 0
 no_focus [window_role="pop-up"]
+focus_follows_mouse no
+focus_on_window_activation urgent
+
 #for_window [title="Assignment"] floating enable
 for_window [title="^https://hangouts.google.com - Google Hangouts - Mozilla Firefox$"] floating disable
 
