@@ -1,5 +1,12 @@
 #!/bin/bash
 
+BLACK=$( xrdb -query | grep ^\*color0:  | cut -f 2)
+RED=$(   xrdb -query | grep ^\*color1:  | cut -f 2)
+GREEN=$( xrdb -query | grep ^\*color10: | cut -f 2)
+YELLOW=$(xrdb -query | grep ^\*color11: | cut -f 2)
+WHITE=$( xrdb -query | grep ^\*color15: | cut -f 2)
+GREY=$(  xrdb -query | grep ^\*grey:    | cut -f 2)
+
 BATTERY=0
 BATTERY_INFO=$(acpi -b | grep -v unavailable)
 # | grep "Battery ${BATTERY}")
@@ -7,37 +14,39 @@ BATTERY_STATE=$(echo "${BATTERY_INFO}" | grep -wo "Full\|Charging\|Discharging")
 BATTERY_POWER=$(echo "${BATTERY_INFO}" | grep -o '[0-9]\+%' | tr -d '%')
 
 if [[ -z $BATTERY_POWER ]]; then
-    # if not battery return (happens for desktops)
+    # if not battery: return (happens for desktops)
     exit
 fi
 
 URGENT_VALUE=10
-
+LOW_VALUE=30
+HIGH_VALUE=70
+ICON=" "
+FG_COLOR=$GREY
+BG_COLOR=$BLACK
 if [[ "${BATTERY_POWER}" -le "${URGENT_VALUE}" ]]; then
-	echo " ${BATTERY_POWER}%"
-	echo " "
-	if [[ "${BATTERY_STATE}" = "Discharging" ]]; then
-		echo "#C55D51"
-	fi
+	ICON=" "
+	FG_COLOR=$WHITE
+	BG_COLOR=$RED
 elif [[ "${BATTERY_STATE}" = "Full" ]]; then
-    # Print nothing if full
-	# echo " ${BATTERY_POWER}%"
-	# echo " "
-	# echo "#B8BB26"
+	# ICON=" "
+	# FG_COLOR=$GREEN
 	exit
-elif [[ "${BATTERY_POWER}" -le 30 ]]; then
-	echo " ${BATTERY_POWER}%"
-	echo " "
-elif [[ "${BATTERY_POWER}" -le 70 ]]; then
-	echo " ${BATTERY_POWER}%"
-	echo " "
+elif [[ "${BATTERY_POWER}" -le "${LOW_VALUE}" ]]; then
+	ICON=" "
+elif [[ "${BATTERY_POWER}" -le "${HIGH_VALUE}" ]]; then
+	ICON=" "
 else
-	echo " ${BATTERY_POWER}%"
-	echo " "
+	ICON=" "
 fi
 
-if [[ "${BATTERY_STATE}" = "Discharging" ]]; then
-	echo ""
-else
-	echo "#FABD2F"
+if [[ "${BATTERY_STATE}" = "Charging" ]]; then
+    FG_COLOR=$YELLOW
+    BG_COLOR=$BLACK
 fi
+
+echo "${ICON} ${BATTERY_POWER}%"
+echo $ICON
+echo $FG_COLOR
+echo $BG_COLOR
+

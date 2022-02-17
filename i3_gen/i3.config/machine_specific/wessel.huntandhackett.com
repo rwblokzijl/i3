@@ -38,26 +38,32 @@ set $SC_M3_X {{$SC_M3_X}}
 ;   export SC2=$SC_M2
 ;   export SC3=$SC_M3
     exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary --output {{$SC3}} --auto --right-of {{$SC2}}"
+    exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
 ; elif [ -n "$SC_M2" ]; then # 3 screens
 ;   if [[ "$SC_M1_X" == "3440" && "$SC_M2_X" == "3440" ]]; then # Both external screens are wide
 ; # replace laptop with leftmost screen
         exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off"
 ;       export SC1=$SC_M1
 ;       export SC2=$SC_M2
-        exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary --output {{$SC2}} --auto --right-of {{$SC1}} "
+        # exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary --output {{$SC2}} --auto --right-of {{$SC1}} "
+        exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary --rotate left --output {{$SC2}} --auto --pos 1440x825"
+        exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/4k/nature/*
 ;   else
 ;       export SC1=$SC_LAP
 ;       export SC2=$SC_M1
 ;       export SC3=$SC_M2
         exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary --output {{$SC3}} --auto --right-of {{$SC2}}"
+        exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
 ;   fi
 ; elif [ -n "$SC_M1" ]; then # 2 screens
 ;   export SC1=$SC_LAP
 ;   export SC2=$SC_M1
     exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary "
+    exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/1080/nature/*
 ; else
 ;   export SC1=$SC_LAP
     exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary"
+    exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/1080/nature/*
 ; fi
 
 # xrandr --output {{$SC1}} --auto --output {{$SC2}} --off
@@ -218,13 +224,6 @@ exec --no-startup-id "chrome_text_drag.py"
 # start a terminal
 # bindsym $mod+Return exec urxvt
 bindsym $mod+Return exec alacritty
-
-; if [ -z "$SC2" ]; then
-exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/1080/nature/*
-; else
-exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
-; fi
-
 
 exec_always --no-startup-id "picom --config $CONFIG/compton.conf"
 

@@ -11,10 +11,11 @@
 #
 ################################################################################
 
-FORMAT="${BLOCK_INSTANCE:-%H:%M}"
-TIME=$(date "+${FORMAT}")
-HOUR=$(date "+%H")
-MIN=$(date "+%M")
+FORMAT="${BLOCK_INSTANCE:-%H %M}"
+TIME=($(date "+${FORMAT}" | tr " " "\n"))
+HOUR=${TIME[0]}
+MIN=${TIME[1]}
+TIME=$(echo ${TIME[@]} | tr " " ":")
 
 # The icons in order 12:00, 12:30 ... to 12:00 again
 # (12:00 twice, this is neccesary for 11:46)

@@ -11,35 +11,39 @@ if [[ -z $INTERFACE ]]; then #no wifi exists
     exit
 fi
 
+ICON=" "
+LONG="$ICON 0%"
+SHORT="$ICON"
+COLOR=$GREY
+
 if [[ ! -d /sys/class/net/${INTERFACE}/wireless ]]; then
-    echo " " "0%"
-    echo " " "0%"
-    echo "$RED"
-	exit
-fi
-
-if [[ "$(cat /sys/class/net/$INTERFACE/operstate)" == 'down' ]]; then
-    echo " " "0%"
-    echo " " "0%"
-    echo "$RED"
-fi
-
-SSID=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d\: -f2)
-QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
-
-# color
-if [[ $QUALITY -lt 50 ]]; then
-    COLOR=$YELLOW
+    LONG="WIFI ERROR"
+    SHORT="$ICON"
+    COLOR=$RED
+elif [[ "$(cat /sys/class/net/$INTERFACE/operstate)" == 'down' ]]; then
+    LONG="WIFI DOWN"
+    SHORT="$ICON"
+    COLOR=$RED
 else
-    COLOR=$GREY
+    SSID=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d\: -f2)
+    QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
+
+    # color
+    if [[ $QUALITY -lt 50 ]]; then
+        COLOR=$YELLOW
+    else
+        COLOR=$GREY
+    fi
+
+    if [[ -z $SSID ]]; then
+        LONG=" "
+        COLOR=$RED
+    else
+        LONG=" $QUALITY% ($SSID)"
+    fi
 fi
 
-if [[ -z $SSID ]]; then
-    echo " "
-else
-    echo " " "$QUALITY% ($SSID)"
-fi
-
-echo " "
+echo $LONG
+echo $SHORT
 echo $COLOR
 
