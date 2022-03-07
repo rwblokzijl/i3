@@ -225,7 +225,7 @@ exec --no-startup-id "chrome_text_drag.py"
 # bindsym $mod+Return exec urxvt
 bindsym $mod+Return exec alacritty
 
-exec_always --no-startup-id "picom --config $CONFIG/compton.conf"
+# exec_always --no-startup-id "picom --config $CONFIG/compton.conf -b"
 
 exec_always --no-startup-id "xset mouse 2 0"
 exec_always --no-startup-id "xset r rate 280 40"
