@@ -59,7 +59,7 @@ set $SC_M3_X {{$SC_M3_X}}
 ;   export SC1=$SC_LAP
 ;   export SC2=$SC_M1
     exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary "
-    exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/1080/nature/*
+    exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
 ; else
 ;   export SC1=$SC_LAP
     exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary"
@@ -158,8 +158,8 @@ bindsym XF86AudioMute        exec --no-startup-id "sound mute"
 exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option "altwin:swap_lalt_lwin"
 
 #configure touchscreen
-; export TOUCHSCREEN=$(xinput --list | grep "pointer" | grep "Wacom" | sed 's/.*\(Wacom.*\w\)\s*id.*/'\''\1'\''/')
-exec_always --no-startup-id "xinput --map-to-output {{$TOUCHSCREEN}} $SC1"
+#; export TOUCHSCREEN=$(xinput --list | grep "pointer" | grep "Wacom" | sed 's/.*\(Wacom.*\w\)\s*id.*/'\''\1'\''/')
+#exec_always --no-startup-id "xinput --map-to-output {{$TOUCHSCREEN}} $SC1"
 
 # Start programs and assign to workspaces
 
