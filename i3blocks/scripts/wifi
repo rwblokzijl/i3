@@ -1,6 +1,6 @@
 #!/bin/bash
 
-INTERFACE=$(iw dev | grep Interface | cut -f2 -d " ")
+INTERFACE=$(iw dev | grep Interface | cut -f2 -d " " | sort | head -1)
 
 RED=$(   xrdb -query | grep ^\*color1:  | cut -f 2)
 GREEN=$( xrdb -query | grep ^\*color10:  | cut -f 2)

@@ -42,11 +42,12 @@ set $SC_M3_X {{$SC_M3_X}}
 ; elif [ -n "$SC_M2" ]; then # 3 screens
 ;   if [[ "$SC_M1_X" == "3440" && "$SC_M2_X" == "3440" ]]; then # Both external screens are wide
 ; # replace laptop with leftmost screen
-        exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off"
+        # exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off"
 ;       export SC1=$SC_M1
 ;       export SC2=$SC_M2
-        # exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary --output {{$SC2}} --auto --right-of {{$SC1}} "
-        exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary --rotate left --output {{$SC2}} --auto --pos 1440x825"
+        # exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off --output {{$SC1}} --auto --primary --output {{$SC2}} --auto --right-of {{$SC1}} "
+        exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off --output {{$SC1}} --auto --primary --rotate left --output {{$SC2}} --auto --pos 1440x825"
+        # exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --auto --primary --output {{$SC1}} --off --output {{$SC2}} --off"
         exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/4k/nature/*
 ;   else
 ;       export SC1=$SC_LAP
