@@ -197,6 +197,8 @@ for_window [class="^.*"] border pixel 5
 no_focus [window_role="pop-up"]
 for_window [title="^https://hangouts.google.com - Google Hangouts - Mozilla Firefox$"] floating disable
 
+bindsym $mod+c exec brave --profile-directory=Default
+bindsym $mod+Shift+c exec brave --incognito --profile-directory=Default
 bindsym $mod+x exec brave --profile-directory="Profile 1"
 bindsym $mod+Shift+x exec brave --incognito --profile-directory="Profile 1"
 
