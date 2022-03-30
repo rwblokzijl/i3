@@ -134,6 +134,8 @@ bindsym $mod+Shift+0 move container to workspace $WS010
 bindsym $mod+Shift+underscore move container to workspace $WS011
 
 # Assign workspaces to Monitors
+workspace $WS101 output $SC3
+
 workspace $WS001 output $SC2
 workspace $WS002 output $SC2
 workspace $WS003 output $SC2
