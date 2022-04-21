@@ -50,7 +50,7 @@ set $WS15 "202:    "
 set $WS16 "203:    "
 
 set $SC1 HDMI-A-0
-set $SC2 DisplayPort-0
+set $SC2 DisplayPort-2
 set $SC3 DisplayPort-1
 set $SCM DVI-D-0
 
@@ -59,6 +59,7 @@ set $SCM DVI-D-0
 # bindsym $mod+z exec chill
 # bindsym $mod+x exec nochill
 bindsym $mod+F1 exec screen toggle
+bindsym $mod+F2 exec home webcam
 bindsym $mod+z exec bed
 bindsym $mod+x exec dark
 
