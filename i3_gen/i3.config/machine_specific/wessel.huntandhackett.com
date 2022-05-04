@@ -49,7 +49,7 @@ set $SC_M3_X {{$SC_M3_X}}
 ;   export SCTMP=$SC1
 ;   export SC1=$SC2
 ;   export SC2=$SCTMP
-        exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off --output {{$SC1}} --auto --primary --rotate left --output {{$SC2}} --auto --pos 1440x825"
+        exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off --output {{$SC1}} --auto --primary --rotate left --output {{$SC2}} --auto --pos 1440x1000"
         # exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --auto --primary --output {{$SC1}} --off --output {{$SC2}} --off"
         exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/4k/nature/*
 ;   else
