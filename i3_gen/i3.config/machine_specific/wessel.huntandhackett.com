@@ -157,6 +157,7 @@ workspace $WS016 output $SC1
 
 bindsym $mod+F1 exec screen toggle
 bindsym $mod+F2 exec home webcam
+bindsym $mod+F3 exec home desk
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id "sound up"
