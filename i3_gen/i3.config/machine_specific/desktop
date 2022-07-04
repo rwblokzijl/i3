@@ -59,7 +59,7 @@ set $SCM DVI-D-0
 # bindsym $mod+z exec chill
 # bindsym $mod+x exec nochill
 bindsym $mod+F1 exec screen toggle
-bindsym $mod+F2 exec home webcam
+bindsym $mod+F2 exec bash -c '[ $(lsmod | grep ^uvcvideo | tr -s " " | cut -d " " -f3) -ne 0 ] && home webcam || home nowebcam'
 bindsym $mod+F3 exec home desk
 bindsym $mod+z exec bed
 bindsym $mod+x exec dark
