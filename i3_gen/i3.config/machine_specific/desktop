@@ -43,14 +43,14 @@ set $WS102 "102:    "
 set $WS103 "103:    "
 
 # Left browser:
-set $WS14 "201:    "
+set $WS201 "201:    "
 # Left Chats
-set $WS15 "202:    "
+set $WS202 "202:    "
 # Left password manager
-set $WS16 "203:    "
+set $WS203 "203:    "
 
-set $SC1 HDMI-A-0
-set $SC2 DisplayPort-2
+set $SC1 DisplayPort-2
+set $SC2 HDMI-A-0
 set $SC3 DisplayPort-1
 set $SCM DVI-D-0
 
@@ -65,7 +65,7 @@ bindsym $mod+z exec bed
 bindsym $mod+x exec dark
 
 # switch to workspace
-bindsym $mod+grave workspace $WS14
+bindsym $mod+grave workspace $WS201
 bindsym $mod+1 workspace $WS1
 bindsym $mod+2 workspace $WS2
 bindsym $mod+3 workspace $WS3
@@ -80,10 +80,10 @@ bindsym $mod+minus workspace $WS11
 bindsym $mod+y workspace $WS101
 bindsym $mod+u workspace $WS102
 bindsym $mod+plus focus output $SC3
-bindsym $mod+q workspace $WS15
+bindsym $mod+q workspace $WS202
 
 # move focused container to workspace
-bindsym $mod+Shift+grave move container to workspace $WS14
+bindsym $mod+Shift+grave move container to workspace $WS201
 bindsym $mod+Shift+1 move container to workspace $WS1
 bindsym $mod+Shift+2 move container to workspace $WS2
 bindsym $mod+Shift+3 move container to workspace $WS3
@@ -116,9 +116,9 @@ workspace $WS101 output $SC3
 workspace $WS102 output $SC3
 workspace $WS103 output $SC3
 
-workspace $WS14 output $SC1
-workspace $WS15 output $SC1
-workspace $WS16 output $SC1
+workspace $WS201 output $SC1
+workspace $WS202 output $SC1
+workspace $WS203 output $SC1
 
 bindsym $mod+Left  exec --no-startup-id "xrandr --output $SCM --mode 1920x1080 --same-as $SC1 && i3-msg focus output $SC1"
 bindsym $mod+Down  exec --no-startup-id "xrandr --output $SCM --mode 1920x1080 --same-as $SC2 && i3-msg focus output $SC2"
@@ -156,16 +156,16 @@ exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/brave.json'
 #exec --no-startup-id i3-msg 'workspace $WS2; append_layout $LAYOUTS/gnome-terminal.json'
 exec --no-startup-id i3-msg 'workspace $WS11; append_layout $LAYOUTS/pavucontrol.json'
 #exec --no-startup-id i3-msg 'workspace $WS101; append_layout $LAYOUTS/firefox.json'
-#exec --no-startup-id i3-msg 'workspace $WS14; append_layout $LAYOUTS/firefox.json'
+#exec --no-startup-id i3-msg 'workspace $WS201; append_layout $LAYOUTS/firefox.json'
 
 # Set standard workspaces for programs
 # left screen
-for_window [class="Mumble"]                 move to workspace $WS14
-# for_window [title="^Google Hangouts "]      move to workspace $WS14
-for_window [class="^Rambox$"]               move to workspace $WS15
-for_window [class="^Signal$"]               move to workspace $WS15
-for_window [class="^discord$"]              move to workspace $WS15
-for_window [class="^KeePassXC$"]            move to workspace $WS16
+for_window [class="Mumble"]                 move to workspace $WS201
+# for_window [title="^Google Hangouts "]      move to workspace $WS201
+for_window [class="^Rambox$"]               move to workspace $WS202
+for_window [class="^Signal$"]               move to workspace $WS202
+for_window [class="^discord$"]              move to workspace $WS202
+for_window [class="^KeePassXC$"]            move to workspace $WS203
 # middle screen
 for_window [class="^jetbrains-studio$"]     move to workspace $WS3
 for_window [class="Steam"]                  move to workspace $WS7
