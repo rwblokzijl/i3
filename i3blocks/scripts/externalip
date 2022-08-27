@@ -32,6 +32,9 @@ fi
 while read line; do
     IFS=' ' read -r -a LINE <<< "$line"
     KNOWN=$(getent hosts ${LINE[0]} | awk '{ print $1 }')
+    if [[ $KNOWN == "" ]];then
+        KNOWN=${LINE[0]}
+    fi
     if [[ $IP_ADDRESS == $KNOWN ]]; then
         IP_LOC=${LINE[1]}
         echo "$ICON  $IP_LOC"
