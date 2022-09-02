@@ -49,9 +49,9 @@ set $WS202 "202:    "
 # Left password manager
 set $WS203 "203:    "
 
-set $SC1 DisplayPort-0
+set $SC1 DisplayPort-1
 set $SC2 HDMI-A-0
-set $SC3 DisplayPort-1
+set $SC3 DisplayPort-0
 set $SCM DVI-D-0
 
 # chill/unchill
