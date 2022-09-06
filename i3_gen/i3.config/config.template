@@ -69,7 +69,7 @@ set $inactive           {{$INACTIVE}}
 floating_modifier $mod
 
 # start a terminal
-# bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec alacritty
 # bindsym $mod+Return exec dbus-launch gnome-terminal
 
 #Start a browser

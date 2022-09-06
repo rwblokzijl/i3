@@ -9,11 +9,11 @@
        "x": 0,
        "y": 0
     },
-    "name": "bloodyfool@Desktop: ~/.config/i3",
+    "name": "Alacritty",
     "percent": 1,
     "swallows": [
        {
-       "class": "^Gnome\\-terminal$"
+            "class": "^Alacritty$"
        // "instance": "^gnome\\-terminal\\-server$",
        // "title": "^bloodyfool\\@Desktop\\:\\ \\~\\/\\.config\\/i3$",
        // "transient_for": "^$",

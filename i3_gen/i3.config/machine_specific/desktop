@@ -12,6 +12,9 @@
 
 set $BAR_SIZE 14
 
+###
+# Workspace and monitor configs
+###
 # Browser
 set $WS1 "1:    "
 # Terminal
@@ -52,7 +55,7 @@ set $WS203 "203:    "
 set $SC1 DisplayPort-1
 set $SC2 HDMI-A-0
 set $SC3 DisplayPort-0
-set $SCM DVI-D-0
+set $SCM DisplayPort-2
 
 # chill/unchill
 # bed/dark
@@ -120,86 +123,56 @@ workspace $WS201 output $SC1
 workspace $WS202 output $SC1
 workspace $WS203 output $SC1
 
-bindsym $mod+Left  exec --no-startup-id "xrandr --output $SCM --mode 1920x1080 --same-as $SC1 && i3-msg focus output $SC1"
-bindsym $mod+Down  exec --no-startup-id "xrandr --output $SCM --mode 1920x1080 --same-as $SC2 && i3-msg focus output $SC2"
-bindsym $mod+Up    exec --no-startup-id "xrandr --output $SCM --mode 1920x1080 --same-as $SC2 && i3-msg focus output $SC2"
-bindsym $mod+Right exec --no-startup-id "xrandr --output $SCM --mode 1920x1080 --same-as $SC3 && i3-msg focus output $SC3"
+; export XRANDR='xrandr --output $SC1 --auto --output $SC2 --auto --right-of $SC1 --primary --output $SC3 --auto --right-of $SC2'
+exec_always --no-startup-id "{{$XRANDR}} --output $SCM --auto --same-as $SC3"
 
-# bindsym $mod+Left  exec --no-startup-id "xrandr --output $SC1 --mode 1920x1080 --pos 0x0 --rotate normal --output $SC2 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output $SC3 --mode 1920x1080 --pos 3840x0 --rotate normal --output $SCM --mode 1920x1080 --same-as $SC1"
-# bindsym $mod+Down  exec --no-startup-id "xrandr --output $SC1 --mode 1920x1080 --pos 0x0 --rotate normal --output $SC2 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output $SC3 --mode 1920x1080 --pos 3840x0 --rotate normal --output $SCM --mode 1920x1080 --same-as $SC2"
-# bindsym $mod+Up    exec --no-startup-id "xrandr --output $SC1 --mode 1920x1080 --pos 0x0 --rotate normal --output $SC2 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output $SC3 --mode 1920x1080 --pos 3840x0 --rotate normal --output $SCM --mode 1920x1080 --same-as $SC2"
-# bindsym $mod+Right exec --no-startup-id "xrandr --output $SC1 --mode 1920x1080 --pos 0x0 --rotate normal --output $SC2 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output $SC3 --mode 1920x1080 --pos 3840x0 --rotate normal --output $SCM --mode 1920x1080 --same-as $SC3"
-
-#enable networkmanager
-exec --no-startup-id nm-applet
-exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+bindsym $mod+Left  exec --no-startup-id "{{$XRANDR}} --output $SCM --auto --same-as $SC1 && i3-msg focus output $SC1"
+bindsym $mod+Down  exec --no-startup-id "{{$XRANDR}} --output $SCM --auto --same-as $SC2 --primary && i3-msg focus output $SC2"
+bindsym $mod+Up    exec --no-startup-id "{{$XRANDR}} --output $SCM --auto --same-as $SC2 --primary && i3-msg focus output $SC2"
+bindsym $mod+Right exec --no-startup-id "{{$XRANDR}} --output $SCM --auto --same-as $SC3 && i3-msg focus output $SC3"
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id "sound up"
 bindsym XF86AudioLowerVolume exec --no-startup-id "sound down"
 bindsym XF86AudioMute        exec --no-startup-id "sound mute"
 
-#swap caps and escape for better VIMing and swap alt and winkey for better i3ing
-#this one fires every second because my shitty usb hub keeps reconnecting my
-#keyboard
-# exec_always --no-startup-id "killall bash $CONFIG/scripts/keyboard.sh; bash $CONFIG/scripts/keyboard.sh"
-# exec_always --no-startup-id "$CONFIG/scripts/keyboard.sh"
-
-#configure monitors
-exec_always --no-startup-id "xrandr --output $SC1 --mode 1920x1080 --pos 0x0 --rotate normal --output $SC2 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output $SC3 --mode 1920x1080 --pos 3840x0 --rotate normal --output $SCM --mode 1920x1080 --same-as $SC3"
-
+###
 # Start programs and assign to workspaces
-
-# Set layouts for monitors to assign programs to specific positions
-# exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/chromium.json'
+###
 exec --no-startup-id i3-msg 'workspace $WS1; append_layout $LAYOUTS/brave.json'
-#exec --no-startup-id i3-msg 'workspace $WS2; append_layout $LAYOUTS/gnome-terminal.json'
+exec --no-startup-id "brave"
+
+exec --no-startup-id i3-msg 'workspace $WS2; append_layout $LAYOUTS/terminal.json'
+exec --no-startup-id "alacritty"
+
 exec --no-startup-id i3-msg 'workspace $WS11; append_layout $LAYOUTS/pavucontrol.json'
-#exec --no-startup-id i3-msg 'workspace $WS101; append_layout $LAYOUTS/firefox.json'
-#exec --no-startup-id i3-msg 'workspace $WS201; append_layout $LAYOUTS/firefox.json'
+exec --no-startup-id "pavucontrol"
 
 # Set standard workspaces for programs
 # left screen
-for_window [class="Mumble"]                 move to workspace $WS201
-# for_window [title="^Google Hangouts "]      move to workspace $WS201
 for_window [class="^Rambox$"]               move to workspace $WS202
 for_window [class="^Signal$"]               move to workspace $WS202
 for_window [class="^discord$"]              move to workspace $WS202
+
 for_window [class="^KeePassXC$"]            move to workspace $WS203
+
 # middle screen
 for_window [class="^jetbrains-studio$"]     move to workspace $WS3
 for_window [class="Steam"]                  move to workspace $WS7
 for_window [title="^Steam$"]                move to workspace $WS7
+
 for_window [class="dota2"]                  move to workspace $WS8
 for_window [class="hl2_linux"]              move to workspace $WS8
 for_window [class="^Minecraft"]             move to workspace $WS8
 for_window [title="^Minecraft Launcher$"]   move to workspace $WS8
 for_window [class="factorio"]               move to workspace $WS8
 for_window [class="Halo.exe"]               move to workspace $WS8
-# for_window [class="^Thunar$"]               move to workspace $WS9
+
 for_window [class="Spotify"]                move to workspace $WS10
+
 # right screen
 for_window [class="mpv"]                    move to workspace $WS102
-#for_window [title="Assignment"]             move output $SC3
 
-hide_edge_borders horizontal
-
-# Set the window borders to indicate the current focused window
-# default_border pixel 2
-for_window [class="^.*"] border pixel 5
-# for_window [class="^Google-chrome$"] border pixel 0
-# for_window [class="^Brave-browser$"] border pixel 0
-# for_window [class="^Chromium$"] border pixel 0
-# for_window [class="^Firefox$"] border pixel 0
-no_focus [window_role="pop-up"]
-# focus_follows_mouse no
-focus_on_window_activation urgent
-
-#for_window [title="Assignment"] floating enable
-for_window [title="^https://hangouts.google.com - Google Hangouts - Mozilla Firefox$"] floating disable
-
-# bindsym $mod+c exec chromium
-# bindsym $mod+Shift+c exec chromium -incognito
 bindsym $mod+c exec brave
 bindsym $mod+Shift+c exec brave --incognito
 
@@ -208,32 +181,28 @@ bindsym $mod+Shift+c exec brave --incognito
 exec --no-startup-id "keepassxc"
 exec --no-startup-id "rambox"
 exec --no-startup-id "signal-desktop"
-# exec --no-startup-id "chromium"
-exec --no-startup-id "brave"
+
 # middle screen
-#exec --no-startup-id "steam"
 exec --no-startup-id "spotify"
-# exec --no-startup-id "thunar"
-exec --no-startup-id "pavucontrol"
 exec --no-startup-id "insync start"
 exec --no-startup-id "blueman-applet"
 # right screen
 
 # Finally focus workspace 1
-exec --no-startup-id i3-msg 'workspace "$WS1"'
+exec --no-startup-id i3-msg 'workspace $WS2;'
 
-# ### Hacky scripts to run ### #
-# mouse sensitivity
-mouse_warping none
-exec --no-startup-id "set_sensitivity.sh"
-# chrome textdrag
-exec --no-startup-id "chrome_text_drag.py"
-exec --no-startup-id "killpy monitor.py; monitor.py"
-# exec --no-startup-id "monitor.py"
+###
+# Extra i3 settings
+###
+hide_edge_borders horizontal
+for_window [class="^.*"] border pixel 5
 
-# start a terminal
-# bindsym $mod+Return exec urxvt
-bindsym $mod+Return exec alacritty
+no_focus [window_role="pop-up"]
+focus_on_window_activation urgent # The window will always be marked urgent, but the focus will not be stolen.
+
+###
+# Other system configs
+###
 
 exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
 
@@ -242,7 +211,12 @@ exec_always --no-startup-id "compton --config $CONFIG/compton.conf"
 exec_always --no-startup-id "xset mouse 2 0"
 exec_always --no-startup-id "xset r rate 280 40"
 
-#Automatic back-and-forth when switching to the current workspace
-#https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth
-# workspace_auto_back_and_forth yes
+###
+# Hacky scripts to run on startup
+###
+# mouse_warping none # Mouse follow focus
+# exec --no-startup-id "set_sensitivity.sh" # mouse sensitivity ROCCAT
+# chrome textdrag
+exec_always --no-startup-id "chrome_text_drag.py"
+exec --no-startup-id "killpy monitor.py; monitor.py" # Home automation listener
 
