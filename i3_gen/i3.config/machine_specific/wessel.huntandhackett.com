@@ -233,10 +233,6 @@ exec --no-startup-id "set_sensitivity.sh"
 # chrome textdrag
 exec --no-startup-id "chrome_text_drag.py"
 
-# start a terminal
-# bindsym $mod+Return exec urxvt
-bindsym $mod+Return exec alacritty
-
 # exec_always --no-startup-id "picom --config $CONFIG/compton.conf -b"
 
 exec_always --no-startup-id "xset mouse 2 0"
