@@ -184,6 +184,7 @@ exec --no-startup-id "signal-desktop"
 
 # middle screen
 exec --no-startup-id "spotify"
+exec --no-startup-id "discord"
 exec --no-startup-id "insync start"
 exec --no-startup-id "blueman-applet"
 # right screen
