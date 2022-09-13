@@ -64,6 +64,8 @@ set $SCM DisplayPort-2
 bindsym $mod+F1 exec screen toggle
 bindsym $mod+F2 exec bash -c '[ $(lsmod | grep ^uvcvideo | tr -s " " | cut -d " " -f3) -ne 0 ] && home webcam || home nowebcam'
 bindsym $mod+F3 exec home desk
+bindsym $mod+F4 exec home deskfan
+bindsym $mod+F5 exec home windowfan
 bindsym $mod+z exec bed
 bindsym $mod+x exec dark
 
