@@ -158,6 +158,8 @@ workspace $WS016 output $SC1
 bindsym $mod+F1 exec screen toggle
 bindsym $mod+F2 exec bash -c '[ $(lsmod | grep ^uvcvideo | tr -s " " | cut -d " " -f3) -ne 0 ] && home webcam || home nowebcam'
 bindsym $mod+F3 exec home desk
+bindsym $mod+F4 exec home deskfan
+bindsym $mod+F5 exec home windowfan
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id "sound up"
