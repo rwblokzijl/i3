@@ -125,6 +125,8 @@ workspace $WS201 output $SC1
 workspace $WS202 output $SC1
 workspace $WS203 output $SC1
 
+bindsym $mod+Print scrot -s - | xclip -selection clipboard -target image/png
+
 ; export XRANDR='xrandr --output $SC1 --auto --output $SC2 --auto --right-of $SC1 --primary --output $SC3 --auto --right-of $SC2'
 exec_always --no-startup-id "{{$XRANDR}} --output $SCM --auto --same-as $SC3"
 
