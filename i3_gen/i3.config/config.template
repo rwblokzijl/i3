@@ -232,6 +232,8 @@ client.urgent           $bright  $bright      $dark   $bright     $bright
 # TODO: enable with proper config: see home desktop
 exec_always --no-startup-id "picom --config $CONFIG/compton.conf -b"
 
+exec_always --no-startup-id "flameshot"
+
 #make i3 windows slightly bigger by hiding edge borders
 #hide_edge_borders both
 #hide_edge_borders horizontal
