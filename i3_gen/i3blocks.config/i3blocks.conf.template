@@ -127,7 +127,6 @@ interval=30
 
 [gh]
 interval=2
-command=[[ "${BLOCK_BUTTON}" -eq 1 ]] && xdg-open "https://github.com/notifications">/dev/null; N_GH=$(gh api notifications --jq length); [[ $N_GH != 0 ]] && echo  $N_GH && echo  $N_GH && echo "#FABD2F"
 
 [date]
 interval=60
