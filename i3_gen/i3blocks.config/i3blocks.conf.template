@@ -1,4 +1,4 @@
-;export CONFIG_TARGET_LOCATION=~/.config/i3/i3blocks.conf
+;export CONFIG_TARGET_LOCATION=~/.config/i3/i3blocks.confi3blocks.conf
 # i3blocks config file
 #
 # Please see man i3blocks for a complete reference!
@@ -126,6 +126,9 @@ interval=1
 interval=30
 
 [gh]
+interval=2
+
+[do]
 interval=2
 
 [date]

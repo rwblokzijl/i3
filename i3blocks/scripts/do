@@ -1,8 +1,8 @@
 #!/bin/bash
-#
-ICON=
-N=$(gh api notifications --jq length)
-URL="https://github.com/notifications"
+
+ICON=
+N=$(doctl compute droplet list  --output json | jq length)
+URL="https://cloud.digitalocean.com/droplets"
 
 [[ "${BLOCK_BUTTON}" -eq 1 ]] && xdg-open "${URL}">/dev/null
 [[ $N != 0 ]] && echo ${ICON} $N && echo ${ICON} $N && echo "#FABD2F"
