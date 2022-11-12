@@ -1,0 +1,42 @@
+#!/bin/bash
+
+ICON=
+BUILD=$(/home/bloodyfool/tmp/gcloud/google-cloud-sdk/bin/gcloud --account=wesselb94@gmail.com --project=gc-controller-a64a3818 builds list --limit=1 --format=json | jq '.[0]')
+URL="https://console.cloud.google.com/run/detail/europe-west4/gc-controller-api/metrics?project=gc-controller-a64a3818"
+
+RED=$(   xrdb -query | grep ^\*color1:  | cut -f 2)
+GREEN=$( xrdb -query | grep ^\*color10:  | cut -f 2)
+YELLOW=$(xrdb -query | grep ^\*color11: | cut -f 2)
+GREY=$(  xrdb -query | grep ^\*grey:    | cut -f 2)
+
+STATUS=$(echo $BUILD | jq -r '.status')
+START_TIME=$(echo $BUILD | jq -r '.createTime' | date -f - +%s)
+NOW=$(date +%s)
+AGE=$((${NOW}-${START_TIME}))
+
+[[ "${BLOCK_BUTTON}" -eq 1 ]] && xdg-open "${URL}">/dev/null
+
+if [[ ${STATUS} = "SUCCESS" ]]; then
+    MAX_AGE=60
+elif [[ ${STATUS} = "QUEUED" ]]; then
+    MAX_AGE=3600
+elif [[ ${STATUS} = "WORKING" ]]; then
+    MAX_AGE=3600
+elif [[ ${STATUS} = "FAILURE" ]]; then
+    MAX_AGE=3600
+fi
+
+if [[ "$MAX_AGE" -gt "$AGE" ]]; then
+    echo "${ICON} "
+    echo "${ICON} "
+    if [[ ${STATUS} = "SUCCESS" ]]; then
+        echo "${GREEN}"
+    elif [[ ${STATUS} = "QUEUED" ]]; then
+        echo "${YELLOW}"
+    elif [[ ${STATUS} = "WORKING" ]]; then
+        echo "${YELLOW}"
+    elif [[ ${STATUS} = "FAILURE" ]]; then
+        echo "${RED}"
+    fi
+fi
+
