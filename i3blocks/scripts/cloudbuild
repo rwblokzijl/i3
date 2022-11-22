@@ -2,7 +2,7 @@
 
 ICON=
 BUILD=$(/home/bloodyfool/tmp/gcloud/google-cloud-sdk/bin/gcloud --account=wesselb94@gmail.com --project=gc-controller-a64a3818 builds list --limit=1 --format=json | jq '.[0]')
-URL="https://console.cloud.google.com/run/detail/europe-west4/gc-controller-api/metrics?project=gc-controller-a64a3818"
+URL="https://console.cloud.google.com/cloud-build/builds?project=gc-controller-a64a3818"
 
 RED=$(   xrdb -query | grep ^\*color1:  | cut -f 2)
 GREEN=$( xrdb -query | grep ^\*color10:  | cut -f 2)
@@ -17,7 +17,7 @@ AGE=$((${NOW}-${START_TIME}))
 [[ "${BLOCK_BUTTON}" -eq 1 ]] && xdg-open "${URL}">/dev/null
 
 if [[ ${STATUS} = "SUCCESS" ]]; then
-    MAX_AGE=60
+    MAX_AGE=300
 elif [[ ${STATUS} = "QUEUED" ]]; then
     MAX_AGE=3600
 elif [[ ${STATUS} = "WORKING" ]]; then
