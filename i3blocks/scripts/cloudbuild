@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ICON=
-BUILD=$(/home/bloodyfool/tmp/gcloud/google-cloud-sdk/bin/gcloud --account=wesselb94@gmail.com --project=gc-controller-a64a3818 builds list --limit=1 --format=json | jq '.[0]')
+BUILD=$(/sbin/gcloud --account=wesselb94@gmail.com --project=gc-controller-a64a3818 builds list --limit=1 --format=json | jq '.[0]')
 URL="https://console.cloud.google.com/cloud-build/builds?project=gc-controller-a64a3818"
 
 RED=$(   xrdb -query | grep ^\*color1:  | cut -f 2)
