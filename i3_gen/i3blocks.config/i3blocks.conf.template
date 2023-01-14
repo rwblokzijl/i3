@@ -137,6 +137,10 @@ interval=10
 [date]
 interval=60
 
+[kek]
+command=echo $TEST
+interval=1
+
 [datetime]
 interval=1
 
