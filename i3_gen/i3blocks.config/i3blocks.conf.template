@@ -122,6 +122,12 @@ interval=60
 [battery]
 interval=1
 
+[cpu_temp]
+interval=1
+
+[cpu_usage]
+interval=1
+
 [mgit]
 interval=30
 

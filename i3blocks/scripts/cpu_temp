@@ -1,0 +1,38 @@
+#!/bin/bash
+
+RED=$(   xrdb -query | grep ^\*color1:  | cut -f 2)
+YELLOW=$(xrdb -query | grep ^\*color11: | cut -f 2)
+GREY=$(  xrdb -query | grep ^\*grey:    | cut -f 2)
+
+TEMP=$(
+sensors 'coretemp-*' \
+  | grep '^Package id' \
+  | awk '{ print $4 }' \
+  | grep -o '[0-9]\+' \
+  | head -n1
+)
+
+if [[ "$TEMP" -lt 30 ]]; then
+  ICON=""
+elif [[ "$TEMP" -lt 40 ]]; then
+  ICON=""
+elif [[ "$TEMP" -lt 50 ]]; then
+  ICON=""
+elif [[ "$TEMP" -lt 60 ]]; then
+  ICON=""
+else
+  ICON=""
+fi
+
+if [[ "$TEMP" -ge 100 ]]; then
+  COLOR=$RED
+elif [[ "$TEMP" -ge 80 ]]; then
+  COLOR=$YELLOW
+else
+  COLOR=$GREY
+fi
+
+echo $ICON $TEMP °C
+echo $TEMP °C
+echo $COLOR
+
