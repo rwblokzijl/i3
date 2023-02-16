@@ -2,4 +2,15 @@
 # ICONS=""
 USERNAME=rwblokzijl
 ICON=" "
-curl -s https://api.chess.com/pub/player/${USERNAME}/games | jq '.games|map(select(.[.turn] == "https://api.chess.com/pub/player/'${USERNAME}'")) | length' | sed '/^0$/d' | sed 's/^/'"$ICON"'/'
+GAMES=$(curl -s https://api.chess.com/pub/player/${USERNAME}/games | jq '.games|map(select(.[.turn] == "https://api.chess.com/pub/player/'${USERNAME}'"))')
+URL=$(echo "$GAMES" | jq -r '.[0].url//empty')
+if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+  if [[ ! -z "${URL}" ]];then
+    xdg-open "${URL}">/dev/null
+  else
+    URL="https://www.chess.com/daily"
+    xdg-open "${URL}">/dev/null
+  fi
+fi
+
+echo "$GAMES" | jq length | sed '/^0$/d' | sed 's/^/'"$ICON"'/'
