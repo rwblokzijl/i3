@@ -140,6 +140,9 @@ interval=2
 [cloudbuild]
 interval=10
 
+[chess]
+interval=10
+
 [date]
 interval=60
 

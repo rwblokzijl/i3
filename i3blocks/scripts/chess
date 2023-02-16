@@ -1,0 +1,5 @@
+#!/bin/bash
+# ICONS=""
+USERNAME=rwblokzijl
+ICON=" "
+curl -s https://api.chess.com/pub/player/${USERNAME}/games | jq '.games|map(select(.[.turn] == "https://api.chess.com/pub/player/'${USERNAME}'")) | length' | sed '/^0$/d' | sed 's/^/'"$ICON"'/'
