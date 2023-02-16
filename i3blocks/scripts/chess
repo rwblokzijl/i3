@@ -13,4 +13,8 @@ if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
   fi
 fi
 
-echo "$GAMES" | jq length | sed '/^0$/d' | sed 's/^/'"$ICON"'/'
+YELLOW=$(xrdb -query | grep ^\*color11: | cut -f 2)
+MSG=$(echo "$GAMES" | jq length | sed '/^0$/d' | sed 's/^/'"$ICON"'/')
+echo $MSG
+echo $MSG
+echo $YELLOW
