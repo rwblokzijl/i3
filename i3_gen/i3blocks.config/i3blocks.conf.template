@@ -143,6 +143,9 @@ interval=10
 [chess]
 interval=10
 
+[optifine]
+interval=10
+
 [date]
 interval=60
 

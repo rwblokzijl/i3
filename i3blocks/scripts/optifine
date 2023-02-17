@@ -1,0 +1,12 @@
+#!/bin/bash
+LATEST=$(curl -s https://www.optifine.net/downloads | hq -0 '.downloadLine' data | tr '\n' ' ' | sed 's/\x0/\n/g;s/  */ /g'  | sed 's/.*\?f=\(.*.jar\)&.*colDate">\([0-9.]*\).*/\2 \1/' | column -t | head -1)
+DATE=$(echo "$LATEST" | cut -d ' ' -f 1)
+URL="https://optifine.net/adloadx?f=$(echo "$LATEST" | cut -d ' ' -f 3)"
+
+[[ "${BLOCK_BUTTON}" -eq 1 ]] && xdg-open "${URL}" >/dev/null
+if [[ "${DATE}" != "30.01.2023" ]];then
+  YELLOW=$(xrdb -query | grep ^\*color11: | cut -f 2)
+  echo $DATE
+  echo $DATE
+  echo $YELLOW
+fi
