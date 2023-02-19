@@ -4,7 +4,7 @@ DATE=$(echo "$LATEST" | cut -d ' ' -f 1)
 URL="https://optifine.net/adloadx?f=$(echo "$LATEST" | cut -d ' ' -f 3)"
 
 [[ "${BLOCK_BUTTON}" -eq 1 ]] && xdg-open "${URL}" >/dev/null
-if [[ "${DATE}" != "30.01.2023" ]];then
+if [[ "${DATE}" != "19.02.2023" ]];then
   YELLOW=$(xrdb -query | grep ^\*color11: | cut -f 2)
   echo $DATE
   echo $DATE
