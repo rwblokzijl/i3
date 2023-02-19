@@ -12,10 +12,12 @@ URL="https://optifine.net/adloadx?f=$(echo "$LATEST" | cut -d ' ' -f 3)"
 FILENAME=$(echo "$LATEST" | cut -d ' ' -f 3)
 QUERY='s/(preview_)*(OptiFine_)([0-9]+.[0-9]+.[0-9])+_(HD_U_I2_pre4)(.jar)/\3-\2\4/'
 LASTEST_VERSION_NAME=$(echo "$FILENAME" | sed -r "$QUERY")
+
 ls ~/.minecraft/versions | grep "^$LASTEST_VERSION_NAME$" > /dev/null
+if [[ $? != 0 ]];then PRINT=true; else PRINT=false; fi
 
 # 3. Print latest version if not installed
-if [[ $? != 0 ]];then
+if [[ $PRINT == true ]];then
   YELLOW=$(xrdb -query | grep ^\*color11: | cut -f 2)
   echo $LASTEST_VERSION_NAME
   echo $LASTEST_VERSION_NAME
