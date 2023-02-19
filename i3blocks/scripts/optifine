@@ -8,9 +8,9 @@ URL="https://optifine.net/adloadx?f=$(echo "$LATEST" | cut -d ' ' -f 3)"
 [[ "${BLOCK_BUTTON}" -eq 1 ]] && xdg-open "${URL}" >/dev/null
 
 # 2. See if latest version is installed
-# preview_OptiFine_1.19.3_HD_U_I2_pre4.jar -> OptiFine_1.19.3_HD_U_I2_pre4.jar
+# preview_OptiFine_1.19.3_HD_U_I2_pre4.jar -> 1.19.3-OptiFine_HD_U_I2_pre4
 FILENAME=$(echo "$LATEST" | cut -d ' ' -f 3)
-QUERY='s/(preview_)*(OptiFine_)([0-9]+.[0-9]+.[0-9])+_(HD_U_I2_pre[0-9]+)(.jar)/\3-\2\4/'
+QUERY='s/(preview_)*(OptiFine)_([0-9]+.[0-9]+.[0-9])+_(HD_U_[A-Z][0-9])(_pre[0-9]+)*(.jar)/\3-\2_\4\5/'
 LASTEST_VERSION_NAME=$(echo "$FILENAME" | sed -r "$QUERY")
 
 ls ~/.minecraft/versions | grep "^$LASTEST_VERSION_NAME$" > /dev/null
