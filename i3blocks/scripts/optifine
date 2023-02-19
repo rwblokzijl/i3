@@ -1,12 +1,23 @@
 #!/bin/bash
+
+# 1. Get latest version
 LATEST=$(curl -s https://www.optifine.net/downloads | hq -0 '.downloadLine' data | tr '\n' ' ' | sed 's/\x0/\n/g;s/  */ /g'  | sed 's/.*\?f=\(.*.jar\)&.*colDate">\([0-9.]*\).*/\2 \1/' | column -t | head -1)
 DATE=$(echo "$LATEST" | cut -d ' ' -f 1)
 URL="https://optifine.net/adloadx?f=$(echo "$LATEST" | cut -d ' ' -f 3)"
 
 [[ "${BLOCK_BUTTON}" -eq 1 ]] && xdg-open "${URL}" >/dev/null
-if [[ "${DATE}" != "19.02.2023" ]];then
+
+# 2. See if latest version is installed
+# preview_OptiFine_1.19.3_HD_U_I2_pre4.jar -> OptiFine_1.19.3_HD_U_I2_pre4.jar
+FILENAME=$(echo "$LATEST" | cut -d ' ' -f 3)
+QUERY='s/(preview_)*(OptiFine_)([0-9]+.[0-9]+.[0-9])+_(HD_U_I2_pre4)(.jar)/\3-\2\4/'
+LASTEST_VERSION_NAME=$(echo "$FILENAME" | sed -r "$QUERY")
+ls ~/.minecraft/versions | grep "^$LASTEST_VERSION_NAME$" > /dev/null
+
+# 3. Print latest version if not installed
+if [[ $? != 0 ]];then
   YELLOW=$(xrdb -query | grep ^\*color11: | cut -f 2)
-  echo $DATE
-  echo $DATE
+  echo $LASTEST_VERSION_NAME
+  echo $LASTEST_VERSION_NAME
   echo $YELLOW
 fi
