@@ -1,5 +1,6 @@
 #!/bin/bash
 # ICONS=""
+set -eo pipefail
 USERNAME=rwblokzijl
 ICON=" "
 GAMES=$(curl -s https://api.chess.com/pub/player/${USERNAME}/games | jq '.games|map(select(.[.turn] == "https://api.chess.com/pub/player/'${USERNAME}'"))')
