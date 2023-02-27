@@ -134,8 +134,8 @@ interval=30
 [gh]
 interval=2
 
-[do]
-interval=2
+# [do]
+# interval=2
 
 [cloudbuild]
 interval=10
