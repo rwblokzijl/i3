@@ -219,6 +219,7 @@ exec --no-startup-id "spotify"
 exec --no-startup-id "pavucontrol"
 # exec --no-startup-id "teams"
 exec --no-startup-id "rambox"
+exec --no-startup-id "cat $(grep -lwr 'Microsoft Teams' ~/Desktop) | grep '^Exec' | sed 's/^Exec=//' | bash"
 exec --no-startup-id "signal-desktop"
 exec --no-startup-id "keepassxc"
 
