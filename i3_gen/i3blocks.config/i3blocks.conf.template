@@ -122,11 +122,11 @@ interval=60
 [battery]
 interval=1
 
-[cpu_temp]
-interval=1
+# [cpu_temp]
+# interval=1
 
-[cpu_usage]
-interval=1
+# [cpu_usage]
+# interval=1
 
 [mgit]
 interval=30
@@ -146,12 +146,15 @@ interval=10
 [optifine]
 interval=10
 
+[weather]
+interval=600
+
 [date]
 interval=60
 
-[kek]
-command=echo $TEST
-interval=1
+# [kek]
+# command=echo $TEST
+# interval=1
 
 [datetime]
 interval=1
