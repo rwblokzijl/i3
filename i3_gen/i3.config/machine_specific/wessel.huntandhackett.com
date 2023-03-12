@@ -173,6 +173,12 @@ exec_always --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape" -option
 #; export TOUCHSCREEN=$(xinput --list | grep "pointer" | grep "Wacom" | sed 's/.*\(Wacom.*\w\)\s*id.*/'\''\1'\''/')
 #exec_always --no-startup-id "xinput --map-to-output {{$TOUCHSCREEN}} $SC1"
 
+# lock screen automatically after 1 minute
+exec_always --no-startup-id xset s noblank
+exec_always --no-startup-id xset dpms 0 0 60
+exec_always --no-startup-id xss-lock -- lock
+
+
 # Start programs and assign to workspaces
 
 # Set layouts for monitors to assign programs to specific positions
@@ -219,6 +225,7 @@ exec --no-startup-id "spotify"
 exec --no-startup-id "pavucontrol"
 # exec --no-startup-id "teams"
 exec --no-startup-id "rambox"
+exec --no-startup-id "cat $(grep -lwr 'Microsoft Teams' ~/Desktop) | grep '^Exec' | sed 's/^Exec=//' | bash"
 exec --no-startup-id "signal-desktop"
 exec --no-startup-id "keepassxc"
 
