@@ -194,8 +194,14 @@ for_window [class="^Rambox$"]               move to workspace $WS015
 for_window [class="^Signal$"]               move to workspace $WS015
 for_window [class="^discord$"]              move to workspace $WS015
 
+for_window [title="^Microsoft\\ Teams.*$"]               move to workspace $WS015
+for_window [instance="^crx_cifhbcnohmdccbgoicgdjpfamggdegmo$"]               move to workspace $WS015
+
 for_window [class="^Microsoft\ Teams.*$"]   move to workspace $WS015
 for_window [class="^KeePassXC$"]            move to workspace $WS016
+for_window [class="^1Password$"]            move to workspace $WS016
+
+
 
 # main screen
 for_window [class="^jetbrains-studio$"]     move to workspace $WS003
@@ -226,10 +232,12 @@ exec --no-startup-id "pavucontrol"
 # exec --no-startup-id "teams"
 exec --no-startup-id "rambox"
 exec --no-startup-id "cat $(grep -lwr 'Microsoft Teams' ~/Desktop) | grep '^Exec' | sed 's/^Exec=//' | bash"
+
 exec --no-startup-id "signal-desktop"
 exec --no-startup-id "keepassxc"
 
 exec --no-startup-id "insync start"
+exec --no-startup-id "1password"
 exec --no-startup-id "blueman-applet"
 
 # Finally focus workspace 1
@@ -243,6 +251,7 @@ exec --no-startup-id "set_sensitivity.sh"
 exec --no-startup-id "chrome_text_drag.py"
 
 # exec_always --no-startup-id "picom --config $CONFIG/compton.conf -b"
+exec --no-startup-id "python3 ~/bin/defender-alert.py"
 
 exec_always --no-startup-id "xset mouse 2 0"
 exec_always --no-startup-id "xset r rate 280 40"
