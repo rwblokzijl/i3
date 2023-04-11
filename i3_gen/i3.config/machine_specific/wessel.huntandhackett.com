@@ -264,5 +264,5 @@ exec_always --no-startup-id "xset r rate 280 40"
 bindsym $mod+n exec $SCRIPTS/wifi.sh
 
 # Open todo.md
-bindsym $mod+o exec --no-startup-id "alacritty -e bash -c 'i3 floating toggle && nvim ~/todo.md'"
+bindsym $mod+o exec --no-startup-id "alacritty -e bash -c 'i3 floating toggle && nvim ~/todo.yaml'"
 
