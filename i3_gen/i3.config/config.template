@@ -231,6 +231,7 @@ client.urgent           $bright  $bright      $dark   $bright     $bright
 # Enable transparent terminal
 # TODO: enable with proper config: see home desktop
 exec_always --no-startup-id "picom --config $CONFIG/compton.conf -b"
+exec_always --no-startup-id "conky"
 
 exec_always --no-startup-id "flameshot"
 
