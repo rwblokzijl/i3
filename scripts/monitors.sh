@@ -9,11 +9,10 @@ get_current_monitor_edids() {
     sed "$SED_REMOVE_DISCONNECTED;$SED_FILTER_EDIDS;$SED_REMOVE_HEADER_LINE" | \
     tr '\r' '\n' | \
     jq -nRc '[inputs]|map(split(","))|map({(.[1]):.[0]})|add'
-
 }
 
 get_config() {
-  yq '.' ~/.config/i3/monitors.yaml
+  cat ~/.config/i3/monitors.yaml | yq -o json
 }
 
 filter_satisfied_configs() {
@@ -49,28 +48,58 @@ compute_monitor_names_from_edids() {
     'map($CURRENT_MONITOR_EDIDS[.])[]'
 }
 
-main() {
+get_screen_config() {
   CURRENT_MONITOR_EDIDS=$(get_current_monitor_edids)
   BEST_CONFIG=$(get_config | filter_best_config "${CURRENT_MONITOR_EDIDS}")
   MONITORS_ORDERED=$(echo $BEST_CONFIG | compute_monitor_edid_ordered | compute_monitor_names_from_edids "$CURRENT_MONITOR_EDIDS")
   MONITOR_PRIMARY=$(echo $BEST_CONFIG | compute_primary_monitor_edid | jq '[.]' | compute_monitor_names_from_edids "$CURRENT_MONITOR_EDIDS")
   PREVIOUS="NONE"
   XRANDR="xrandr"
+  ALL_MONITORS=$(echo $CURRENT_MONITOR_EDIDS | jq -r '.[]')
+  UNUSED_MONITORS=$(echo $ALL_MONITORS $MONITORS_ORDERED | tr ' ' '\n' | sort | uniq -u)
+  COUNT=1
+  echo 3
+  rm -rf /tmp/monitors
+  mkdir -p /tmp/monitors
   for MONITOR in $MONITORS_ORDERED
   do
+
     XRANDR+=" --output $MONITOR --auto"
-    if [[ "$PREVIOUS" != "NONE" ]];then
-      XRANDR+=" --right-of $PREVIOUS"
+    POS=$(echo $BEST_CONFIG | jq -r --arg COUNT $(($COUNT-1)) '.pos[$COUNT]//empty')
+    if [[ ! -z "$POS" ]];then
+        XRANDR+=" --pos $POS"
+    else
+      if [[ "$PREVIOUS" != "NONE" ]];then
+        XRANDR+=" --right-of $PREVIOUS"
+      fi
     fi
+
+    MODE=$(echo $BEST_CONFIG | jq -r --arg COUNT $(($COUNT-1)) '.mode[$COUNT]//empty')
+    if [[ ! -z "$MODE" ]];then
+        XRANDR+=" --mode $MODE"
+    fi
+
     if [[ "$MONITOR" == "$MONITOR_PRIMARY" ]];then
       XRANDR+=" --primary"
     fi
+
+    ROTATE=$(echo $BEST_CONFIG | jq -r --arg COUNT $(($COUNT-1)) '.rotate[$COUNT]//empty')
+    if [[ ! -z "$ROTATE" ]];then
+      XRANDR+=" --rotate $ROTATE"
+    fi
+
     PREVIOUS=$MONITOR
+    echo $MONITOR > /tmp/monitors/SC${COUNT}
+    COUNT=$(($COUNT+1))
   done
-  echo $MONITORS_ORDERED
-  echo $MONITOR_PRIMARY
+  echo "$BEST_CONFIG" | jq -r '.wallpapers_size' > /tmp/monitors/wallpapers_size
+  for MONITOR in $UNUSED_MONITORS
+  do
+    XRANDR+=" --output $MONITOR --off"
+  done
+  >&2 echo $MONITORS_ORDERED
   echo $XRANDR
   $XRANDR
 }
 
-main
+get_screen_config

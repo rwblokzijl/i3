@@ -3,6 +3,9 @@
 INSTANCE="${BLOCK_INSTANCE:-instance}"
 STEP="${step:-5}" # use "step" set in i3blocks.conf, with 5 as default
 
+echo 1 $BLOCK_BUTTON
+echo 1 $BLOCK_BUTTON
+
 # First round the old volume down to the next "$STEP"
 INSTANCE=$(pacmd info | grep Default\ sink | grep -oE '[^ ]+$')
 INSTANCE_NUM=$(pactl list short | grep "${INSTANCE}\s" | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,')
@@ -17,18 +20,15 @@ pactl set-sink-volume ${INSTANCE} $volume%
 if [[ "${BLOCK_BUTTON}" -eq 4 ]]; then
 	pactl set-sink-volume ${INSTANCE} +$STEP%
 	pactl set-sink-mute ${INSTANCE} off
-	pkill -RTMIN+1 i3blocks
 
 # right click
 elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
 	pactl set-sink-mute ${INSTANCE} toggle
-	pkill -RTMIN+1 i3blocks
 
 # scroll down
 elif [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
 	pactl set-sink-volume ${INSTANCE} -$STEP%
 	pactl set-sink-mute ${INSTANCE} off
-	pkill -RTMIN+1 i3blocks
 fi
 
 # Recalculate the mute status and volume

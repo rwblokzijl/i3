@@ -13,67 +13,13 @@
 set $BAR_SIZE 14
 
 # Get all screens
-; export SC_LAP=$(  xrandr | grep " connected" | sed -n '1 p' | awk '{print $1;}')
-; export SC_M1=$(   xrandr | grep " connected" | sed -n '2 p' | awk '{print $1;}')
-; export SC_M2=$(   xrandr | grep " connected" | sed -n '3 p' | awk '{print $1;}')
-; export SC_M3=$(   xrandr | grep " connected" | sed -n '4 p' | awk '{print $1;}')
+exec_always --no-startup-id "{{$($HOME/.config/i3/scripts/monitors.sh)}}"
+; export SC1=$(cat /tmp/monitors/SC1)
+; export SC2=$(cat /tmp/monitors/SC2)
+; export SC3=$(cat /tmp/monitors/SC3)
+; export WALLPAPER_SIZE=$(cat /tmp/monitors/wallpapers_size)
 
-set $SC_LAP {{$SC_LAP}}
-set $SC_M1  {{$SC_M1}}
-set $SC_M2  {{$SC_M2}}
-set $SC_M3  {{$SC_M3}}
-
-; export SC_M1_X=$( xrandr --current | grep '+' | grep -v "connected" | sed -n '2 p' | awk '{print $1}' | cut -d 'x' -f1)
-; export SC_M2_X=$( xrandr --current | grep '+' | grep -v "connected" | sed -n '3 p' | awk '{print $1}' | cut -d 'x' -f1)
-; export SC_M3_X=$( xrandr --current | grep '+' | grep -v "connected" | sed -n '4 p' | awk '{print $1}' | cut -d 'x' -f1)
-
-set $SC_M1_X {{$SC_M1_X}}
-set $SC_M2_X {{$SC_M2_X}}
-set $SC_M3_X {{$SC_M3_X}}
-
-# Get unique IDs for monitors
-# xrandr --prop | tr '\n' '\r' | sed 's/\r[0-9a-zA-Z-]* disconnected[^\r]*\(\r\t[^\r]*\)*//g;s/\(\r[0-9a-zA-Z-]*\) connected[^\r]*\r\tEDID: \(\(\r\t\t[0-9a-f]*\)*\)\(\r\s[^\r]*\)*/\1 \2/g;s/^Screen[^\r]*\r//;s/\r\t\t//g' | tr '\r' '\n'
-
-; if [ -n "$SC_M3" ]; then # if at least 4 screens
-; # replace laptop with leftmost screen
-    exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off"
-;   export SC1=$SC_M1
-;   export SC2=$SC_M2
-;   export SC3=$SC_M3
-    exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary --output {{$SC3}} --auto --right-of {{$SC2}}"
-    exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
-; elif [ -n "$SC_M2" ]; then # 3 screens
-;   if [[ "$SC_M1_X" == "3440" && "$SC_M2_X" == "3440" ]]; then # Both external screens are wide
-; # replace laptop with leftmost screen
-        # exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off"
-;       export SC1=$SC_M1
-;       export SC2=$SC_M2
-        # exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off --output {{$SC1}} --auto --primary --output {{$SC2}} --auto --right-of {{$SC1}} "
-;   # export SCTMP=$SC1
-;   # export SC1=$SC2
-;   # export SC2=$SCTMP
-        exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --off --output {{$SC1}} --auto --primary --rotate left --output {{$SC2}} --auto --pos 1440x1000"
-        # exec_always --no-startup-id "xrandr --output {{$SC_LAP}} --auto --primary --output {{$SC1}} --off --output {{$SC2}} --off"
-        exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/4k/nature/*
-;   else
-;       export SC1=$SC_LAP
-;       export SC2=$SC_M1
-;       export SC3=$SC_M2
-        exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary --output {{$SC3}} --auto --right-of {{$SC2}}"
-        exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
-;   fi
-; elif [ -n "$SC_M1" ]; then # 2 screens
-;   export SC1=$SC_LAP
-;   export SC2=$SC_M1
-    exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --output {{$SC2}} --auto --right-of {{$SC1}} --primary "
-    exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/5760/nature/*
-; else
-;   export SC1=$SC_LAP
-    exec_always --no-startup-id "xrandr --output {{$SC1}} --auto --primary"
-    exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/1080/nature/*
-; fi
-
-# xrandr --output {{$SC1}} --auto --output {{$SC2}} --off
+exec_always --no-startup-id feh --bg-scale --no-xinerama --randomize $WALLPAPERS/{{$WALLPAPER_SIZE}}/nature/*
 
 set $SC1 {{$SC1}}
 set $SC2 {{$SC2}}
@@ -186,10 +132,12 @@ exec_always --no-startup-id xss-lock -- lock
 
 # Set layouts for monitors to assign programs to specific positions
 # exec --no-startup-id i3-msg 'workspace $WS001; append_layout $LAYOUTS/chromium.json'
-exec --no-startup-id i3-msg 'workspace $WS001; append_layout $LAYOUTS/brave.json'
+# exec --no-startup-id i3-msg 'workspace $WS001; append_layout $LAYOUTS/brave.json'
+exec --no-startup-id i3-msg 'workspace $WS001; append_layout $LAYOUTS/edge.json'
 #exec --no-startup-id i3-msg 'workspace $WS002; append_layout $LAYOUTS/gnome-terminal.json'
 exec --no-startup-id i3-msg 'workspace $WS011; append_layout $LAYOUTS/pavucontrol.json'
 #exec --no-startup-id i3-msg 'workspace $WS014; append_layout $LAYOUTS/firefox.json'
+exec --no-startup-id i3-msg 'workspace $WS016; append_layout $LAYOUTS/1pass.json'
 
 # Set standard workspaces for programs
 # small screen
@@ -201,8 +149,8 @@ for_window [title="^Microsoft\\ Teams.*$"]               move to workspace $WS01
 for_window [instance="^crx_cifhbcnohmdccbgoicgdjpfamggdegmo$"]               move to workspace $WS015
 
 for_window [class="^Microsoft\ Teams.*$"]   move to workspace $WS015
-for_window [class="^KeePassXC$"]            move to workspace $WS016
-for_window [class="^1Password$"]            move to workspace $WS016
+#for_window [class="^KeePassXC$"]            move to workspace $WS016
+#for_window [class="^1Password$" floating]   move to workspace $WS016
 
 
 
@@ -223,13 +171,19 @@ for_window [class="^.*"] border pixel 5
 no_focus [window_role="pop-up"]
 for_window [title="^https://hangouts.google.com - Google Hangouts - Mozilla Firefox$"] floating disable
 
-bindsym $mod+c exec brave --profile-directory=Default
-bindsym $mod+Shift+c exec brave --incognito --profile-directory=Default
-bindsym $mod+x exec brave --profile-directory="Profile 1"
-bindsym $mod+Shift+x exec brave --incognito --profile-directory="Profile 1"
+# bindsym $mod+c exec brave-browser --profile-directory=Default
+# bindsym $mod+Shift+c exec brave-browser --incognito --profile-directory=Default
+# bindsym $mod+x exec brave-browser --profile-directory="Profile 1"
+# bindsym $mod+Shift+x exec brave-browser --incognito --profile-directory="Profile 1"
+
+bindsym $mod+c exec microsoft-edge
+bindsym $mod+Shift+c exec microsoft-edge --incognito
+bindsym $mod+x exec brave-browser --profile-directory="Profile 1"
+bindsym $mod+Shift+x exec brave-browser --incognito --profile-directory="Profile 1"
 
 # Start programs
-exec --no-startup-id "brave"
+# exec --no-startup-id "brave-browser --profile-directory=Default"
+exec --no-startup-id "microsoft-edge"
 exec --no-startup-id "spotify"
 exec --no-startup-id "pavucontrol"
 # exec --no-startup-id "teams"
@@ -259,6 +213,7 @@ exec --no-startup-id "python3 ~/bin/defender-alert.py"
 exec_always --no-startup-id "xset mouse 2 0"
 exec_always --no-startup-id "xset r rate 280 40"
 
+exec --no-startup-id "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1"
 
 #Automatic back-and-forth when switching to the current workspace
 # https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth
@@ -267,5 +222,5 @@ exec_always --no-startup-id "xset r rate 280 40"
 bindsym $mod+n exec $SCRIPTS/wifi.sh
 
 # Open todo.md
-bindsym $mod+o exec --no-startup-id "alacritty -e bash -c 'i3 floating toggle && nvim ~/todo.yaml'"
+bindsym $mod+o exec --no-startup-id "alacritty -e bash -c 'source ~/.profile && i3 floating toggle && nvim ~/todo.yaml'"
 

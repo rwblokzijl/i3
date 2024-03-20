@@ -4,7 +4,9 @@
 API_KEY=$(cat ~/.ssh/openweathermap.api)
 
 # Check on http://openweathermap.org/find
-CITY_ID="${BLOCK_INSTANCE:-2757345}"
+CITY_ID="${BLOCK_INSTANCE:-2751771}" # Leiderdorp
+# CITY_ID="${BLOCK_INSTANCE:-3155422}" # Gol
+# try: ?lat=52.1082&lon=4.2174 and see if there is an answer, then find a way to get the
 
 URGENT_LOWER=0
 URGENT_HIGHER=30

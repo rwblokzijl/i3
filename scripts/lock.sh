@@ -25,15 +25,15 @@ convert $TMPBG -scale 1000% $TMPBG
 # add icons
 
 # SIZES=$(xrandr |              grep -oP '\d+x\d+\+\d+\+\d+' | sed 's/x/ /g; s/+/ /g')
-SIZES=$(xrandr | grep primary | grep -oP '\d+x\d+\+\d+\+\d+' | sed 's/x/ /g; s/+/ /g')
-ICON_SIZE=($(identify -format '%w %h' $ICON))
+# SIZES=$(xrandr | grep primary | grep -oP '\d+x\d+\+\d+\+\d+' | sed 's/x/ /g; s/+/ /g')
+# ICON_SIZE=($(identify -format '%w %h' $ICON))
 
-while read -r line
-do
-	W_H_X_Y=($line)
-	let WIDTH=${W_H_X_Y[0]}/2+${W_H_X_Y[2]}-${ICON_SIZE[0]}/2
-	let HEIGHT=${W_H_X_Y[1]}/2+${W_H_X_Y[3]}-${ICON_SIZE[1]}/2
-	convert $TMPBG $ICON -geometry +$WIDTH+$HEIGHT -composite -matte $TMPBG #add an icon
-done <<< "$SIZES"
+# while read -r line
+# do
+# 	W_H_X_Y=($line)
+# 	let WIDTH=${W_H_X_Y[0]}/2+${W_H_X_Y[2]}-${ICON_SIZE[0]}/2
+# 	let HEIGHT=${W_H_X_Y[1]}/2+${W_H_X_Y[3]}-${ICON_SIZE[1]}/2
+# 	convert $TMPBG $ICON -geometry +$WIDTH+$HEIGHT -composite -matte $TMPBG #add an icon
+# done <<< "$SIZES"
 
 i3lock -i $TMPBG

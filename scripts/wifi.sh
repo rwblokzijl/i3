@@ -1,3 +1,4 @@
+#!/bin/bash
 notify-send "WIFI: " "Scanning..." &
 SSID=$(nmcli -f in-use,bars,ssid device wifi list | \
     tail -n +2 | sed -r 's/^\s+/   /; s/^\*\s*/ * /' | \

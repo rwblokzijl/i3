@@ -115,9 +115,9 @@ signal=10
 [wifi]
 interval=5
 
-[laundry]
-command=laundry
-interval=60
+# [laundry]
+# command=laundry
+# interval=60
 
 [battery]
 interval=1
@@ -128,8 +128,8 @@ interval=1
 # [cpu_usage]
 # interval=1
 
-[mgit]
-interval=30
+# [mgit]
+# interval=30
 
 [gh]
 interval=2
@@ -137,8 +137,8 @@ interval=2
 # [do]
 # interval=2
 
-[cloudbuild]
-interval=10
+# [cloudbuild]
+# interval=10
 
 [chess]
 interval=10
