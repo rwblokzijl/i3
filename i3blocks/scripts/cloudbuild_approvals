@@ -1,0 +1,36 @@
+#!/bin/bash
+
+ICON=" "
+BUILDS_WAITING_FOR_APPROVAL=$( gcloud --project="${gcp_project}" builds list --region="${region}" --filter="status=PENDING" --format=json | jq length )
+URL="https://console.cloud.google.com/cloud-build/builds?project=${gcp_project}"
+
+# Tmp file shared between all scripts that share the same $gcp_project and $region
+TMP_FILE="/tmp/cloudbuild_approvals_${gcp_project}_${region}"
+# Read it if it exists, else 0
+if [[ -f "${TMP_FILE}" ]]; then
+  OLD_BUILDS_WAITING_FOR_APPROVAL=$(cat "${TMP_FILE}")
+else
+  OLD_BUILDS_WAITING_FOR_APPROVAL=0
+fi
+# Write the new value
+echo "${BUILDS_WAITING_FOR_APPROVAL}" > "${TMP_FILE}"
+
+# If the new value is greater than the old value, notify
+if [[ "${BUILDS_WAITING_FOR_APPROVAL}" -gt "${OLD_BUILDS_WAITING_FOR_APPROVAL}" ]]; then
+  NUMBER_OF_NEW_BUILDS=$((BUILDS_WAITING_FOR_APPROVAL - OLD_BUILDS_WAITING_FOR_APPROVAL))
+  notify-send "Cloud Build" "There are ${NUMBER_OF_NEW_BUILDS} new builds waiting for approval for project ${gcp_project} in region ${region}"
+fi
+
+RED=$(   xrdb -query | grep ^\*color1:  | cut -f 2)
+GREEN=$( xrdb -query | grep ^\*color10:  | cut -f 2)
+YELLOW=$(xrdb -query | grep ^\*color11: | cut -f 2)
+GREY=$(  xrdb -query | grep ^\*grey:    | cut -f 2)
+
+[[ "${BLOCK_BUTTON}" -eq 1 ]] && xdg-open "${URL}">/dev/null
+
+
+if [[ "${BUILDS_WAITING_FOR_APPROVAL}" -gt 0 ]]; then
+    echo "$ICON ${BUILDS_WAITING_FOR_APPROVAL}"
+    echo "$ICON ${BUILDS_WAITING_FOR_APPROVAL}"
+    echo "${RED}"
+fi

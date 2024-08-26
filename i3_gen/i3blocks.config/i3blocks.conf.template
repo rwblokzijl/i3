@@ -134,6 +134,11 @@ interval=1
 [gh]
 interval=2
 
+[cloudbuild_approvals]
+gcp_project=org-pipeline-be521183
+region=europe-west4
+interval=2
+
 # [do]
 # interval=2
 

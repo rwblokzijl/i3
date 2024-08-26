@@ -11,6 +11,14 @@
 #
 ################################################################################
 
+HOME_TZ="Europe/Amsterdam"
+HOME_ICON=""
+
+# export TZ=$(curl ipinfo.io | jq -r '.timezone') # Low rate limit
+# export TZ=$(curl -s http://ip-api.com/json/\?fields\=timezone | jq -r .timezone)
+# export TZ="Asia/Jakarta"
+export TZ="Europe/Amsterdam"
+# echo $TZ
 FORMAT="${BLOCK_INSTANCE:-%H %M}"
 TIME=($(date "+${FORMAT}" | tr " " "\n"))
 HOUR=${TIME[0]}
@@ -19,28 +27,38 @@ TIME=$(echo ${TIME[@]} | tr " " ":")
 
 # The icons in order 12:00, 12:30 ... to 12:00 again
 # (12:00 twice, this is neccesary for 11:46)
-ICONS=(🕛 🕧 🕐 🕜 🕑 🕝 🕒 🕞 🕓 🕟 🕔 🕠 🕕 🕡 🕖 🕢 🕗 🕣 🕘 🕤 🕙 🕥 🕚 🕦 🕛)
+# ICONS=(🕛 🕧 🕐 🕜 🕑 🕝 🕒 🕞 🕓 🕟 🕔 🕠 🕕 🕡 🕖 🕢 🕗 🕣 🕘 🕤 🕙 🕥 🕚 🕦 🕛)
+# ICONS=(󱑖 🕧 󱑋 🕜 󱑌 🕝 󱑍 🕞 󱑎 🕟 󱑏 🕠 󱑐 🕡 󱑑 🕢 󱑒 🕣 󱑓 🕤 󱑔 🕥 󱑕 🕦 󱑖)
+ICONS=(󱑖 󱑋 󱑌 󱑍 󱑎 󱑏 󱑐 󱑑 󱑒 󱑓 󱑔 󱑕 󱑖)
 
 # Pick icon based on the hours and minutes, this line is equivalent to the
 # commented lines below. Read them to understand the mechanism for choosing a
 # clock.
-ICONS_IDX=$(echo "(($HOUR%12)*2)+(($MIN+15)/30)" | bc)
+# ICONS_IDX=$(echo "(($HOUR%12)*2)+(($MIN+15)/30)" | bc) # One icon per half hour
+ICONS_IDX=$(echo "(($HOUR%12))+(($MIN+30)/60)" | bc) # One icon per hour
 
 # Pick icon based on the HOUR
 # ICONS_IDX=$(echo "($HOUR%12)*2" | bc)
 
 # Shift icon forward based on the minutes (if :15 or more, proceed to half
 # past(idx+1), if :45 or more proceed a whole hour (idx+2))
-# if [[ "${MIN}" -ge 15  ]]; then
+# if [[ "${MIN}" -ge 15 ]]; then
 # 	ICONS_IDX=$(echo "$ICONS_IDX+1" | bc)
 # fi
 
-# if [[ "${MIN}" -ge 45  ]]; then
+# if [[ "${MIN}" -ge 45 ]]; then
 # 	ICONS_IDX=$(echo "$ICONS_IDX+1" | bc)
 # fi
 
 # Set the icon
 ICON=${ICONS[${ICONS_IDX}]}
 
-echo "$ICON ${TIME}"
-echo "$ICON ${TIME}"
+if [[ $TZ == $HOME_TZ ]]; then
+  echo "$ICON ${TIME}"
+  echo "$ICON ${TIME}"
+else
+  TIME_HOME=$(TZ="$HOME_TZ" date "+${FORMAT}" |  tr " " ":")
+  echo "$ICON ${TIME}" ${HOME_ICON} ${TIME_HOME}
+  echo "$ICON ${TIME}" ${HOME_ICON} ${TIME_HOME}
+fi
+

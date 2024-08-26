@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 ICON=
 N=$(gh api notifications --jq length)
 URL="https://github.com/notifications"

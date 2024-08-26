@@ -224,3 +224,5 @@ bindsym $mod+n exec $SCRIPTS/wifi.sh
 # Open todo.md
 bindsym $mod+o exec --no-startup-id "alacritty -e bash -c 'source ~/.profile && i3 floating toggle && nvim ~/todo.yaml'"
 
+bindsym $mod+p exec --no-startup-id "flameshot gui"
+

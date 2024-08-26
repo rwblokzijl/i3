@@ -46,7 +46,7 @@ if [[ "${BATTERY_STATE}" = "Charging" ]]; then
 fi
 
 echo "${ICON} ${BATTERY_POWER}%"
-echo $ICON
+echo "${ICON} ${BATTERY_POWER}%"
 echo $FG_COLOR
 echo $BG_COLOR
 
