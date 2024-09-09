@@ -2,7 +2,7 @@
 
 ICON=" "
 BUILDS_WAITING_FOR_APPROVAL=$( gcloud --project="${gcp_project}" builds list --region="${region}" --filter="status=PENDING" --format=json | jq length )
-URL="https://console.cloud.google.com/cloud-build/builds?project=${gcp_project}"
+URL="https://console.cloud.google.com/cloud-build/builds;region=${region}?project=${gcp_project}"
 
 # Tmp file shared between all scripts that share the same $gcp_project and $region
 TMP_FILE="/tmp/cloudbuild_approvals_${gcp_project}_${region}"
