@@ -45,8 +45,8 @@ set $WS011 "11:    "
 # Right screen
 ; if [ ! -z "$SC3" ]; then # if 3 screens
 set $WS101 "101:    "
-bindsym $mod+equal workspace $WS101
-bindsym $mod+Shift+plus move container to workspace $WS101
+bindsym $mod+minus workspace $WS101
+bindsym $mod+Shift+underscore move container to workspace $WS101
 ;fi
 
 # Left screen
@@ -54,6 +54,8 @@ bindsym $mod+Shift+plus move container to workspace $WS101
 set $WS014 "201:    "
 bindsym $mod+grave workspace $WS014
 bindsym $mod+Shift+grave move container to workspace $WS014
+bindsym $mod+equal workspace $WS014
+bindsym $mod+Shift+plus move container to workspace $WS014
 ;fi
 set $WS015 "202:    "
 set $WS016 "203:    "
@@ -69,7 +71,6 @@ bindsym $mod+7 workspace $WS007
 bindsym $mod+8 workspace $WS008
 bindsym $mod+9 workspace $WS009
 bindsym $mod+0 workspace $WS010
-bindsym $mod+minus workspace $WS011
 bindsym $mod+q workspace $WS015
 
 # move focused container to workspace
@@ -83,7 +84,6 @@ bindsym $mod+Shift+7 move container to workspace $WS007
 bindsym $mod+Shift+8 move container to workspace $WS008
 bindsym $mod+Shift+9 move container to workspace $WS009
 bindsym $mod+Shift+0 move container to workspace $WS010
-bindsym $mod+Shift+underscore move container to workspace $WS011
 
 # Assign workspaces to Monitors
 workspace $WS101 output $SC3
